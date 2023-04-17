@@ -1,0 +1,86 @@
+@import "sassPartial";
+
+//this will space out our item photos
+.itemsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1rem;
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+//this will center the items within their divs
+.itemContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.top-element {
+  margin-top: $margin-top;
+}
+
+.featuredImage  {
+  @include featuredImageSize();
+  // margin-left: 33px;
+}
+
+.titleContainer {
+  //create layout for the component using css grid
+  display: grid;
+  //if we specify columns, but not rows, it assumes there can be more than one row.
+  //create two columns
+  grid-template-columns: 33% 66%;
+  margin-left: 4em;
+  margin-right: 4em;
+}
+
+//style the contents of the title div using flexbox
+.title {
+  display: flex;
+  align-items: left;
+  flex-direction: row;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+//style the ending soon photos
+.endingSoon {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+//style the contents of the horizontal rule div using flexbox
+.hr {
+  display: flex;
+  align-items: left;
+  flex-direction: row;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.siteName {
+  text-align: center;
+  font-size: 9em;
+}
+
+.bid-price {
+  opacity: 0.8;
+  position: absolute;
+  margin-left: 20px;
+  width: 8vw;
+  height: 5vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-Color: black;
+  color: white;
+  padding: 10px;
+  border-Radius: 5px;
+  transform: translate(-10%, -100%);
+}
+
+.itemLink:hover .bid-price {
+  display: flex;
+}

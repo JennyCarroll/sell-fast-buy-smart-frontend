@@ -1,0 +1,54 @@
+@import "sassPartial";
+
+.itemDetail {
+  //create layout for the component using css grid
+  display: grid;
+  //if we specify columns, but not rows, it assumes there can be more than one row.
+  //create two columns
+  grid-template-columns: 33% 66%;
+  margin-left: 4em;
+  margin-right: 4em;
+}
+
+.top-element {
+  margin-top: $margin-top;
+}
+
+//style the contents of the images div using flexbox
+.images {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+//style the contents of the info div using flexbox
+.info {
+  display: flex;
+  align-items: left;
+  flex-direction: column;
+}
+
+.description {
+  text-align: left;
+  padding: 3em;
+}
+
+hr {
+  width: 100%;
+  float: right;
+}
+
+.image {
+    @include imageSize();
+    margin: 5px;
+}
+
+.footer {
+  position:absolute
+}
+
+div {
+  .thumbNail:hover {
+  cursor: pointer;
+  }
+} 

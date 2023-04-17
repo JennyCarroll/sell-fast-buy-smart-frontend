@@ -1,0 +1,29 @@
+@import "sassPartial";
+
+.category-title {
+  display: flex;
+  margin-left: 2em;
+}
+
+.top-element {
+  margin-top: $margin-top;
+}
+
+.categoryItemsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1rem;
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+//this will center the items within their divs
+.itemContainer {
+  display: flex;
+  justify-content: center;
+}
+
+hr {
+  width: 100%;
+  float: right;
+}

@@ -1,0 +1,91 @@
+// To use these variables, paste @import "sassPartial"; at the top of your scss file
+
+//top margin to drop content below navbar
+$margin-top: 130px;
+
+// colors
+$darkest: hsl(228, 19%, 5%);
+$dark: hsl(213, 24%, 16%);
+$light: hsl(210, 2%, 78%);
+$lightest:	hsl(0, 0%, 95%);
+$colourLight: hsl(176, 96%, 69%);
+$colourDark: hsl(177, 40%, 45%);
+
+//create a variable with multiple values (a list)
+$scheme-light: $lightest, $dark;
+$scheme-dark: $dark, $light;
+$scheme-nav-light: $dark, $lightest;
+$scheme-nav-dark: $darkest, $lightest;
+
+//color scheme mixin
+@mixin color-scheme($bg, $text) {
+  background-color: $bg;
+  color: $text;
+}
+
+/* this mixin makes all of the images the same size without stretching them DO NOT CHANGE*/
+@mixin imageSize(){
+  float: left;
+  width:  20vw;
+  height: 40vh;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* this mixin makes all of the featured images the same size without stretching them DO NOT CHANGE*/
+@mixin featuredImageSize(){
+  width: 10vw;
+  height: 20vh;
+  background-Repeat: no-repeat;
+  background-Position: center;
+  background-Size: cover;
+  position: relative;
+  // float: left;
+  // width:  10vw;
+  // height: 20vh;
+  // object-fit: cover;
+  // border-radius: 4px;
+}
+
+/* this mixin makes all of the small images in itemDetail the same size without stretching them DO NOT CHANGE*/
+@mixin thumbNail(){
+  float: left;
+  width:  5vw;
+  height: 10vh;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+@mixin bid-price-on-hover(){
+  opacity: 0.8;
+  position: absolute;
+  margin-left: 20px;
+  width: 8vw;
+  height: 5vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-Color: black;
+  color: white;
+  padding: 10px;
+  border-Radius: 5px;
+  transform: translate(-10%, -100%);
+}
+
+.light {
+  //when passing in a list as arguments use three dots
+  @include color-scheme($scheme-light...)
+}
+
+.dark {
+  @include color-scheme($scheme-dark...)
+}
+
+.light .nav {
+  @include color-scheme($scheme-nav-light...)
+}
+
+.dark .nav {
+  @include color-scheme($scheme-nav-dark...)
+}
+

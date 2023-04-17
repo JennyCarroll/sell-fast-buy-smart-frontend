@@ -1,0 +1,93 @@
+@import "sassPartial";
+
+//this is just here so i can style my favicon font I will delete it later
+.fav {
+  line-height: 10px;
+  // color: white
+}
+
+.nav-bar {
+  // background-color: black;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+    a {
+      text-decoration: none;
+      // color: grey;
+    }
+
+    .top-nav, .bottom-nav {
+      // color: gray;
+     width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+        // :hover {
+          // color:white;
+        // }
+        // .login{
+          // :hover{
+            // color: black;
+          // }
+        // }
+    }
+    .categories {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      width: 100%
+    }
+    .right-nav {
+      display: flex;
+      flex-direction: row;
+        div {
+         margin-right: 15px;
+        }
+        // .login {
+          // input {
+            // color: black;
+          // }
+        // }
+    }
+    .search {
+      // color: black;
+      // background-color: white;
+      align-items: center;
+      z-index: 2;
+      :hover {
+        color: darkgrey !important;
+      }
+    }
+    .logo {
+      margin-left: 2em;
+    }
+
+}
+.dropdown {
+  position: fixed;
+  // color: grey !important;
+}
+
+.dropdown-content {
+  padding-left: 10px;
+  min-width: 100px;
+  max-width: 100px;
+  // background-color: black;
+  position: fixed;
+  flex-direction: column;
+  display: none;
+  z-index: 1;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.dropdown:hover .dropdown-content {display: flex;}
+
+// .login-input {
+  // color: black;
+// }

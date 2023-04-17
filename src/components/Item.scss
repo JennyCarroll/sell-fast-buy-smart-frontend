@@ -1,0 +1,31 @@
+@import "sassPartial";
+
+.itemImage  {
+  width: 20vw;
+  height: 40vh;
+  background-Repeat: no-repeat;
+  background-Position: center;
+  background-Size: cover;
+  position: relative;
+  // @include imageSize()
+}
+
+// .bid-price {
+//   opacity: 0.5;
+//   position: absolute;
+//   margin-left: 20px;
+//   width: 10vw;
+//   height: 5vh;
+//   display: none;
+//   align-items: center;
+//   justify-content: center;
+//   background-Color: black;
+//   color: white;
+//   padding: 10px;
+//   border-Radius: 5px;
+//   transform: translate(0, -100%);
+// }
+
+// .itemImage:hover > .bid-price {
+//   display: flex;
+// }
