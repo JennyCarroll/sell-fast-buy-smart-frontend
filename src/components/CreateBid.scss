@@ -1,3 +1,5 @@
+@import "sassPartial";
+
 .new-bid {
   display: flex;
   // justify-content: center;
@@ -9,4 +11,8 @@
   flex-direction: row;
   display: flex;
   margin-top: 50px;
+}
+
+.imageContainer {
+  @include imageSize();
 }
