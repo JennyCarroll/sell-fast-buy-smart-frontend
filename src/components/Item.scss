@@ -1,13 +1,7 @@
 @import "sassPartial";
 
 .itemImage  {
-  width: 20vw;
-  height: 40vh;
-  background-Repeat: no-repeat;
-  background-Position: center;
-  background-Size: cover;
-  position: relative;
-  // @include imageSize()
+  @include imageSize();
 }
 
 // .bid-price {
