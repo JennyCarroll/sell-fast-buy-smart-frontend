@@ -22,8 +22,8 @@ function ItemEdit(props) {
 
   const { currentUser } = useContext(loginContext);
   const { state, setStateRefresh } = useContext(stateContext);
-  const params = useParams();
   const [newItemId, setNewItemId] = useState(false);
+  const params = useParams();
 
   useEffect(() => {
     console.log();
@@ -38,7 +38,7 @@ function ItemEdit(props) {
     setDescription(item.description);
     setCondition(item.condition);
     setCategory(item.category_id);
-    setEndDate(item.end_date);
+    setEndDate(new Date(item.end_date).toISOString().slice(0, 16));
     setMinBid(item.highest_bid / 100);
 
     let image = state.images.find((element) => element.item_id === itemId);
@@ -68,11 +68,10 @@ function ItemEdit(props) {
     if (params.itemId) {
       //edit item case
       const editData = { ...itemData, id: params.itemId };
-      console.log(editData);
 
-      // axios.post(`items/${params.itemId}/edit`, editData).then(() => {
-      //   setStateRefresh(true);
-      // });
+      axios.post(`/items/${params.itemId}/edit`, editData).then(() => {
+        setStateRefresh(true);
+      });
     } else {
       //new item case
       axios
@@ -90,7 +89,7 @@ function ItemEdit(props) {
   return (
     <Fragment>
       {newItemId && <Navigate to={'/items/' + newItemId} />}
-      <form autoComplete='off'>
+      <form onSubmit={handleSubmit} autoComplete='off'>
         <div className={'itemEdit'}></div>
         <div className={'m-4'}>
           <span className={'strong'}>List a new item:</span>
@@ -220,9 +219,7 @@ function ItemEdit(props) {
           </div>
         </div>
         <div className='d-flex justify-content-end m-4'>
-          <button onSubmit={handleSubmit} className={'btn btn-dark submit'}>
-            Create Item
-          </button>
+          <button className={'btn btn-dark submit'}>Create Item</button>
         </div>
       </form>
     </Fragment>
