@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 
 import SelectListOptions from './general/SelectListOptions';
-import { loginContext } from '../providers/UserContext';
+import Cookies from 'js-cookie'
 
 import './ItemEdit.scss';
 
@@ -20,7 +20,7 @@ function ItemEdit(props) {
   const [imgUrlBlur, setImgUrlBlur] = useState(
     props.item.imgUrl || 'https://imgur.com/BDT7VOn.jpg'
   );
-  const { currentUser } = useContext(loginContext);
+  const currentUser = Cookies.get('userId');
 
   const [newItemId, setNewItemId] = useState(false);
 

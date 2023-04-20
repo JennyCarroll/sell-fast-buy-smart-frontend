@@ -6,14 +6,14 @@ import ThumbNail from './ThumbNail';
 import Carousel from './Carousel';
 import CreateBid from './CreateBid';
 import Counter from './general/Counter';
-import { loginContext } from '../providers/UserContext';
 import { webSocketContext } from '../providers/WebSocketContext';
+import Cookies from 'js-cookie'
 
 function ItemDetail(props) {
   // Get the itemId from the URL parameters
   const params = useParams();
   const [itemObj, setItemObj] = useState({});
-  const { currentUser, login, logout } = useContext(loginContext);
+  const currentUser = Cookies.get('userId')
   //create state for the activeImage of the carousel
   const [activeImage, setActiveImage] = useState('');
   const { bidData } = useContext(webSocketContext);

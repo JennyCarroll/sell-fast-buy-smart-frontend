@@ -2,12 +2,14 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import Item from "./Item";
 import { loginContext } from "../providers/UserContext";
+import Cookies from 'js-cookie'
 import("./MyProfile.scss");
+
 
 const MyProfile = ({ users, items, images }) => {
   const params = useParams();
   const [thisUser, setThisUser] = useState({});
-  const { currentUser } = useContext(loginContext);
+  const currentUser = Cookies.get('userId')
 
   const userId = Number(params.userId);
 
@@ -36,7 +38,7 @@ const MyProfile = ({ users, items, images }) => {
           <p>{thisUser && thisUser.bio}</p>
         </div>
       </div>
-      <div className="items">
+      <div className="tems">
         {currentUser ? (
           <h1>
             Your Items For Sale
