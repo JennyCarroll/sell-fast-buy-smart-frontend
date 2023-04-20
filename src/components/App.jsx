@@ -5,6 +5,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Items from './Items';
 import Nav from './Nav';
 import ItemDetail from './ItemDetail';
+import ItemNew from './ItemNew';
 import ItemEdit from './ItemEdit';
 import Category from './Category';
 import MyBids from './MyBids';
@@ -60,30 +61,9 @@ export default function App() {
             <Route path='/logout' element={<MyBids />}></Route>
             <Route
               path='items/new'
-              element={
-                currentUser ? (
-                  <ItemEdit
-                    item={false}
-                    categories={state.categories}
-                    conditions={state.conditions}
-                    onSubmit={setStateRefresh}
-                  />
-                ) : (
-                  <Navigate to={'/'} />
-                )
-              }
+              element={currentUser ? <ItemNew /> : <Navigate to={'/'} />}
             ></Route>
-            <Route
-              path='items/:itemId/edit'
-              element={
-                <ItemEdit
-                  item={false}
-                  categories={state.categories}
-                  conditions={state.conditions}
-                  onSubmit={setStateRefresh}
-                />
-              }
-            ></Route>
+            <Route path='items/:itemId/edit' element={<ItemEdit />}></Route>
           </Routes>
           <BidToast />
         </main>
