@@ -1,9 +1,10 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import axios from 'axios';
 
 import SelectListOptions from './general/SelectListOptions';
+import { loginContext } from '../providers/UserContext';
 
 import './ItemEdit.scss';
 
@@ -11,11 +12,15 @@ function ItemEdit(props) {
   // MANAGE STATE
   const [title, setTitle] = useState(props.item || '');
   const [description, setDescription] = useState(props.item.description || '');
-  const [condition, setCondition] = useState(props.item.condition || '');
-  const [category, setCategory] = useState(props.item.category || '');
+  const [condition, setCondition] = useState(props.item.condition || 1);
+  const [category, setCategory] = useState(props.item.category || 1);
   const [endDate, setEndDate] = useState(props.item.endDate || '');
   const [minBid, setMinBid] = useState(props.item.minBid || 0);
-  const [imgUrl, setImgUrl] = useState(props.item.imgUrl || 'https://i.imgur.com/87xMgGQ.png');
+  const [imgUrl, setImgUrl] = useState(props.item.imgUrl || '');
+  const [imgUrlBlur, setImgUrlBlur] = useState(
+    props.item.imgUrl || 'https://imgur.com/BDT7VOn.jpg'
+  );
+  const { currentUser } = useContext(loginContext);
 
   const [newItemId, setNewItemId] = useState(false);
 
@@ -24,9 +29,13 @@ function ItemEdit(props) {
   // Collects form data from state and submits an axios.post
   const handleSubmit = (event) => {
     event.preventDefault();
+    // Data validation - No empty fields allowed.
+    if (!currentUser || !title || !description || !endDate || !imgUrl || !category || !condition) {
+      return;
+    }
 
     const itemData = {
-      user_id: 1, // HARDCODED USER ID!
+      user_id: currentUser,
       title,
       description,
       endDate,
@@ -58,7 +67,7 @@ function ItemEdit(props) {
             <div className={'d-flex flex-column col-4'}>
               <img
                 className={'imageContainer img-fluid'}
-                src='https://i.imgur.com/0MBBOMT.jpeg'
+                src={imgUrlBlur ? imgUrlBlur : 'https://imgur.com/BDT7VOn.jpg'}
                 alt='image_url'
               ></img>
               <div className={'form-group m-1'}>
@@ -71,8 +80,27 @@ function ItemEdit(props) {
                   onChange={(event) => {
                     setImgUrl(event.target.value);
                   }}
+                  onBlur={(event) => {
+                    setImgUrlBlur(event.target.value);
+                  }}
                   placeholder='Item Image Url'
                 />
+                <div
+                  onClick={() => {
+                    setImgUrlBlur('https://i.imgur.com/HGJaWYO.jpeg');
+                    setImgUrl('https://i.imgur.com/HGJaWYO.jpeg');
+                  }}
+                >
+                  <i>A nice picture of a car: https://i.imgur.com/HGJaWYO.jpeg</i>
+                </div>
+                <div
+                  onClick={() => {
+                    setImgUrlBlur('https://i.imgur.com/kwUdo7j.jpeg');
+                    setImgUrl('https://i.imgur.com/kwUdo7j.jpeg');
+                  }}
+                >
+                  <i>Or maybe some boots?: https://i.imgur.com/kwUdo7j.jpeg</i>
+                </div>
               </div>
             </div>
 
