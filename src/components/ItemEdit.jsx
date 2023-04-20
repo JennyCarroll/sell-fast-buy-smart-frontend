@@ -3,13 +3,8 @@ import { Navigate } from "react-router-dom";
 
 import axios from "axios";
 
-<<<<<<< HEAD
-import SelectListOptions from './general/SelectListOptions';
-import Cookies from 'js-cookie'
-=======
 import SelectListOptions from "./general/SelectListOptions";
-import { loginContext } from "../providers/UserContext";
->>>>>>> styleItemDetail
+import Cookies from "js-cookie";
 
 import "./ItemEdit.scss";
 
@@ -25,7 +20,7 @@ function ItemEdit(props) {
   const [imgUrlBlur, setImgUrlBlur] = useState(
     props.item.imgUrl || "https://imgur.com/BDT7VOn.jpg"
   );
-  const currentUser = Cookies.get('userId');
+  const currentUser = Cookies.get("userId");
 
   const [newItemId, setNewItemId] = useState(false);
 
