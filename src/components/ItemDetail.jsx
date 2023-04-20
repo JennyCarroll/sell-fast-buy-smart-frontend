@@ -14,6 +14,7 @@ function ItemDetail(props) {
   // Get the itemId from the URL parameters
   const params = useParams();
   const [itemObj, setItemObj] = useState({});
+  const [sellerId, setSellerId] = useState({});
   const [currentUserCookie, setCurrentUserCookie] = useState(Cookies.get('userId'));
   //create state for the activeImage of the carousel
   const [activeImage, setActiveImage] = useState("");
@@ -27,6 +28,9 @@ function ItemDetail(props) {
       .then((res) => {
         // Set the item object state with the response data
         setItemObj(res.data[0]);
+        console.log('response', res.data)
+        setSellerId(res.data[res.data.length - 1].user_id);
+        console.log('seller', sellerId)
       })
       .catch((error) => {
         console.log(error.response.status);
@@ -102,7 +106,7 @@ function ItemDetail(props) {
                     </span>
                     <span>Current Bid: {bidToDollars(itemObj.bid_value)}</span>
                     <span>Condition: {itemObj.condition}</span>
-                    <span><Link to={`/profile/${itemObj.user_id}`}>View This Seller</Link></span>
+                    <span><Link to={`/profile/${sellerId}`}>View This Seller</Link></span>
                   </span>
                   <span className="newBid">
                     {currentUserCookie && (

@@ -1,6 +1,6 @@
 import './Nav.scss';
 import Search from './Search';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import { loginContext } from '../providers/UserContext';
 import Cookies from 'js-cookie'
@@ -15,7 +15,7 @@ function Nav(props) {
 
 useEffect(() => {
   setCurrentUserCookie(Cookies.get('userId'))
-}, [currentUser])
+}, [currentUser, useParams()])
 
   const handleChange = (event) => {
     setUserId(event.target.value);
