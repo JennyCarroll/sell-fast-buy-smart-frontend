@@ -15,16 +15,20 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
   useEffect(() => {
     setUserId(currentUser);
     setItemId(item.item_id);
+    setBidValue("")
   }, [item, currentUser]);
 
   // values: [bidInfo.user_id, bidInfo.item_id, bidInfo.bid_value],
 
   // Collects form data from state and submits an axios.post
   const handleSubmit = (event) => {
+<<<<<<< HEAD
     console.log("bidValue", bidValue);
     console.log("currentBid", currentBid);
+=======
+>>>>>>> ad3dae3bd5eea0ecae73548ccdd429f3253fbf4d
     event.preventDefault();
-
+    setBidValue("")
     // Data validation - All field must be populated.
     if (bidValue < currentBid || !itemId || !userId) {
       return;
@@ -33,7 +37,7 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
     const bidData = {
       user_id: userId,
       item_id: parseInt(itemId),
-      bid_value: parseInt(bidValue),
+      bid_value: parseInt(bidValue * 100),
     };
 
     axios
@@ -61,13 +65,21 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
               <div className={"form-group m-1"}>
                 <label htmlFor="new-bid">What Is Your Bid?</label>
                 <input
+<<<<<<< HEAD
                   className={"form-control"}
                   type="number"
                   name="new-bid"
                   // value={minBid}
                   placeholder="Bid Amount"
+=======
+                  className={'form-control'}
+                  type='number'
+                  name='new-bid'
+                  value={bidValue}
+                  placeholder='Bid Amount'
+>>>>>>> ad3dae3bd5eea0ecae73548ccdd429f3253fbf4d
                   onChange={(event) => {
-                    setBidValue(event.target.value * 100);
+                    setBidValue(event.target.value);
                   }}
                 />
               </div>
