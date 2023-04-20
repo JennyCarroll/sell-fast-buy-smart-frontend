@@ -25,22 +25,17 @@
 }
 
 .titleContainer {
-  //create layout for the component using css grid
-  display: grid;
-  //if we specify columns, but not rows, it assumes there can be more than one row.
-  //create two columns
-  grid-template-columns: 33% 66%;
-  margin-left: 4em;
-  margin-right: 4em;
+@include titleContainer();
 }
 
 //style the contents of the title div using flexbox
 .title {
-  display: flex;
-  align-items: left;
-  flex-direction: row;
-  margin-top: 1em;
-  margin-bottom: 1em;
+@include title();
+}
+
+//style the contents of the horizontal rule div using flexbox
+.hr {
+@include hr();
 }
 
 //style the ending soon photos
@@ -51,18 +46,10 @@
   justify-content: space-around;
 }
 
-//style the contents of the horizontal rule div using flexbox
-.hr {
-  display: flex;
-  align-items: left;
-  flex-direction: row;
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
 .siteName {
   text-align: center;
   font-size: 9em;
+  @include large-font()
 }
 
 .bid-price {

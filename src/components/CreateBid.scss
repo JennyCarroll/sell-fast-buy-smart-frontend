@@ -14,3 +14,7 @@
 .imageContainer {
   @include imageSize();
 }
+
+.bid-box {
+  padding-right: 3em;
+}

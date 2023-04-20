@@ -66,12 +66,13 @@ hr {
 .bidInfo {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .bid-plus-condition {
   display: flex;
   flex-direction: column;
+  padding-left: 3em;
 }
 
 .footer {
