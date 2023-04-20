@@ -14,7 +14,7 @@ import BidToast from './general/BidToast';
 
 // Import hooks and helpers:
 import useApplicationData from '../hooks/useApplicationData';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 
 // Import styling:
 import './App.scss';
@@ -23,7 +23,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // MAIN FUNCTION
 export default function App() {
   // State management and functions:
-  const currentUser = Cookies.get('userId')
+  const currentUser = Cookies.get('userId');
   const { state, setState, setStateRefresh } = useApplicationData();
   const [theme, setTheme] = useState(true);
 

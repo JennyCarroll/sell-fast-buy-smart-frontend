@@ -11,41 +11,51 @@ import './ItemEdit.scss';
 
 function ItemEdit(props) {
   // MANAGE STATE
-  const [item, setItem] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [condition, setCondition] = useState(1);
   const [category, setCategory] = useState(1);
   const [endDate, setEndDate] = useState('');
-  const [minBid, setMinBid] = useState(1);
-  const [imgUrl, setImgUrl] = useState('https://imgur.com/BDT7VOn.jpg');
+  const [minBid, setMinBid] = useState('');
+  const [imgUrl, setImgUrl] = useState('');
   const [imgUrlBlur, setImgUrlBlur] = useState('https://imgur.com/BDT7VOn.jpg');
-  const currentUser = Cookies.get('userId');
+  const currentUser = parseInt(Cookies.get('userId'));
 
   const { state, setStateRefresh } = useContext(stateContext);
   const [newItemId, setNewItemId] = useState(false);
-  const params = useParams();
 
+  const params = useParams();
+  console.log('params', params);
+  const paramsItemId = parseInt(params.itemId);
+
+  let item;
+
+  console.log('state', state);
   console.log('item', item);
+
   useEffect(() => {
     // Will only populate state in an edit.
-    if (!params.itemId) {
+    if (!paramsItemId) {
       return;
     }
-    const itemId = parseInt(params.itemId);
+    axios
+      .get(`/items/${paramsItemId}`)
+      .then((res) => {
+        item = res.data[0];
+        console.log(item);
+      })
+      .then(() => {
+        setTitle(item.title);
+        setDescription(item.description);
+        setCondition(item.condition);
+        setCategory(item.category_id);
+        setEndDate(new Date(item.end_date).toISOString().slice(0, 16));
+        setMinBid(item.highest_bid / 100);
 
-    setItem(state.items.find((element) => element.id === itemId));
-    setTitle(item.title);
-    setDescription(item.description);
-    setCondition(item.condition);
-    setCategory(item.category_id);
-    // setEndDate(new Date(item.end_date).toISOString().slice(0, 16));
-    setMinBid(item.highest_bid / 100);
-
-    let image = state.images.find((element) => element.item_id === itemId);
-    console.log('image', image);
-    setImgUrl(image.img_url);
-    // setImgUrlBlur(image.img_url);
+        let image = state.images.find((element) => element.item_id === item.id);
+        setImgUrl(image.img_url);
+        setImgUrlBlur(image.img_url);
+      });
   }, []);
 
   // SUPPORTING FUNCTIONS:
