@@ -99,7 +99,9 @@ function ItemDetail(props) {
           </div>
         </div>
       )}
-      {currentUser && <CreateBid item={itemObj} onSubmit={props.onSubmit} />}
+      {currentUser && (
+        <CreateBid item={itemObj} onSubmit={props.onSubmit} currentBid={itemObj.bid_value} />
+      )}
     </>
   );
 }
