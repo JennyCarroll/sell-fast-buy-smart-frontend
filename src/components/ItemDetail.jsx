@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import './ItemDetail.scss';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ThumbNail from './ThumbNail';
 import Carousel from './Carousel';
 import CreateBid from './CreateBid';
@@ -102,6 +102,7 @@ function ItemDetail(props) {
                     </span>
                     <span>Current Bid: {bidToDollars(itemObj.bid_value)}</span>
                     <span>Condition: {itemObj.condition}</span>
+                    <span><Link to={`/profile/${itemObj.user_id}`}>View This Seller</Link></span>
                   </span>
                   <span className="newBid">
                     {currentUserCookie && (
