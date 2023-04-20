@@ -1,36 +1,51 @@
 @import "sassPartial";
 
-.itemDetail {
-  //create layout for the component using css grid
-  display: grid;
-  //if we specify columns, but not rows, it assumes there can be more than one row.
-  //create two columns
-  grid-template-columns: 33% 66%;
-  margin-left: 4em;
-  margin-right: 4em;
-}
-
 .top-element {
   margin-top: $margin-top;
 }
 
+// .detailContainer {
+//   display: flex;
+//   justify-content: center;
+// }
+
+  //create layout for the component using css grid
+.itemDetail {
+  display: grid;
+  //if we specify columns, but not rows, it assumes there can be more than one row.
+  //create two columns
+  grid-template-columns: 288px 66%;
+  margin-left: 4em;
+  margin-right: 4em;
+}
+
 //style the contents of the images div using flexbox
 .images {
+  margin-top: 30px;
   display: flex;
   align-items: center;
   flex-direction: column;
+  // margin-right: 30px;
+}
+
+.image {
+  @include imageSize();
+  margin: 5px;
+}
+
+.thumbNails {
+  margin-top: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 //style the contents of the info div using flexbox
 .info {
+  margin-top: 30px;
   display: flex;
   align-items: left;
   flex-direction: column;
-}
-
-.description {
-  text-align: left;
-  padding: 3em;
 }
 
 hr {
@@ -38,9 +53,21 @@ hr {
   float: right;
 }
 
-.image {
-    @include imageSize();
-    margin: 5px;
+.description {
+  text-align: left;
+  padding: 3em;
+}
+
+.bidInfo {
+  display: flex;
+  align-items: left;
+  flex-direction: column;
+}
+
+.bids {
+  display: flex;
+  align-items: left;
+  flex-direction: row;
 }
 
 .footer {

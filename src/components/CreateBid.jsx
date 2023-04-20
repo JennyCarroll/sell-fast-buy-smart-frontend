@@ -1,10 +1,10 @@
-import React, { useState, Fragment, useEffect, useContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useState, Fragment, useEffect, useContext } from "react";
+import { Navigate } from "react-router-dom";
 
 import axios from 'axios';
 import Cookies from 'js-cookie'
 
-import './CreateBid.scss';
+import "./CreateBid.scss";
 
 const CreateBid = ({ item, onSubmit, currentBid }) => {
   const [userId, setUserId] = useState(null);
@@ -16,7 +16,7 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
   useEffect(() => {
     setUserId(currentUser);
     setItemId(item.item_id);
-    setBidValue("")
+    setBidValue("");
   }, [item, currentUser]);
 
   // values: [bidInfo.user_id, bidInfo.item_id, bidInfo.bid_value],
@@ -24,6 +24,7 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
   // Collects form data from state and submits an axios.post
   const handleSubmit = (event) => {
     event.preventDefault();
+    setBidValue("");
     // Data validation - All field must be populated.
     // if (bidValue < currentBid || !itemId || !userId) {
     //   return;
@@ -39,12 +40,12 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
     };
     
     axios
-      .post('/bids/new', bidData)
+      .post("/bids/new", bidData)
       .then((res) => {
         onSubmit(true);
       })
       .catch((error) => {
-        console.error('Error submitting bid:', error);
+        console.error("Error submitting bid:", error);
       });
   };
 
@@ -52,30 +53,30 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
     <Fragment>
       {/* {newItemId && <Navigate to={`/items/${itemId}`}} */}
 
-      <form onSubmit={handleSubmit} autoComplete='off'>
-        <div className={'m-4'}>
-          <div className={'d-flex'}>
-            <div className={'d-flex flex-column col-4'}></div>
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <div className={"m-4"}>
+          <div className={"d-flex"}>
+            <div className={"d-flex flex-column col-4"}></div>
 
-            <div className={'new-bid'}>
-              <p className={'strong'}>Create a new bid:</p>
+            <div className={"new-bid"}>
+              <p className={"strong"}>Create a new bid:</p>
 
-              <div className={'form-group m-1'}>
-                <label htmlFor='new-bid'>What Is Your Bid?</label>
+              <div className={"form-group m-1"}>
+                <label htmlFor="new-bid">What Is Your Bid?</label>
                 <input
-                  className={'form-control'}
-                  type='number'
-                  name='new-bid'
+                  className={"form-control"}
+                  type="number"
+                  name="new-bid"
                   value={bidValue}
-                  placeholder='Bid Amount'
+                  placeholder="Bid Amount"
                   onChange={(event) => {
                     setBidValue(event.target.value);
                   }}
                 />
               </div>
             </div>
-            <div className='bid-button'>
-              <button className={'btn btn-dark submit'}>Create Bid</button>
+            <div className="bid-button">
+              <button className={"btn btn-dark submit"}>Create Bid</button>
             </div>
           </div>
         </div>
