@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 // Import components:
 import Items from './Items';
@@ -13,6 +13,7 @@ import MyProfile from './MyProfile';
 import BidToast from './general/BidToast';
 
 // Import hooks and helpers:
+import { loginContext } from '../providers/UserContext';
 import useApplicationData from '../hooks/useApplicationData';
 
 // Import styling:
@@ -22,6 +23,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // MAIN FUNCTION
 export default function App() {
   // State management and functions:
+  const { currentUser } = useContext(loginContext);
   const { state, setState, setStateRefresh } = useApplicationData();
   const [theme, setTheme] = useState(true);
 
@@ -44,33 +46,33 @@ export default function App() {
             ></Route>
             <Route path='items/:itemId' element={<ItemDetail onSubmit={setStateRefresh} />}></Route>
             <Route
-              path='items/new'
-              element={
-                <ItemEdit
-                  item={false}
-                  categories={state.categories}
-                  conditions={state.conditions}
-                  onSubmit={setStateRefresh}
-                />
-              }
-            ></Route>
-            <Route
               path='/categories/:categoryId'
-              element={<Category categories={state.categories} images={state.images} items={state.items}/>}
+              element={
+                <Category categories={state.categories} images={state.images} items={state.items} />
+              }
             ></Route>
             <Route path='/bids' element={<AllBids />}></Route>
             <Route path='/bids/:userId' element={<MyBids />}></Route>
             <Route
               path='/profile/:userId'
-              element={
-                <MyProfile
-                  users={state.users}
-                  items={state.items}
-                  images={state.images}
-                />
-              }
+              element={<MyProfile users={state.users} items={state.items} images={state.images} />}
             ></Route>
             <Route path='/logout' element={<MyBids />}></Route>
+            <Route
+              path='items/new'
+              element={
+                currentUser ? (
+                  <ItemEdit
+                    item={false}
+                    categories={state.categories}
+                    conditions={state.conditions}
+                    onSubmit={setStateRefresh}
+                  />
+                ) : (
+                  <Navigate to={'/'} />
+                )
+              }
+            ></Route>
           </Routes>
           <BidToast />
         </main>
