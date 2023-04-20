@@ -2,12 +2,13 @@ import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import Item from './Item';
 import { loginContext } from '../providers/UserContext';
+import Cookies from 'js-cookie';
 import('./MyProfile.scss');
 
 const MyProfile = ({ users, items, images }) => {
   const params = useParams();
   const [thisUser, setThisUser] = useState({});
-  const { currentUser } = useContext(loginContext);
+  const currentUser = Cookies.get('userId');
 
   const userId = Number(params.userId);
 

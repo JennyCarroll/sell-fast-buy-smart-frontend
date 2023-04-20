@@ -6,11 +6,13 @@ import axios from 'axios';
 import SelectListOptions from './general/SelectListOptions';
 import { loginContext } from '../providers/UserContext';
 import { stateContext } from '../providers/StateContext';
+import Cookies from 'js-cookie';
 
 import './ItemEdit.scss';
 
 function ItemEdit(props) {
   // MANAGE STATE
+  const [item, setItem] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [condition, setCondition] = useState(1);
@@ -18,9 +20,11 @@ function ItemEdit(props) {
   const [endDate, setEndDate] = useState('');
   const [minBid, setMinBid] = useState(0);
   const [imgUrl, setImgUrl] = useState('');
-  const [imgUrlBlur, setImgUrlBlur] = useState('https://imgur.com/BDT7VOn.jpg');
+  const [imgUrlBlur, setImgUrlBlur] = useState(
+    props.item.imgUrl || 'https://imgur.com/BDT7VOn.jpg'
+  );
+  const currentUser = Cookies.get('userId');
 
-  const { currentUser } = useContext(loginContext);
   const { state, setStateRefresh } = useContext(stateContext);
   const [newItemId, setNewItemId] = useState(false);
   const params = useParams();
@@ -33,12 +37,12 @@ function ItemEdit(props) {
     }
     const itemId = parseInt(params.itemId);
 
-    let item = state.items.find((element) => element.id === itemId);
+    setItem(state.items.find((element) => element.id === itemId));
     setTitle(item.title);
     setDescription(item.description);
     setCondition(item.condition);
     setCategory(item.category_id);
-    setEndDate(new Date(item.end_date).toISOString().slice(0, 16));
+    setEndDate(new Date(item.end_date));
     setMinBid(item.highest_bid / 100);
 
     let image = state.images.find((element) => element.item_id === itemId);
@@ -67,11 +71,21 @@ function ItemEdit(props) {
     };
     if (params.itemId) {
       //edit item case
-      const editData = { ...itemData, id: params.itemId };
 
-      axios.post(`/items/${params.itemId}/edit`, editData).then(() => {
-        setStateRefresh(true);
-      });
+      console.log('item', item);
+
+      const editData = { ...itemData, id: params.itemId };
+      if (currentUser === item.user_id) {
+        axios
+          .post(`/items/${params.itemId}/edit`, editData)
+          .then((res) => {
+            props.onSubmit(true);
+            setNewItemId(res.data.id);
+          })
+          .catch((error) => {
+            console.error('Error submitting form:', error);
+          });
+      }
     } else {
       //new item case
       axios
@@ -94,7 +108,7 @@ function ItemEdit(props) {
         <div className={'m-4'}>
           <span className={'strong'}>List a new item:</span>
           <div className={'d-flex'}>
-            <div className={'d-flex flex-column col-4'}>
+            <div className={'d-flex flex-column'}>
               <img
                 className={'imageContainer img-fluid'}
                 src={imgUrlBlur ? imgUrlBlur : 'https://imgur.com/BDT7VOn.jpg'}

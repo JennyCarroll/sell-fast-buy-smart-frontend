@@ -4,19 +4,20 @@
   margin-top: $margin-top;
 }
 
-// .detailContainer {
-//   display: flex;
-//   justify-content: center;
-// }
+.detailContainer {
+  width: 80%;
+}
 
-  //create layout for the component using css grid
 .itemDetail {
-  display: grid;
-  //if we specify columns, but not rows, it assumes there can be more than one row.
-  //create two columns
-  grid-template-columns: 288px 66%;
-  margin-left: 4em;
-  margin-right: 4em;
+  display: flex;
+  justify-content: center;
+  //or we could do margin auto
+}
+
+.custom-container {
+  display: flex;
+  column-gap: 2em;
+  justify-content: space-between;
 }
 
 //style the contents of the images div using flexbox
@@ -25,7 +26,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  // margin-right: 30px;
 }
 
 .image {
@@ -35,17 +35,18 @@
 
 .thumbNails {
   margin-top: 5px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
 }
 
-//style the contents of the info div using flexbox
 .info {
   margin-top: 30px;
   display: flex;
   align-items: left;
   flex-direction: column;
+  min-width: 800px;
+  max-width: 800px;
 }
 
 hr {
@@ -58,16 +59,19 @@ hr {
   padding: 3em;
 }
 
-.bidInfo {
-  display: flex;
-  align-items: left;
-  flex-direction: column;
+.counter {
+  padding-left: 3em;
 }
 
-.bids {
+.bidInfo {
   display: flex;
-  align-items: left;
   flex-direction: row;
+  justify-content: space-around;
+}
+
+.bid-plus-condition {
+  display: flex;
+  flex-direction: column;
 }
 
 .footer {

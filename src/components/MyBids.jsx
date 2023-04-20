@@ -1,15 +1,15 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { loginContext } from '../providers/UserContext';
 import { webSocketContext } from '../providers/WebSocketContext';
+import Cookies from 'js-cookie'
 import './MyBids.scss'
 
 const MyBids = (props) => {
   const params = useParams();
   const [myBids, setMyBids] = useState([]);
   const [highestBids, setHighestBids] = useState([]);
-  const { currentUser, login, logout } = useContext(loginContext);
+  const currentUser = Cookies.get('userId')
   const { bidData } = useContext(webSocketContext);
   
   

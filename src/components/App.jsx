@@ -13,8 +13,8 @@ import MyProfile from './MyProfile';
 import BidToast from './general/BidToast';
 
 // Import hooks and helpers:
-import { loginContext } from '../providers/UserContext';
 import useApplicationData from '../hooks/useApplicationData';
+import Cookies from 'js-cookie'
 
 // Import styling:
 import './App.scss';
@@ -23,7 +23,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // MAIN FUNCTION
 export default function App() {
   // State management and functions:
-  const { currentUser } = useContext(loginContext);
+  const currentUser = Cookies.get('userId')
   const { state, setState, setStateRefresh } = useApplicationData();
   const [theme, setTheme] = useState(true);
 
