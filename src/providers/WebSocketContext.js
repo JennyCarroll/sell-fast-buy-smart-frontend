@@ -8,7 +8,7 @@ export const webSocketContext = createContext();
 export default function WebSocketProvider(props) {
   // MANAGE STATE
   const [socket, setSocket] = useState(null);
-  const [bidData, setBidData] = useState({});
+  const [bidItem, setBidItem] = useState(0);
 
   useEffect(() => {
     const socket = io();
@@ -16,12 +16,11 @@ export default function WebSocketProvider(props) {
 
     socket.on('bid', (data) => {
       const price = data.bid.bid_value / 100;
-      const userName = data.name;
+      const userName = data.user.name;
       const itemName = data.item.title;
 
 
-      setBidData(data);
-      console.log(data);
+      setBidItem(data.item.id);
       toast.info(`${userName} bid $${price} for ${itemName}!`, {
         position: "bottom-center",
         autoClose: 3000,
@@ -32,7 +31,6 @@ export default function WebSocketProvider(props) {
         progress: undefined,
         theme: "light",
       });
-      console.log('someone made a bid!', data);
     });
 
     //Cleanup
@@ -44,12 +42,11 @@ export default function WebSocketProvider(props) {
 
   // FUNCTIONS
   const socketLogin = (currentUser) => {
-    console.log('inside socket Login');
     socket.emit('login', currentUser);
   };
 
 
-  const socketInfo = { socketLogin, bidData };
+  const socketInfo = { socketLogin, bidItem };
   return (
     <webSocketContext.Provider value={socketInfo}>
       {props.children}
