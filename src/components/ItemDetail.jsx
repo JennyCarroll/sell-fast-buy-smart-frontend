@@ -7,6 +7,7 @@ import Carousel from "./Carousel";
 import CreateBid from "./CreateBid";
 import Counter from "./general/Counter";
 import { loginContext } from '../providers/UserContext';
+import { webSocketContext } from '../providers/WebSocketContext';
 
 function ItemDetail(props) {
   // Get the itemId from the URL parameters
@@ -15,13 +16,13 @@ function ItemDetail(props) {
   const { currentUser, login, logout } = useContext(loginContext);
   //create state for the activeImage of the carousel
   const [activeImage, setActiveImage] = useState("");
+  const { bidData } = useContext(webSocketContext);
 
   useEffect(() => {
     axios
       //fetch item data from the server
       .get(`/items/${params.itemId}`)
       .then((res) => {
-        console.log("res.data[0]", res.data[0]);
         // Set the item object state with the response data
         setItemObj(res.data[0]);
       })
@@ -30,7 +31,7 @@ function ItemDetail(props) {
         console.log(error.response.headers);
         console.log(error.response.data);
       });
-  }, [params]);
+  }, [params, bidData]);
 
   // Helper function to convert bid value to a dollar amount
   const bidToDollars = function (value) {

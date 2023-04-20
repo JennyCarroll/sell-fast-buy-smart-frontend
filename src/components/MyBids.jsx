@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { loginContext } from '../providers/UserContext';
 import './MyBids.scss'
 
 const MyBids = (props) => {
   const params = useParams();
   const [myBids, setMyBids] = useState([]);
+  const { currentUser, login, logout } = useContext(loginContext);
   
   const bidToDollars = function (value) {
     return (value / 100).toLocaleString("en-US", {
@@ -22,6 +24,7 @@ const MyBids = (props) => {
         },
       })
       .then((res) => {
+        console.log(res.data)
         setMyBids(res.data);
       });
   }, [params]);
@@ -37,6 +40,7 @@ const MyBids = (props) => {
               className="bids-image"
             ></div>
             <div class='my-bid-price' >{bidToDollars(bid.bid_value)}</div>
+            <div class='highest-bid-price' >👑 You have the highest bid</div>
           </Link>
         );
       })}
