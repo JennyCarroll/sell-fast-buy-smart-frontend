@@ -4,11 +4,10 @@ import { useContext } from 'react';
 import { webSocketContext } from '../../providers/WebSocketContext';
 
 export default function BidToast(props) {
-  const { bidData } = useContext(webSocketContext);
-  console.log(bidData);
+  const { bidItem } = useContext(webSocketContext);
 
   return (
-    <Link to={`/items/${bidData.item_id}`}>
+    <Link to={`/items/${bidItem}`}>
       <ToastContainer />
     </Link>
   );
