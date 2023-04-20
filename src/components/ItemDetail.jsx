@@ -28,9 +28,7 @@ function ItemDetail(props) {
       .then((res) => {
         // Set the item object state with the response data
         setItemObj(res.data[0]);
-        console.log('response', res.data)
         setSellerId(res.data[res.data.length - 1].user_id);
-        console.log('seller', sellerId)
       })
       .catch((error) => {
         console.log(error.response.status);
