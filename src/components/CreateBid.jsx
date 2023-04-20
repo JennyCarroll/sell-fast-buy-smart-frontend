@@ -54,32 +54,32 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
       {/* {newItemId && <Navigate to={`/items/${itemId}`}} */}
 
       <form onSubmit={handleSubmit} autoComplete="off">
-        <div className={"m-4"}>
-          <div className={"d-flex"}>
-            <div className={"d-flex flex-column col-4"}></div>
+        {/* <div className={"m-4"}> */}
+        <div className={"d-flex"}>
+          <div className={"d-flex flex-column"}></div>
 
-            <div className={"new-bid"}>
-              <p className={"strong"}>Create a new bid:</p>
+          <div className={"new-bid"}>
+            <p className={"strong"}>Create a new bid:</p>
 
-              <div className={"form-group m-1"}>
-                <label htmlFor="new-bid">What Is Your Bid?</label>
-                <input
-                  className={"form-control"}
-                  type="number"
-                  name="new-bid"
-                  value={bidValue}
-                  placeholder="Bid Amount"
-                  onChange={(event) => {
-                    setBidValue(event.target.value);
-                  }}
-                />
-              </div>
-            </div>
-            <div className="bid-button">
-              <button className={"btn btn-dark submit"}>Create Bid</button>
+            <div className={"form-group"}>
+              <label htmlFor="new-bid">What Is Your Bid?</label>
+              <input
+                className={"form-control"}
+                type="number"
+                name="new-bid"
+                value={bidValue}
+                placeholder="Bid Amount"
+                onChange={(event) => {
+                  setBidValue(event.target.value);
+                }}
+              />
             </div>
           </div>
+          <div className="bid-button">
+            <button className={"btn btn-dark submit"}>Create Bid</button>
+          </div>
         </div>
+        {/* </div> */}
       </form>
     </Fragment>
   );
