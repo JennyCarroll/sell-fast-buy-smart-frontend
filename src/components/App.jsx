@@ -73,6 +73,17 @@ export default function App() {
                 )
               }
             ></Route>
+            <Route
+              path='items/:itemId/edit'
+              element={
+                <ItemEdit
+                  item={false}
+                  categories={state.categories}
+                  conditions={state.conditions}
+                  onSubmit={setStateRefresh}
+                />
+              }
+            ></Route>
           </Routes>
           <BidToast />
         </main>

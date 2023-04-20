@@ -1,31 +1,53 @@
-import React, { useState, Fragment, useContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useState, Fragment, useContext, useEffect } from 'react';
+import { Navigate, useParams } from 'react-router-dom';
 
 import axios from 'axios';
 
 import SelectListOptions from './general/SelectListOptions';
 import { loginContext } from '../providers/UserContext';
+import { stateContext } from '../providers/StateContext';
 
 import './ItemEdit.scss';
 
 function ItemEdit(props) {
   // MANAGE STATE
-  const [title, setTitle] = useState(props.item || '');
-  const [description, setDescription] = useState(props.item.description || '');
-  const [condition, setCondition] = useState(props.item.condition || 1);
-  const [category, setCategory] = useState(props.item.category || 1);
-  const [endDate, setEndDate] = useState(props.item.endDate || '');
-  const [minBid, setMinBid] = useState(props.item.minBid || 0);
-  const [imgUrl, setImgUrl] = useState(props.item.imgUrl || '');
-  const [imgUrlBlur, setImgUrlBlur] = useState(
-    props.item.imgUrl || 'https://imgur.com/BDT7VOn.jpg'
-  );
-  const { currentUser } = useContext(loginContext);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [condition, setCondition] = useState(1);
+  const [category, setCategory] = useState(1);
+  const [endDate, setEndDate] = useState('');
+  const [minBid, setMinBid] = useState(0);
+  const [imgUrl, setImgUrl] = useState('');
+  const [imgUrlBlur, setImgUrlBlur] = useState('https://imgur.com/BDT7VOn.jpg');
 
+  const { currentUser } = useContext(loginContext);
+  const { state, setStateRefresh } = useContext(stateContext);
+  const params = useParams();
   const [newItemId, setNewItemId] = useState(false);
 
-  // SUPPORTING FUNCTIONS:
+  useEffect(() => {
+    console.log();
+    if (!params.itemId) {
+      console.log('no params.itemId');
+      return;
+    }
+    const itemId = parseInt(params.itemId);
 
+    let item = state.items.find((element) => element.id === itemId);
+    setTitle(item.title);
+    setDescription(item.description);
+    setCondition(item.condition);
+    setCategory(item.category_id);
+    setEndDate(item.end_date);
+    setMinBid(item.highest_bid / 100);
+
+    let image = state.images.find((element) => element.item_id === itemId);
+    setImgUrl(image.img_url);
+    setImgUrlBlur(image.img_url);
+    console.log('item', item);
+  }, []);
+
+  // SUPPORTING FUNCTIONS:
   // Collects form data from state and submits an axios.post
   const handleSubmit = (event) => {
     event.preventDefault();
