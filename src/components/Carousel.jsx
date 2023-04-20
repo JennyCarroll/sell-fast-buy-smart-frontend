@@ -1,42 +1,42 @@
-import React from "react";
-import Item from "./Item";
+import React from 'react';
+import Item from './Item';
 
 function Carousel(props) {
   return (
-    <div id="carouselExample" class="carousel slide">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
+    <div id='carouselExample' className='carousel slide'>
+      <div className='carousel-inner'>
+        <div className='carousel-item active'>
           <Item
             // if there is an active image use that, otherwise use the first image
             photo={props.active ? props.active : props.images[0].img_url}
             title={props.title}
           ></Item>
         </div>
-        {props.images.map((image) => {
+        {props.images.map((image, i) => {
           return (
-            <div class="carousel-item">
+            <div className='carousel-item'>
               <Item photo={image.img_url} title={props.title}></Item>
             </div>
           );
         })}
       </div>
       <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExample"
-        data-bs-slide="prev"
+        className='carousel-control-prev'
+        type='button'
+        data-bs-target='#carouselExample'
+        data-bs-slide='prev'
       >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+        <span className='carousel-control-prev-icon' aria-hidden='true'></span>
+        <span className='visually-hidden'>Previous</span>
       </button>
       <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExample"
-        data-bs-slide="next"
+        className='carousel-control-next'
+        type='button'
+        data-bs-target='#carouselExample'
+        data-bs-slide='next'
       >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
+        <span className='carousel-control-next-icon' aria-hidden='true'></span>
+        <span className='visually-hidden'>Next</span>
       </button>
     </div>
   );
