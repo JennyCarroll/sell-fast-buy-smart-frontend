@@ -21,10 +21,8 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
 
   // Collects form data from state and submits an axios.post
   const handleSubmit = (event) => {
-    console.log('bidValue', bidValue);
-    console.log('currentBid', currentBid);
     event.preventDefault();
-
+    setBidValue("")
     // Data validation - All field must be populated.
     if (bidValue < currentBid || !itemId || !userId) {
       return;
@@ -64,7 +62,7 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
                   className={'form-control'}
                   type='number'
                   name='new-bid'
-                  // value={minBid}
+                  value={bidValue}
                   placeholder='Bid Amount'
                   onChange={(event) => {
                     setBidValue(event.target.value * 100);
