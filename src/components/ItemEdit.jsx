@@ -48,7 +48,7 @@ function ItemEdit(props) {
 
   // SUPPORTING FUNCTIONS:
   // Collects form data from state and submits an axios.post
-  const handleSubmitNew = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     // Data validation - No empty fields allowed.
     if (!currentUser || !title || !description || !endDate || !imgUrl || !category || !condition) {
@@ -68,9 +68,11 @@ function ItemEdit(props) {
     if (params.itemId) {
       //edit item case
       const editData = { ...itemData, id: params.itemId };
-      axios.post(`items/${params.itemId}/edit`).then(() => {
-        setStateRefresh(true);
-      });
+      console.log(editData);
+
+      // axios.post(`items/${params.itemId}/edit`, editData).then(() => {
+      //   setStateRefresh(true);
+      // });
     } else {
       //new item case
       axios
@@ -218,7 +220,7 @@ function ItemEdit(props) {
           </div>
         </div>
         <div className='d-flex justify-content-end m-4'>
-          <button onSubmit={handleSubmitNew} className={'btn btn-dark submit'}>
+          <button onSubmit={handleSubmit} className={'btn btn-dark submit'}>
             Create Item
           </button>
         </div>
