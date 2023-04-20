@@ -56,52 +56,59 @@ function ItemDetail(props) {
       );
     });
   };
-
   return (
     <>
       {/* check to see if the itemObj exists before rendering the jsx */}
       {itemObj && (
-        <div className="itemDetail top-element">
-          <div className="images">
-            <h1>{itemObj.title}</h1>
-            {/* because this data is nested in itemObj and it is an additional async query, it may take longer to load so we check to make sure it exists and has length before rendering */}
-            {itemObj.img_url && itemObj.img_url.length > 0 && (
-              <Carousel
-                images={itemObj.img_url}
-                title={itemObj.title}
-                active={activeImage}
-              ></Carousel>
-            )}
-          </div>
-          <div className="info">
-            <hr />
-            <span className="description">{itemObj.description}</span>
-          </div>
-          <div className="thumbNails">{thumbNails(itemObj)}</div>
-          <div className="bids">
-            <span className="bidInfo">
-              <span>
-                {Number(itemObj.user_id) === Number(currentUser)
-                  ? "👑 You are the highest bidder"
-                  : ""}
-              </span>
-              <span>Current Bid: {bidToDollars(itemObj.bid_value)}</span>
-
-              {/*It is necessary to only render this once `itemObj.end_date` exists, otherwise the setInterval won't start properly
-               */}
-              {itemObj.end_date && <Counter end_date={itemObj.end_date} />}
-              <br />
-              <span>Condition: {itemObj.condition}</span>
-            </span>
-            <span className="newBid">
-              {currentUser && (
-                <CreateBid
-                  item={itemObj}
-                  onSubmit={props.onSubmit}
-                  currentBid={itemObj.bid_value}
-                />
-              )}
-            </span>
+        <div className="itemDetail top-element ">
+          <div className="detailContainer">
+            <div className="custom-container">
+              <div className="images">
+                <h1>{itemObj.title}</h1>
+                {/* because this data is nested in itemObj and it is an additional async query, it may take longer to load so we check to make sure it exists and has length before rendering */}
+                {itemObj.img_url && itemObj.img_url.length > 0 && (
+                  <Carousel
+                    images={itemObj.img_url}
+                    title={itemObj.title}
+                    active={activeImage}
+                  ></Carousel>
+                )}
+              </div>
+              <div className="info">
+                <hr />
+                <span className="description">{itemObj.description}</span>
+                <span className="counter">
+                  {/*It is necessary to only render this once `itemObj.end_date` exists, otherwise the setInterval won't start properly
+                   */}
+                  {itemObj.end_date && <Counter end_date={itemObj.end_date} />}
+                </span>
+              </div>
+            </div>
+            <div className="custom-container">
+              <div className="thumbNails">{thumbNails(itemObj)}</div>
+              <div className="info">
+                <div className="bidInfo">
+                  <span className="bid-plus-condition">
+                    <span>
+                      {Number(itemObj.user_id) === Number(currentUser)
+                        ? "👑 You are the highest bidder"
+                        : ""}
+                    </span>
+                    <span>Current Bid: {bidToDollars(itemObj.bid_value)}</span>
+                    <span>Condition: {itemObj.condition}</span>
+                  </span>
+                  <span className="newBid">
+                    {currentUser && (
+                      <CreateBid
+                        item={itemObj}
+                        onSubmit={props.onSubmit}
+                        currentBid={itemObj.bid_value}
+                      />
+                    )}
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
