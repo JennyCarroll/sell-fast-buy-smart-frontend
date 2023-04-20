@@ -15,6 +15,7 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
   useEffect(() => {
     setUserId(currentUser);
     setItemId(item.item_id);
+    setBidValue("")
   }, [item, currentUser]);
 
   // values: [bidInfo.user_id, bidInfo.item_id, bidInfo.bid_value],
@@ -31,7 +32,7 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
     const bidData = {
       user_id: userId,
       item_id: parseInt(itemId),
-      bid_value: parseInt(bidValue),
+      bid_value: parseInt(bidValue * 100),
     };
 
     axios
@@ -65,7 +66,7 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
                   value={bidValue}
                   placeholder='Bid Amount'
                   onChange={(event) => {
-                    setBidValue(event.target.value * 100);
+                    setBidValue(event.target.value);
                   }}
                 />
               </div>
