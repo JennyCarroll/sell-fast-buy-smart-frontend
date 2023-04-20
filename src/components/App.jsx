@@ -5,6 +5,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Items from './Items';
 import Nav from './Nav';
 import ItemDetail from './ItemDetail';
+import ItemNew from './ItemNew';
 import ItemEdit from './ItemEdit';
 import Category from './Category';
 import MyBids from './MyBids';
@@ -14,7 +15,7 @@ import BidToast from './general/BidToast';
 
 // Import hooks and helpers:
 import useApplicationData from '../hooks/useApplicationData';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 
 // Import styling:
 import './App.scss';
@@ -23,7 +24,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // MAIN FUNCTION
 export default function App() {
   // State management and functions:
-  const currentUser = Cookies.get('userId')
+  const currentUser = Cookies.get('userId');
   const { state, setState, setStateRefresh } = useApplicationData();
   const [theme, setTheme] = useState(true);
 
@@ -60,19 +61,9 @@ export default function App() {
             <Route path='/logout' element={<MyBids />}></Route>
             <Route
               path='items/new'
-              element={
-                currentUser ? (
-                  <ItemEdit
-                    item={false}
-                    categories={state.categories}
-                    conditions={state.conditions}
-                    onSubmit={setStateRefresh}
-                  />
-                ) : (
-                  <Navigate to={'/'} />
-                )
-              }
+              element={currentUser ? <ItemNew /> : <Navigate to={'/'} />}
             ></Route>
+            <Route path='items/:itemId/edit' element={<ItemEdit />}></Route>
           </Routes>
           <BidToast />
         </main>

@@ -1,5 +1,5 @@
-import React, { useState, Fragment, useContext, useEffect } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import React, { useState, Fragment, useContext } from 'react';
+import { Navigate } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -9,43 +9,20 @@ import Cookies from 'js-cookie';
 
 import './ItemForm/ItemForm.scss';
 
-function ItemEdit() {
+function ItemNew() {
   // MANAGE STATE
-  const [item, setItem] = useState({});
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [condition, setCondition] = useState(1);
   const [category, setCategory] = useState(1);
   const [endDate, setEndDate] = useState('');
-  const [minBid, setMinBid] = useState(0);
+  const [minBid, setMinBid] = useState('');
   const [imgUrl, setImgUrl] = useState('');
   const [imgUrlBlur, setImgUrlBlur] = useState('https://imgur.com/BDT7VOn.jpg');
   const currentUser = parseInt(Cookies.get('userId'));
 
   const { state, setStateRefresh } = useContext(stateContext);
-  const [success, setSuccess] = useState(false);
-
-  const params = useParams();
-  const paramsItemId = parseInt(params.itemId);
-
-  useEffect(() => {
-    axios.get(`/items/${paramsItemId}`).then((res) => {
-      const resItem = res.data[0];
-      setItem(resItem);
-      setTitle(resItem.title);
-      setDescription(resItem.description);
-      setCondition(resItem.condition);
-      setCategory(resItem.category_id);
-      setEndDate(new Date(resItem.end_date).toISOString().slice(0, 16));
-      setMinBid(resItem.bid_value / 100);
-
-      let image = state.images.find((element) => element.item_id === resItem.id);
-      if (image) {
-        setImgUrl(image.img_url);
-        setImgUrlBlur(image.img_url);
-      }
-    });
-  }, [state]);
+  const [newItemId, setNewItemId] = useState(false);
 
   // SUPPORTING FUNCTIONS:
   // Collects form data from state and submits an axios.post
@@ -67,31 +44,31 @@ function ItemEdit() {
       minBid: parseInt(minBid * 100),
     };
 
-    const editData = { ...itemData, id: params.itemId };
-    if (currentUser === item.user_id) {
-      axios
-        .post(`/items/${params.itemId}/edit`, editData)
-        .then((res) => {
-          console.log(res);
-          setStateRefresh(true);
-          setSuccess(true);
-        })
-        .catch((error) => {
-          console.error('Error submitting form:', error);
-        });
-    }
+    axios
+      .post('/items/new', itemData)
+      .then((res) => {
+        setNewItemId(res.data.id);
+        setStateRefresh(true);
+      })
+      .catch((error) => {
+        console.error('Error submitting form:', error);
+      });
   };
 
   return (
     <Fragment>
-      {success && <Navigate to={'/items/' + paramsItemId} />}
+      {newItemId && <Navigate to={'/items/' + newItemId} />}
       <form onSubmit={handleSubmit} autoComplete='off'>
         <div className={'itemForm'}></div>
         <div className={'m-4'}>
-          <span className={'strong'}>Edit your item:</span>
+          <span className={'strong'}>List a new item:</span>
           <div className={'d-flex'}>
             <div className={'d-flex flex-column'}>
-              <img className={'imageContainer img-fluid'} src={imgUrlBlur} alt='image_url'></img>
+              <img
+                className={'imageContainer img-fluid'}
+                src={imgUrlBlur ? imgUrlBlur : 'https://imgur.com/BDT7VOn.jpg'}
+                alt='image_url'
+              ></img>
               <div className={'form-group m-1'}>
                 <label htmlFor='item-url'>Item URL:</label>
                 <input
@@ -211,11 +188,11 @@ function ItemEdit() {
           </div>
         </div>
         <div className='d-flex justify-content-end m-4'>
-          <button className={'btn btn-dark submit'}>Edit Item</button>
+          <button className={'btn btn-dark submit'}>Create Item</button>
         </div>
       </form>
     </Fragment>
   );
 }
 
-export default ItemEdit;
+export default ItemNew;
