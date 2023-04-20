@@ -4,7 +4,6 @@ import { Navigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 import SelectListOptions from './general/SelectListOptions';
-import { loginContext } from '../providers/UserContext';
 import { stateContext } from '../providers/StateContext';
 import Cookies from 'js-cookie';
 
@@ -18,19 +17,17 @@ function ItemEdit(props) {
   const [condition, setCondition] = useState(1);
   const [category, setCategory] = useState(1);
   const [endDate, setEndDate] = useState('');
-  const [minBid, setMinBid] = useState(0);
-  const [imgUrl, setImgUrl] = useState('');
-  const [imgUrlBlur, setImgUrlBlur] = useState(
-    props.item.imgUrl || 'https://imgur.com/BDT7VOn.jpg'
-  );
+  const [minBid, setMinBid] = useState(1);
+  const [imgUrl, setImgUrl] = useState('https://imgur.com/BDT7VOn.jpg');
+  const [imgUrlBlur, setImgUrlBlur] = useState('https://imgur.com/BDT7VOn.jpg');
   const currentUser = Cookies.get('userId');
 
   const { state, setStateRefresh } = useContext(stateContext);
   const [newItemId, setNewItemId] = useState(false);
   const params = useParams();
 
+  console.log('item', item);
   useEffect(() => {
-    console.log();
     // Will only populate state in an edit.
     if (!params.itemId) {
       return;
@@ -42,12 +39,13 @@ function ItemEdit(props) {
     setDescription(item.description);
     setCondition(item.condition);
     setCategory(item.category_id);
-    setEndDate(new Date(item.end_date));
+    // setEndDate(new Date(item.end_date).toISOString().slice(0, 16));
     setMinBid(item.highest_bid / 100);
 
     let image = state.images.find((element) => element.item_id === itemId);
+    console.log('image', image);
     setImgUrl(image.img_url);
-    setImgUrlBlur(image.img_url);
+    // setImgUrlBlur(image.img_url);
   }, []);
 
   // SUPPORTING FUNCTIONS:
@@ -71,8 +69,6 @@ function ItemEdit(props) {
     };
     if (params.itemId) {
       //edit item case
-
-      console.log('item', item);
 
       const editData = { ...itemData, id: params.itemId };
       if (currentUser === item.user_id) {
