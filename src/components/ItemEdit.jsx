@@ -27,8 +27,8 @@ function ItemEdit(props) {
 
   useEffect(() => {
     console.log();
+    // Will only populate state in an edit.
     if (!params.itemId) {
-      console.log('no params.itemId');
       return;
     }
     const itemId = parseInt(params.itemId);
@@ -44,12 +44,11 @@ function ItemEdit(props) {
     let image = state.images.find((element) => element.item_id === itemId);
     setImgUrl(image.img_url);
     setImgUrlBlur(image.img_url);
-    console.log('item', item);
   }, []);
 
   // SUPPORTING FUNCTIONS:
   // Collects form data from state and submits an axios.post
-  const handleSubmit = (event) => {
+  const handleSubmitNew = (event) => {
     event.preventDefault();
     // Data validation - No empty fields allowed.
     if (!currentUser || !title || !description || !endDate || !imgUrl || !category || !condition) {
@@ -66,22 +65,30 @@ function ItemEdit(props) {
       condition: parseInt(condition),
       minBid: parseInt(minBid * 100),
     };
-
-    axios
-      .post('/items/new', itemData)
-      .then((res) => {
-        props.onSubmit(true);
-        setNewItemId(res.data.id);
-      })
-      .catch((error) => {
-        console.error('Error submitting form:', error);
+    if (params.itemId) {
+      //edit item case
+      const editData = { ...itemData, id: params.itemId };
+      axios.post(`items/${params.itemId}/edit`).then(() => {
+        setStateRefresh(true);
       });
+    } else {
+      //new item case
+      axios
+        .post('/items/new', itemData)
+        .then((res) => {
+          setNewItemId(res.data.id);
+          setStateRefresh(true);
+        })
+        .catch((error) => {
+          console.error('Error submitting form:', error);
+        });
+    }
   };
 
   return (
     <Fragment>
       {newItemId && <Navigate to={'/items/' + newItemId} />}
-      <form onSubmit={handleSubmit} autoComplete='off'>
+      <form autoComplete='off'>
         <div className={'itemEdit'}></div>
         <div className={'m-4'}>
           <span className={'strong'}>List a new item:</span>
@@ -211,7 +218,9 @@ function ItemEdit(props) {
           </div>
         </div>
         <div className='d-flex justify-content-end m-4'>
-          <button className={'btn btn-dark submit'}>Create Item</button>
+          <button onSubmit={handleSubmitNew} className={'btn btn-dark submit'}>
+            Create Item
+          </button>
         </div>
       </form>
     </Fragment>
