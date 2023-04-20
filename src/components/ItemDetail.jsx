@@ -7,16 +7,18 @@ import Carousel from './Carousel';
 import CreateBid from './CreateBid';
 import Counter from './general/Counter';
 import { webSocketContext } from '../providers/WebSocketContext';
+import { loginContext } from '../providers/UserContext';
 import Cookies from 'js-cookie'
 
 function ItemDetail(props) {
   // Get the itemId from the URL parameters
   const params = useParams();
   const [itemObj, setItemObj] = useState({});
-  const currentUser = Cookies.get('userId')
+  const [currentUserCookie, setCurrentUserCookie] = useState(Cookies.get('userId'));
   //create state for the activeImage of the carousel
   const [activeImage, setActiveImage] = useState("");
   const { bidData } = useContext(webSocketContext);
+  const { currentUser } = useContext(loginContext);
 
   useEffect(() => {
     axios
@@ -32,6 +34,10 @@ function ItemDetail(props) {
         console.log(error.response.data);
       });
   }, [params, bidData]);
+
+  useEffect(() => {
+    setCurrentUserCookie(Cookies.get('userId'))
+  }, [currentUser])
 
   // Helper function to convert bid value to a dollar amount
   const bidToDollars = function (value) {
@@ -90,7 +96,7 @@ function ItemDetail(props) {
                 <div className="bidInfo">
                   <span className="bid-plus-condition">
                     <span>
-                      {Number(itemObj.user_id) === Number(currentUser)
+                      {Number(itemObj.user_id) === Number(currentUserCookie)
                         ? "👑 You are the highest bidder"
                         : ""}
                     </span>
@@ -98,7 +104,7 @@ function ItemDetail(props) {
                     <span>Condition: {itemObj.condition}</span>
                   </span>
                   <span className="newBid">
-                    {currentUser && (
+                    {currentUserCookie && (
                       <CreateBid
                         item={itemObj}
                         onSubmit={props.onSubmit}

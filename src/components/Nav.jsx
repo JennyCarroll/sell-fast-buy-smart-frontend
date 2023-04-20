@@ -1,7 +1,7 @@
 import './Nav.scss';
 import Search from './Search';
 import { Link } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { loginContext } from '../providers/UserContext';
 import Cookies from 'js-cookie'
 
@@ -9,8 +9,13 @@ function Nav(props) {
   let categories = props.categories;
 
   const [userId, setUserId] = useState(null);
-  const { login, logout } = useContext(loginContext);
-  let currentUser = Cookies.get('userId')
+  const [currentUserCookie, setCurrentUserCookie] = useState(Cookies.get('userId'))
+  const { currentUser, login, logout } = useContext(loginContext);
+  
+
+useEffect(() => {
+  setCurrentUserCookie(Cookies.get('userId'))
+}, [currentUser])
 
   const handleChange = (event) => {
     setUserId(event.target.value);
@@ -46,7 +51,7 @@ function Nav(props) {
           >
             {props.theme ? 'Dark Mode' : 'Light Mode'}
           </button>
-          {Cookies.get('userId') ? (
+          {currentUserCookie ? (
             <>
               <div className='btn mb1 bg-black'>
                 <Link to={'/items/new'}>Sell Now</Link>
@@ -54,14 +59,14 @@ function Nav(props) {
               <div className='btn mb1 bg-black dropdown'>
                 Profile
                 <div className='dropdown-content'>
-                  <Link to={`/profile/${currentUser}`}>My Profile</Link>
+                  <Link to={`/profile/${currentUserCookie}`}>My Profile</Link>
                   <Link to={`/`} onClick={() => logout()}>
                     logout
                   </Link>
                 </div>
               </div>
               <div className='btn mb1 bg-black'>
-                <Link to={`bids/${currentUser}`}>My Bids</Link>
+                <Link to={`bids/${currentUserCookie}`}>My Bids</Link>
               </div>
             </>
           ) : (
