@@ -21,20 +21,14 @@ function ItemEdit() {
   const [imgUrl, setImgUrl] = useState('');
   const [imgUrlBlur, setImgUrlBlur] = useState('https://imgur.com/BDT7VOn.jpg');
   const currentUser = parseInt(Cookies.get('userId'));
-  const { success, setSuccess } = useState(false);
 
   const { state, setStateRefresh } = useContext(stateContext);
-  const [newItemId, setNewItemId] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const params = useParams();
-  // console.log('params', params);
   const paramsItemId = parseInt(params.itemId);
 
-  // console.log('state', state);
-  // console.log('item', item);
-
   useEffect(() => {
-    console.log('useEffect fires');
     axios.get(`/items/${paramsItemId}`).then((res) => {
       const resItem = res.data[0];
       setItem(resItem);
@@ -46,8 +40,10 @@ function ItemEdit() {
       setMinBid(resItem.bid_value / 100);
 
       let image = state.images.find((element) => element.item_id === resItem.id);
-      setImgUrl(image.img_url);
-      setImgUrlBlur(image.img_url);
+      if (image) {
+        setImgUrl(image.img_url);
+        setImgUrlBlur(image.img_url);
+      }
     });
   }, [state]);
 
@@ -92,14 +88,10 @@ function ItemEdit() {
       <form onSubmit={handleSubmit} autoComplete='off'>
         <div className={'itemForm'}></div>
         <div className={'m-4'}>
-          <span className={'strong'}>List a new item:</span>
+          <span className={'strong'}>Edit your item:</span>
           <div className={'d-flex'}>
             <div className={'d-flex flex-column'}>
-              <img
-                className={'imageContainer img-fluid'}
-                src={imgUrlBlur ? imgUrlBlur : 'https://imgur.com/BDT7VOn.jpg'}
-                alt='image_url'
-              ></img>
+              <img className={'imageContainer img-fluid'} src={imgUrlBlur} alt='image_url'></img>
               <div className={'form-group m-1'}>
                 <label htmlFor='item-url'>Item URL:</label>
                 <input
@@ -219,7 +211,7 @@ function ItemEdit() {
           </div>
         </div>
         <div className='d-flex justify-content-end m-4'>
-          <button className={'btn btn-dark submit'}>Create Item</button>
+          <button className={'btn btn-dark submit'}>Edit Item</button>
         </div>
       </form>
     </Fragment>
