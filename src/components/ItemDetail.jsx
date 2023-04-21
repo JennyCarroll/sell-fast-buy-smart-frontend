@@ -75,9 +75,7 @@ function ItemDetail(props) {
       {itemObj && (
         <div className='top-element '>
           <div className="title-container">
-            <div className="title">
-              <h1>{itemObj.title}</h1>
-            </div>
+              <h1 className="title">{itemObj.title}</h1>
             <span className="hr">
               <hr />
             </span>

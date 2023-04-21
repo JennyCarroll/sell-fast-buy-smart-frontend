@@ -4,6 +4,10 @@
   margin-top: $margin-top;
 }
 
+.title {
+  @include title();
+}
+
 .detailContainer {
   width: 80%;
   display: flex;
