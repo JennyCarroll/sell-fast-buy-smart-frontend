@@ -7,7 +7,6 @@ import Rating from './general/Rating';
 import('./MyProfile.scss');
 
 const MyProfile = ({ users, items, images }) => {
-  console.log('MyProfile - render');
   const params = useParams();
   const [thisUser, setThisUser] = useState({});
   const currentUser = Cookies.get('userId');
@@ -20,6 +19,7 @@ const MyProfile = ({ users, items, images }) => {
     setThisUser(users.find((user) => user.id === userId));
   }, [params, items]);
 
+  console.log('MyProfile - Render');
   return (
     <body>
       <div className='profile'>
