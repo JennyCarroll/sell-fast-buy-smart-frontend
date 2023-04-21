@@ -43,7 +43,7 @@ function Search(props) {
       <div className="input-group">
         <input
           id="search-bar"
-          className="form-control"
+          className="form-control search-bar"
           type="text"
           placeholder="Search items ..."
           onChange={handleChange}
@@ -57,7 +57,9 @@ function Search(props) {
       <ul className="results">
         {filteredItems.map((item) => (
           <Link key={item.id} to={`/items/${item.id}`}>
+            <div className="search-result">
             <p className="result-list">{item.title}</p>
+            </div>
           </Link>
         ))}
       </ul>

@@ -16,7 +16,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    background-color: $light;
+    background-color: $lightest;
     color: $dark;
     position: fixed;
     top: 50px;
@@ -36,4 +36,20 @@
 .search-bar-text {
   flex-direction: row;
   z-index: 2;
+}
+
+.search-bar-with-results .input-group .search-bar {
+  background-color: $light;
+}
+
+.search .search-bar-with-results .input-group
+  :hover {
+    background-color: $lightest;
+    color: $dark
+  }
+
+.search .search-bar-with-results .results {
+  :hover{
+    background-color: darkgrey;
+  }
 }
