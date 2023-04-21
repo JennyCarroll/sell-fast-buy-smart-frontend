@@ -50,7 +50,7 @@ function Search(props) {
           value={searchInput}
           onBlur={handleBlur}
         />
-        <button className={"btn btn-dark mb1 bg-black"} type={"submit"}>
+        <button className={"btn btn-dark"} type={"submit"}>
           <FontAwesomeIcon icon={icon({ name: "magnifying-glass" })} />
         </button>
       </div>
