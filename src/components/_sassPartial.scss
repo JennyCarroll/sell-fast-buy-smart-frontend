@@ -114,12 +114,17 @@ $scheme-nav-dark: $darkest, $lightest;
 
 @mixin titleContainer() {
   //create layout for the component using css grid
-  display: grid;
+  // display: grid;
   //if we specify columns, but not rows, it assumes there can be more than one row.
   //create two columns
-  grid-template-columns: 33% 66%;
+  // grid-template-columns: 33% 66%;
+  display: flex;
+  // flex-direction: row;
+  margin-top: 4em;
   margin-left: 4em;
   margin-right: 4em;
+  width: 100%;
+  justify-content: space-between;
 }
 
 //style the contents of the title div using flexbox
@@ -134,9 +139,16 @@ $scheme-nav-dark: $darkest, $lightest;
 
 //style the contents of the horizontal rule div using flexbox
 @mixin hr() {
-  display: flex;
-  align-items: left;
-  flex-direction: row;
+  // display: flex;
+  // align-items: left;
+  // flex-direction: row;
+  margin-right:4em;
+  margin-left: 1em;
   margin-top: 1em;
   margin-bottom: 1em;
+  display: flex;
+  width: 60%;
+  align-items: center;
+  // justify-content: right;
+  // float: right;
 }

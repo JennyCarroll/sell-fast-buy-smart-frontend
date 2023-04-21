@@ -40,12 +40,14 @@ const MyBids = (props) => {
   }, [params]);
 
   return (
-    <>
-    <div className="category-title top-element">
-    <h1>
+<>
+    <div className="title-container top-element">
+    <h1 className="title">
       {Number(currentUserCookie) === Number(params.userId) ? 'Your Bids' : "Users Bids"}
-      <hr />
-    </h1>
+      </h1>
+      <span className="hr">
+              <hr />
+            </span>
   </div>
     <div className="itemsContainer">
       {myBids.map((bid) => {

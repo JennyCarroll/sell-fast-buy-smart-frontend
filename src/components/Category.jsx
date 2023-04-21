@@ -36,11 +36,12 @@ function Category({ categories, items }) {
 
   return (
     <>
-      <div className="category-title top-element">
-        <h1>
-          {currentCategory ? currentCategory.title : "loading..."}
-          <hr />
-        </h1>
+      <div className="title-container top-element">
+        <h1 className="title">
+          {currentCategory ? currentCategory.title : "loading..."}</h1>
+          <span className="hr">
+              <hr />
+            </span>
       </div>
       <div className="categoryItemsContainer">
         {itemsInCategory.map((item) => {

@@ -24,6 +24,15 @@
 }
 
 hr {
+  align-items: center;
   width: 100%;
   float: right;
+}
+
+.title-container {
+  @include titleContainer()
+};
+
+.top-element {
+  margin-top: $margin-top;
 }
