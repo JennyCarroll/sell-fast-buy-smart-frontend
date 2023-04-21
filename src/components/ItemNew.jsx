@@ -45,11 +45,11 @@ function ItemNew() {
       condition: parseInt(condition),
       minBid: parseInt(minBid * 100),
     };
-    console.log('Item New - Pre Axios');
+    // console.log('Item New - Pre Axios');
     axios
       .post('/items/new', itemData)
       .then((res) => {
-        console.log('Item New - Axios Success, newItemId:', res.data.id);
+        // console.log('Item New - Axios Success, newItemId:', res.data.id);
         setNewItemId(res.data.id);
         setStateLoading(true);
         setStateRefresh(true);

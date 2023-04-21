@@ -18,9 +18,9 @@ export default function useApplicationData() {
 
   //Requests for data on first page load.
   useEffect(() => {
-    console.log('pre Axios - UseApplicationData, stateLoading:', stateLoading);
+    // console.log('pre Axios - UseApplicationData, stateLoading:', stateLoading);
     if (stateLoading) {
-      console.log('Application data - starting axios');
+      // console.log('Application data - starting axios');
       Promise.all([
         axios.get("/items"),
         axios.get("/users"),
@@ -29,7 +29,7 @@ export default function useApplicationData() {
         axios.get("/items/ending-soon"),
         axios.get("/conditions"),
       ]).then((res) => {
-        console.log('Application data - axios success');
+        // console.log('Application data - axios success');
         setState((prev) => ({
           ...prev,
           items: res[0].data,

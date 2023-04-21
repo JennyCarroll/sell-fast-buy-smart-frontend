@@ -31,7 +31,7 @@ export default function App() {
     useContext(stateContext);
   const [theme, setTheme] = useState(true);
 
-  console.log('stateLoading', stateLoading);
+  // console.log('stateLoading', stateLoading);
   return (
     <BrowserRouter>
       {/* create a button that sets this theme set theme  = !theme*/}
