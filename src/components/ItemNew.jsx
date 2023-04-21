@@ -1,5 +1,5 @@
-import React, { useState, Fragment, useContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useState, Fragment, useContext, useEffect } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -21,8 +21,10 @@ function ItemNew() {
   const [imgUrlBlur, setImgUrlBlur] = useState('https://imgur.com/BDT7VOn.jpg');
   const currentUser = parseInt(Cookies.get('userId'));
 
-  const { state, setStateRefresh } = useContext(stateContext);
+  const { state, setStateRefresh, setStateLoading } = useContext(stateContext);
+
   const [newItemId, setNewItemId] = useState(false);
+  const navigate = useNavigate();
 
   // SUPPORTING FUNCTIONS:
   // Collects form data from state and submits an axios.post
@@ -43,12 +45,15 @@ function ItemNew() {
       condition: parseInt(condition),
       minBid: parseInt(minBid * 100),
     };
-
+    console.log('Item New - Pre Axios');
     axios
       .post('/items/new', itemData)
       .then((res) => {
+        console.log('Item New - Axios Success, newItemId:', res.data.id);
         setNewItemId(res.data.id);
+        setStateLoading(true);
         setStateRefresh(true);
+        navigate(`/items/${res.data.id}`);
       })
       .catch((error) => {
         console.error('Error submitting form:', error);
@@ -57,7 +62,6 @@ function ItemNew() {
 
   return (
     <Fragment>
-      {newItemId && <Navigate to={'/items/' + newItemId} />}
       <form onSubmit={handleSubmit} autoComplete='off'>
         <div className={'itemForm'}></div>
         <div className={'m-4'}>

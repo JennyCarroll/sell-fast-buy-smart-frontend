@@ -1,5 +1,5 @@
 import React, { useState, Fragment, useContext, useEffect } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -22,12 +22,13 @@ function ItemEdit() {
   const [imgUrlBlur, setImgUrlBlur] = useState('https://imgur.com/BDT7VOn.jpg');
   const currentUser = parseInt(Cookies.get('userId'));
 
-  const { state, setStateRefresh } = useContext(stateContext);
+  const { state, setStateRefresh, setStateLoading } = useContext(stateContext);
   const [editStatus, setEditStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
 
   const params = useParams();
   const paramsItemId = parseInt(params.itemId);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`/items/${paramsItemId}`).then((res) => {
@@ -73,9 +74,10 @@ function ItemEdit() {
       axios
         .post(`/items/${paramsItemId}/edit`, editData)
         .then((res) => {
-          console.log(res);
+          console.log('inside edit - axios successful - setting states');
+          setStateLoading(true);
           setStateRefresh(true);
-          setEditStatus(true);
+          navigate(`/items/${paramsItemId}`);
         })
         .catch((error) => {
           console.error('Error submitting form:', error);
@@ -85,22 +87,24 @@ function ItemEdit() {
 
   const deleteItem = (event) => {
     event.preventDefault();
+    console.log('inside delete - start axios');
     axios
       .post(`/items/${paramsItemId}/delete`, { itemId: paramsItemId })
       .then(() => {
+        console.log('inside delete - axios successful - setting states');
+        setStateLoading(true);
         setStateRefresh(true);
         setDeleteStatus(true);
+        navigate(`/profile/${currentUser}`);
       })
       .catch((error) => {
         console.error('Error deleting item:', error);
       });
   };
 
-  console.log(deleteStatus);
   return (
     <Fragment>
       {editStatus && <Navigate to={'/items/' + paramsItemId} />}
-      {deleteStatus && <Navigate to={'/profile/' + currentUser} />}
       <form autoComplete='off'>
         <div className={'itemForm'}></div>
         <div className={'m-4'}>
