@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import Item from "./Item";
 import { loginContext } from "../providers/UserContext";
 import Cookies from 'js-cookie'
+import Rating from './general/Rating'
 import("./MyProfile.scss");
 
 
@@ -36,6 +37,8 @@ const MyProfile = ({ users, items, images }) => {
             {thisUser && thisUser.city}, {thisUser && thisUser.country}
           </p>
           <p>{thisUser && thisUser.bio}</p>
+          <br/>
+          <Rating user={thisUser}></Rating>
         </div>
       </div>
       <div className="tems">
