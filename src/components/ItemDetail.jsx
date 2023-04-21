@@ -1,21 +1,23 @@
-import { useState, useEffect, useContext } from 'react';
-import './ItemDetail.scss';
-import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
-import ThumbNail from './ThumbNail';
-import Carousel from './Carousel';
-import CreateBid from './CreateBid';
-import Counter from './general/Counter';
-import { webSocketContext } from '../providers/WebSocketContext';
-import { loginContext } from '../providers/UserContext';
-import Cookies from 'js-cookie'
+import { useState, useEffect, useContext } from "react";
+import "./ItemDetail.scss";
+import axios from "axios";
+import { Link, useParams } from "react-router-dom";
+import ThumbNail from "./ThumbNail";
+import Carousel from "./Carousel";
+import CreateBid from "./CreateBid";
+import Counter from "./general/Counter";
+import { webSocketContext } from "../providers/WebSocketContext";
+import { loginContext } from "../providers/UserContext";
+import Cookies from "js-cookie";
 
 function ItemDetail(props) {
   // Get the itemId from the URL parameters
   const params = useParams();
   const [itemObj, setItemObj] = useState({});
   const [sellerId, setSellerId] = useState({});
-  const [currentUserCookie, setCurrentUserCookie] = useState(Cookies.get('userId'));
+  const [currentUserCookie, setCurrentUserCookie] = useState(
+    Cookies.get("userId")
+  );
   //create state for the activeImage of the carousel
   const [activeImage, setActiveImage] = useState("");
   const { bidData } = useContext(webSocketContext);
@@ -24,7 +26,9 @@ function ItemDetail(props) {
   useEffect(() => {
     axios
       //fetch item data from the server
-      .get(`/items/${params.itemId}`)
+      .get(
+        `https://octopus-app-hzms7.ondigitalocean.app/items/${params.itemId}`
+      )
       .then((res) => {
         // Set the item object state with the response data
         setItemObj(res.data[0]);
@@ -38,8 +42,8 @@ function ItemDetail(props) {
   }, [params, bidData]);
 
   useEffect(() => {
-    setCurrentUserCookie(Cookies.get('userId'))
-  }, [currentUser])
+    setCurrentUserCookie(Cookies.get("userId"));
+  }, [currentUser]);
 
   // Helper function to convert bid value to a dollar amount
   const bidToDollars = function (value) {
@@ -104,7 +108,9 @@ function ItemDetail(props) {
                     </span>
                     <span>Current Bid: {bidToDollars(itemObj.bid_value)}</span>
                     <span>Condition: {itemObj.condition}</span>
-                    <span><Link to={`/profile/${sellerId}`}>View This Seller</Link></span>
+                    <span>
+                      <Link to={`/profile/${sellerId}`}>View This Seller</Link>
+                    </span>
                   </span>
                   <span className="newBid">
                     {currentUserCookie && (
