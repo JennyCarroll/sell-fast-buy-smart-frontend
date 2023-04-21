@@ -12,7 +12,7 @@ const AllBids = (props) => {
   }, []);
 
   return (
-    <div className="itemsContainer">
+    <div className="items-container">
       {allBids.map((bid) => {
         return (
           <Link key={bid.id} to={`/items/${bid.item_id}`}>

@@ -10,7 +10,7 @@ function Items(props) {
     let item = props.items.find((item) => item.id === image.item_id);
     let itemBid = props.items.find((item2) => item2.id === item.id);
     return (
-      <div key={image.item_id} className="itemContainer">
+      <div key={image.item_id} className="item-container">
         <Link className="itemLink" to={"/items/" + image.item_id}>
           <Item photo={image.img_url} title={item.title} bid={itemBid}></Item>
         </Link>
@@ -39,12 +39,12 @@ function Items(props) {
       </div>
 
       <div className="endingSoon">
-        {props.endingSoon.slice(0, 7).map((item) => {
+        {props.endingSoon.slice(0, 8).map((item) => {
           let image = props.images.find((image) => image.item_id === item.id);
           let itemBid = props.items.find((item2) => item2.id === item.id);
           return (
-            <div key={item.id} className="itemContainer">
-              <Link className="itemLink" to={`/items/${item.id}`}>
+              <Link className="item-container itemLink" to={`/items/${item.id}`}>
+            <div key={item.id} >
                 {/* rather than linking to an item or creating a new component, we render an image directly here with a special class to style the photos smaller */}
                 <img
                   className="featuredImage"
@@ -54,8 +54,8 @@ function Items(props) {
                 <div className="bid-price">
                   {bidToDollars(itemBid.highest_bid)}
                 </div>
-              </Link>
             </div>
+              </Link>
           );
         })}
       </div>
@@ -67,7 +67,7 @@ function Items(props) {
           <hr />
         </div>
       </div>
-      <div className="itemsContainer">{arrayOfItemPhotos}</div>
+      <div className="items-container">{arrayOfItemPhotos}</div>
     </div>
   );
 }

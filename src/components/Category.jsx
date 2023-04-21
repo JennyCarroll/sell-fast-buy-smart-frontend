@@ -43,7 +43,7 @@ function Category({ categories, items }) {
               <hr />
             </span>
       </div>
-      <div className="categoryItemsContainer">
+      <div className="category-items-container">
         {itemsInCategory.map((item) => {
           let itemBid = items.find((item2) => item2.id === item.id);
           return (

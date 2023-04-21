@@ -11,6 +11,7 @@
 }
 .profile-photo {
  @include image-size();
+ max-width: 20em;
   align-items: center;
   display: flex;
   flex-direction: column;

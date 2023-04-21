@@ -51,20 +51,28 @@ const MyBids = (props) => {
           <hr />
         </span>
       </div>
-      <div className="itemsContainer">
+      <div className="items-container">
         {myBids.map((bid) => {
           const highestBid = highestBids.find(highBid => highBid.item_id === bid.item_id && highBid.highest_bid === bid.highest_bid);
+          console.log(bid)
           return (
+            <div key={bid.id} className="item-container">
             <Link className="itemLink" key={bid.item_id} to={`/items/${bid.item_id}`}>
-              <div
+              <img
+                  className="itemImage"
+                  src={bid.img_url}
+                  alt={bid.title}
+                />
+              {/* <div
                 style={{
                   backgroundImage: `url(${bid.img_url})`
                 }}
                 className="bids-image"
-              ></div>
+              ></div> */}
               <div className='my-bid-price' >{bidToDollars(bid.highest_bid)}</div>
               {highestBid && <div className='highest-bid-price'>{currentUser === params.userId ? '👑 You have the highest bid' : '👑 This user has the highest bid'}</div>}
             </Link>
+            </div>
           );
         })}
       </div>

@@ -27,19 +27,37 @@
 }
 
 .highest-bid-price {
-  opacity: 0.8;
+  min-height: fit-content;
+  min-width: fit-content;
+  font-size: calc(0.5vw + 0.9vh);
   position: absolute;
-  margin-left: 20px;
-  width: 12vw;
-  height: 6vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-Color: black;
+  top: 0;
+  left: 0;
+  width: 12vw; /* set the width of the price element */
+  height: 6vh; /* set the height of the price element */
+  background-color: rgba(0, 0, 0, 0.8);
   color: white;
-  padding: 10px;
+  border-radius: 4px;
+  display: flex; /* hide the element by default */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5px 10px;
   border-Radius: 5px;
-  transform: translate(-10%, -660%);
+  // @include bid-price-on-hover();
+  // opacity: 0.8;
+  // position: absolute;
+  // margin-left: 20px;
+  // width: 12vw;
+  // height: 6vh;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  // background-Color: black;
+  // color: white;
+  // padding: 10px;
+  // border-Radius: 5px;
+  // transform: translate(-10%, -660%);
 }
 
 .items {

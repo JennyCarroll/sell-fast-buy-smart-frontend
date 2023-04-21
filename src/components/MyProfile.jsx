@@ -59,14 +59,16 @@ const MyProfile = ({ users, items, images }) => {
         )}
       </div>
       {/* <div className="items-info"> */}
-      <div className='itemsContainer'>
+      <div className='items-container'>
         {itemsForUser.map((item) => {
           let itemBid = items.find((item2) => item2.id === item.id);
           let img = images.find((image) => image.item_id === item.id);
           return (
+            <div key={item.id} className="item-container">
             <Link className='itemLink' to={`/items/${item.id}/edit`} key={item.id}>
               <Item photo={img.img_url} title={item.title} bid={itemBid}></Item>
             </Link>
+            </div>
           );
         })}
       </div>
