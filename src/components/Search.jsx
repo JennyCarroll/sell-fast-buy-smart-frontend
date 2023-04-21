@@ -48,7 +48,7 @@ function Search(props) {
           placeholder="Search items ..."
           onChange={handleChange}
           value={searchInput}
-          onBlur={handleBlur}
+          // onBlur={handleBlur}
         />
         <button className={"btn btn-dark"} type={"submit"}>
           <FontAwesomeIcon icon={icon({ name: "magnifying-glass" })} />
@@ -56,7 +56,7 @@ function Search(props) {
       </div>
       <ul className="results">
         {filteredItems.map((item) => (
-          <Link key={item.id} to={`/items/${item.id}`}>
+          <Link className='search-result-link' key={item.id} to={`/items/${item.id}`}>
             <div className="search-result">
             <p className="result-list">{item.title}</p>
             </div>
