@@ -1,5 +1,13 @@
-@import "sassPartial";
+@import 'sassPartial';
 
-.item-image  {
+.item-image {
   @include image-size();
+}
+
+.edit-icon {
+  @include edit-on-hover();
+}
+
+.item-link:hover .edit-icon {
+  display: flex;
 }

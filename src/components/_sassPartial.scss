@@ -7,9 +7,9 @@ $secondary-font: 'Plus Jakarta Sans', sans-serif;
 
 //use less spacing and less line height for larger fonts
 @mixin large-font() {
-font-family: $secondary-font;
-letter-spacing: -1px;
-line-height: 100%;
+  font-family: $secondary-font;
+  letter-spacing: -1px;
+  line-height: 100%;
 }
 
 //use large line height and greater letter spacing for small fonts
@@ -31,7 +31,7 @@ $margin-top: 130px;
 $darkest: hsl(228, 19%, 5%);
 $dark: hsl(213, 24%, 16%);
 $light: hsl(210, 2%, 78%);
-$lightest:	hsl(0, 0%, 95%);
+$lightest: hsl(0, 0%, 95%);
 $colourLight: hsl(176, 96%, 69%);
 $colourDark: hsl(177, 40%, 45%);
 
@@ -51,7 +51,7 @@ $scheme-nav-dark: $darkest, $lightest;
 }
 
 /* this mixin makes all of the images the same size without stretching them DO NOT CHANGE*/
-@mixin image-size(){
+@mixin image-size() {
   // max-width: 100%;
   max-width: 290px;
   height: auto;
@@ -68,7 +68,7 @@ $scheme-nav-dark: $darkest, $lightest;
 }
 
 /* this mixin makes all of the featured images the same size without stretching them DO NOT CHANGE*/
-@mixin featured-image-size(){
+@mixin featured-image-size() {
   // position: relative;
   max-width: 100px;
   height: auto;
@@ -85,7 +85,7 @@ $scheme-nav-dark: $darkest, $lightest;
 }
 
 /* this mixin makes all of the small images in itemDetail the same size without stretching them DO NOT CHANGE*/
-@mixin thumbnail(){
+@mixin thumbnail() {
   max-width: 91px;
   height: auto;
   display: block;
@@ -98,7 +98,7 @@ $scheme-nav-dark: $darkest, $lightest;
   // border-radius: 4px;
 }
 
-@mixin bid-price-on-hover(){
+@mixin bid-price-on-hover() {
   // opacity: 0.8;
   // position: absolute;
   // top: 0;
@@ -143,7 +143,25 @@ $scheme-nav-dark: $darkest, $lightest;
   min-height: fit-content;
   min-width: fit-content;
   padding: 5px 10px;
+}
 
+@mixin edit-on-hover() {
+  position: absolute;
+  font-size: calc(0.5vw + 0.9vh);
+  bottom: 0;
+  right: 0;
+  width: 2rem; /* set the width of the price element */
+  height: 5vh; /* set the height of the price element */
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 4px;
+  display: none; /* hide the element by default */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: fit-content;
+  min-width: fit-content;
+  padding: 5px 10px;
 }
 
 .light {
@@ -157,20 +175,19 @@ $scheme-nav-dark: $darkest, $lightest;
 
 .dark {
   @include color-scheme($scheme-dark...);
-  height:fit-content;
+  height: fit-content;
   // .items-container{
   //   @include color-scheme($scheme-light...);
   // }
 }
 
 .light .nav {
-  @include color-scheme($scheme-nav-light...)
+  @include color-scheme($scheme-nav-light...);
 }
 
 .dark .nav {
-  @include color-scheme($scheme-nav-dark...)
+  @include color-scheme($scheme-nav-dark...);
 }
-
 
 @mixin title-container() {
   //create layout for the component using css grid
@@ -204,7 +221,7 @@ $scheme-nav-dark: $darkest, $lightest;
   // display: flex;
   // align-items: left;
   // flex-direction: row;
-  margin-right:10em;
+  margin-right: 10em;
   margin-left: 1em;
   margin-top: 1em;
   margin-bottom: 1em;
@@ -223,7 +240,7 @@ $scheme-nav-dark: $darkest, $lightest;
   border-color: black;
   border-style: solid;
   border-radius: 4px;
-  width: 100%
+  width: 100%;
 }
 
 @mixin items-container {

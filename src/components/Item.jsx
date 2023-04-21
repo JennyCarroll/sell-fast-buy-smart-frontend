@@ -11,17 +11,19 @@ function Item(props) {
     });
   };
 
+  const onEdit = () => {
+    console.log('onEdit, props.itemId', props.itemId);
+  };
+
   return (
     <>
       <img className='item-image' src={props.photo} alt={props.title} />
-      <div className='item-info'>
-        {props.bid && <div className='bid-price'>{bidToDollars(props.bid.highest_bid)}</div>}
-        {props.edit && (
-          <span>
-            <FontAwesomeIcon icon={icon({ name: 'pen-to-square' })} className='bid-price' />
-          </span>
-        )}
-      </div>
+      {props.bid && <span className='bid-price'>{bidToDollars(props.bid.highest_bid)}</span>}
+      {props.edit && (
+        <span>
+          <FontAwesomeIcon icon={icon({ name: 'pen-to-square' })} className='edit-icon' />
+        </span>
+      )}
     </>
   );
 }
