@@ -74,9 +74,10 @@ function ItemEdit() {
       axios
         .post(`/items/${paramsItemId}/edit`, editData)
         .then((res) => {
-          console.log(res);
+          console.log('inside edit - axios successful - setting states');
+          setStateLoading(true);
           setStateRefresh(true);
-          setEditStatus(true);
+          navigate(`/items/${paramsItemId}`);
         })
         .catch((error) => {
           console.error('Error submitting form:', error);
@@ -104,7 +105,6 @@ function ItemEdit() {
   return (
     <Fragment>
       {editStatus && <Navigate to={'/items/' + paramsItemId} />}
-      {/* {deleteStatus && <Navigate to={'/profile/' + currentUser} />} */}
       <form autoComplete='off'>
         <div className={'itemForm'}></div>
         <div className={'m-4'}>
