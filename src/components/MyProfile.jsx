@@ -64,10 +64,10 @@ const MyProfile = ({ users, items, images }) => {
           let itemBid = items.find((item2) => item2.id === item.id);
           let img = images.find((image) => image.item_id === item.id);
           return (
-            <div key={item.id} className="item-container">
-            <Link className='item-link' to={`/items/${item.id}/edit`} key={item.id}>
-              <Item photo={img.img_url} title={item.title} bid={itemBid}></Item>
-            </Link>
+            <div key={item.id} className='item-container'>
+              <Link className='item-link' to={`/items/${item.id}/edit`} key={item.id}>
+                <Item photo={img.img_url} title={item.title} bid={itemBid} edit={true}></Item>
+              </Link>
             </div>
           );
         })}
