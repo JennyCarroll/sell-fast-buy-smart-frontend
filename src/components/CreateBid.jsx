@@ -1,8 +1,8 @@
 import React, { useState, Fragment, useEffect, useContext } from "react";
 import { Navigate } from "react-router-dom";
 
-import axios from 'axios';
-import Cookies from 'js-cookie'
+import axios from "axios";
+import Cookies from "js-cookie";
 
 import "./CreateBid.scss";
 
@@ -10,8 +10,8 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
   const [userId, setUserId] = useState(null);
   const [itemId, setItemId] = useState(null);
   const [bidValue, setBidValue] = useState("");
-  let currentUser = Cookies.get('userId')
-  let currentBidInDollars = currentBid / 100
+  let currentUser = Cookies.get("userId");
+  let currentBidInDollars = currentBid / 100;
 
   useEffect(() => {
     setUserId(currentUser);
@@ -32,13 +32,13 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
     if (bidValue < currentBidInDollars || !itemId || !currentUser) {
       return;
     }
-    setBidValue("")
+    setBidValue("");
     const bidData = {
       user_id: userId,
       item_id: parseInt(itemId),
       bid_value: parseInt(bidValue * 100),
     };
-    
+
     axios
       .post("/bids/new", bidData)
       .then((res) => {
@@ -55,7 +55,7 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
 
       <form onSubmit={handleSubmit} autoComplete="off">
         {/* <div className={"m-4"}> */}
-        <div className={"d-flex"}>
+        <div className={"d-flex bid-box"}>
           <div className={"d-flex flex-column"}></div>
 
           <div className={"new-bid"}>

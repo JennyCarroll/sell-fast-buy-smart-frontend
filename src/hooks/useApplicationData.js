@@ -28,7 +28,6 @@ export default function useApplicationData() {
       axios.get("/items/ending-soon"),
       axios.get("/conditions"),
     ]).then((res) => {
-      // console.log(res);
       setState((prev) => ({
         ...prev,
         items: res[0].data,

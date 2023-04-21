@@ -2,6 +2,28 @@
 
 //to include a mixin to your class, add in @include mixinName();
 
+$main-font: 'Nunito Sans', sans-serif;
+$secondary-font: 'Plus Jakarta Sans', sans-serif;
+
+//use less spacing and less line height for larger fonts
+@mixin large-font() {
+font-family: $secondary-font;
+letter-spacing: -1px;
+line-height: 100%;
+}
+
+//use large line height and greater letter spacing for small fonts
+@mixin small-font() {
+  letter-spacing: 0.5px;
+  line-height: 140%;
+}
+
+@mixin logo() {
+  font-family: $secondary-font;
+  letter-spacing: -3px;
+  line-height: 100%;
+}
+
 //top margin to drop content below navbar
 $margin-top: 130px;
 
@@ -89,3 +111,32 @@ $scheme-nav-dark: $darkest, $lightest;
   @include color-scheme($scheme-nav-dark...)
 }
 
+
+@mixin titleContainer() {
+  //create layout for the component using css grid
+  display: grid;
+  //if we specify columns, but not rows, it assumes there can be more than one row.
+  //create two columns
+  grid-template-columns: 33% 66%;
+  margin-left: 4em;
+  margin-right: 4em;
+}
+
+//style the contents of the title div using flexbox
+@mixin title() {
+  @include small-font();
+  display: flex;
+  align-items: left;
+  flex-direction: row;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+//style the contents of the horizontal rule div using flexbox
+@mixin hr() {
+  display: flex;
+  align-items: left;
+  flex-direction: row;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
