@@ -39,14 +39,14 @@ function Nav(props) {
         <div className="nav right-nav">
           {currentUser ? (
             <>
-              <div className="btn btn-light">
+              <div className="">
                 <Link to={"/items/new"}>Sell</Link>
               </div>
-              <div className="btn btn-light dropdown">
+              <div className="dropdown">
                 Profile
                 <div className="dropdown-content">
                   <Link
-                    class="btn btn-light option"
+                    class="btn btn-light optio"
                     to={`/profile/${currentUser}`}
                   >
                     Profile
@@ -60,7 +60,7 @@ function Nav(props) {
                   </Link>
                 </div>
               </div>
-              <div className="btn btn-light">
+              <div className="">
                 <Link to={`bids/${currentUser}`}>Bids</Link>
               </div>
             </>

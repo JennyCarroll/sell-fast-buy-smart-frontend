@@ -13,12 +13,17 @@
   position: fixed;
   top: 0;
   z-index: 1;
+    // .top-nav .btn{
+    //   :hover{
+    //     background-color:white;
+    //   }
+    // }
     a {
       text-decoration: none;
       color: inherit;
-      // :hover {
-      //   color: inherit;
-      // }
+      :hover {
+        color: white;
+      }
 
     }
 
@@ -36,11 +41,14 @@
       width: 100%;
       height: 65px;
     }
-    .right-nav {
+    .top-nav .right-nav {
       display: flex;
       flex-direction: row;
+      justify-content: center;
+      align-items: center;
         div {
          margin-right: 15px;
+         cursor: default;
         }
     }
     .search {
@@ -67,6 +75,7 @@
   z-index: 1;
   justify-content: center;
   align-items: flex-start;
+  color: $dark;
 }
 
 .dropdown:hover .dropdown-content {display: flex;}
@@ -85,6 +94,7 @@
 }
 
 .nav-bar .right-nav .bi {
+  background-color: $dark;
   color: $light;
   margin-right: 17px;
   margin-top: 8px;
@@ -96,4 +106,34 @@
 
 .option {
   margin-top: 3px;
+}
+
+.right-nav .dropdown {
+  button:hover{
+      background-color: white;
+      cursor:default;
+    }
+  a{
+    background-color: $light;  
+  }
+
+.btn {
+  background-color: $light;
+  border-color: $dark;
+}
+.dropdown-content{
+  :hover{
+    background-color: white;
+  }
+  input{
+    background-color: $light;
+  }
+  button:hover{
+    cursor: pointer;
+  }
+}
+}
+
+.right-nav .btn {
+  background-color: $light;
 }
