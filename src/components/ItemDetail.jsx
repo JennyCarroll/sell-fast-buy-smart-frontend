@@ -73,22 +73,30 @@ function ItemDetail(props) {
     <>
       {/* check to see if the itemObj exists before rendering the jsx */}
       {itemObj && (
-        <div className='itemDetail top-element '>
+        <div className='top-element '>
+          <div className="title-container">
+            <div className="title">
+              <h1>{itemObj.title}</h1>
+            </div>
+            <span className="hr">
+              <hr />
+            </span>
+          </div>
+          <div className='itemDetail'>
           <div className='detailContainer'>
             <div className='carousel-image-container'>
               <div className='custom-container'>
                 <div className='images'>
-                  <h1>{itemObj.title}</h1>
                   {/* because this data is nested in itemObj and it is an additional async query, it may take longer to load so we check to make sure it exists and has length before rendering */}
                   <div className='item-container'>
-                  {itemObj.img_url && itemObj.img_url.length > 0 && (
-                    <Carousel
-                      images={itemObj.img_url}
-                      title={itemObj.title}
-                      active={activeImage}
-                    ></Carousel>
-                  )}
-                   </div>
+                    {itemObj.img_url && itemObj.img_url.length > 0 && (
+                      <Carousel
+                        images={itemObj.img_url}
+                        title={itemObj.title}
+                        active={activeImage}
+                      ></Carousel>
+                    )}
+                  </div>
                   <div className='thumbNails'>{thumbNails(itemObj)}</div>
                 </div>
 
@@ -96,7 +104,6 @@ function ItemDetail(props) {
             </div>
             <div className='info-container'>
               <div className='info'>
-                <hr />
                 <span className="description">{itemObj.description}</span>
                 <span className="counter">
                   {/*It is necessary to only render this once `itemObj.end_date` exists, otherwise the setInterval won't start properly
@@ -131,6 +138,7 @@ function ItemDetail(props) {
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
       )}
