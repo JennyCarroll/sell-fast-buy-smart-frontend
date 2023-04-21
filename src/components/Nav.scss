@@ -84,9 +84,14 @@
   width: 50vw;
 }
 
-.bi {
+.nav-bar .right-nav .bi {
+  color: $light;
   margin-right: 17px;
   margin-top: 8px;
+  :hover{
+    cursor: pointer;
+    color: $lightest;
+  }
 }
 
 .option {

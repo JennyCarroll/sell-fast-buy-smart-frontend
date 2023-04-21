@@ -88,7 +88,7 @@ function Nav(props) {
           )}
           {/* light bulb deal with dark mode and light mode */}
           <i
-            className={props.theme ? "bi bi-lightbulb" : "bi bi-lightbulb-off"}
+            className={props.theme ? "bi bi-lightbulb btn" : "bi bi-lightbulb-off btn"}
             onClick={() => {
               let theme = !props.theme;
               props.setTheme(theme);
