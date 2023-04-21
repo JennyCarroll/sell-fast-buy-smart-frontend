@@ -42,7 +42,7 @@ function ItemDetail(props) {
   }, [currentUser]);
 
   // Helper function to convert bid value to a dollar amount
-  const bidToDollars = function (value) {
+  const bidToDollars = function(value) {
     return (itemObj.bid_value / 100).toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -50,7 +50,7 @@ function ItemDetail(props) {
   };
 
   // set thumbNails
-  const thumbNails = function (itemObj) {
+  const thumbNails = function(itemObj) {
     if (!itemObj.img_url) {
       return;
     }
@@ -73,18 +73,26 @@ function ItemDetail(props) {
       {itemObj && (
         <div className='itemDetail top-element '>
           <div className='detailContainer'>
-            <div className='custom-container'>
-              <div className='images'>
-                <h1>{itemObj.title}</h1>
-                {/* because this data is nested in itemObj and it is an additional async query, it may take longer to load so we check to make sure it exists and has length before rendering */}
-                {itemObj.img_url && itemObj.img_url.length > 0 && (
-                  <Carousel
-                    images={itemObj.img_url}
-                    title={itemObj.title}
-                    active={activeImage}
-                  ></Carousel>
-                )}
+            <div className='carousel-image-container'>
+              <div className='custom-container'>
+                <div className='images'>
+                  <h1>{itemObj.title}</h1>
+                  {/* because this data is nested in itemObj and it is an additional async query, it may take longer to load so we check to make sure it exists and has length before rendering */}
+                  <div className='item-container'>
+                  {itemObj.img_url && itemObj.img_url.length > 0 && (
+                    <Carousel
+                      images={itemObj.img_url}
+                      title={itemObj.title}
+                      active={activeImage}
+                    ></Carousel>
+                  )}
+                   </div>
+                  <div className='thumbNails'>{thumbNails(itemObj)}</div>
+                </div>
+
               </div>
+            </div>
+            <div className='info-container'>
               <div className='info'>
                 <hr />
                 <span className='description'>{itemObj.description}</span>
@@ -94,9 +102,7 @@ function ItemDetail(props) {
                   {itemObj.end_date && <Counter end_date={itemObj.end_date} />}
                 </span>
               </div>
-            </div>
-            <div className='custom-container'>
-              <div className='thumbNails'>{thumbNails(itemObj)}</div>
+
               <div className='info'>
                 <div className='bidInfo'>
                   <span className='bid-plus-condition'>

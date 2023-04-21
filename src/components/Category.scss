@@ -30,7 +30,7 @@ hr {
 }
 
 .title-container {
-  @include titleContainer()
+  @include title-container()
 };
 
 .top-element {

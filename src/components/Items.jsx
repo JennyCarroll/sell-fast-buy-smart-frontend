@@ -29,7 +29,7 @@ function Items(props) {
     <div className="top-element">
       <h1 className="siteName">Sell Fast Buy Smart</h1>
 
-      <div className="titleContainer">
+      <div className="title-container">
         <div className="title">
           <h1>Ending Soon!</h1>
         </div>
@@ -59,7 +59,7 @@ function Items(props) {
           );
         })}
       </div>
-      <div className="titleContainer">
+      <div className="title-container">
         <div className="title">
           <h1>All Items</h1>
         </div>
