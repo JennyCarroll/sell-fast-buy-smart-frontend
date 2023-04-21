@@ -65,6 +65,7 @@
     }
     .logo {
       margin-left: 2em;
+      @include logo()
     }
 
 }
