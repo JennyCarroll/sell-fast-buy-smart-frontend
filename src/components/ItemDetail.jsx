@@ -95,7 +95,7 @@ function ItemDetail(props) {
                       ></Carousel>
                     )}
                   </div>
-                  <div className='thumbNails'>{thumbNails(itemObj)}</div>
+                  <div className='thumbnails'>{thumbNails(itemObj)}</div>
                 </div>
 
               </div>

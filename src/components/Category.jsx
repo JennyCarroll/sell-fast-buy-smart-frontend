@@ -48,7 +48,7 @@ function Category({ categories, items }) {
           let itemBid = items.find((item2) => item2.id === item.id);
           return (
             <div className="item-container" key={item.id}>
-            <Link className="itemLink" to={`/items/${item.id}`}>
+            <Link className="item-link" to={`/items/${item.id}`}>
               <Item photo={item.img_url} title={item.title} bid={itemBid} ></Item>
             </Link>
             </div>

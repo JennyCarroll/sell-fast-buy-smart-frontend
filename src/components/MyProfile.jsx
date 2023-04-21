@@ -65,7 +65,7 @@ const MyProfile = ({ users, items, images }) => {
           let img = images.find((image) => image.item_id === item.id);
           return (
             <div key={item.id} className="item-container">
-            <Link className='itemLink' to={`/items/${item.id}/edit`} key={item.id}>
+            <Link className='item-link' to={`/items/${item.id}/edit`} key={item.id}>
               <Item photo={img.img_url} title={item.title} bid={itemBid}></Item>
             </Link>
             </div>

@@ -7,7 +7,7 @@ function ThumbNail(props) {
       onClick={() => {
         props.setActiveImage(props.photo);
       }}
-      className="thumbNail"
+      className="thumbnail"
       src={props.photo}
       alt={props.title}
     />

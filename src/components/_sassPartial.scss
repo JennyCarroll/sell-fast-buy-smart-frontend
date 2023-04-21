@@ -64,7 +64,7 @@ $scheme-nav-dark: $darkest, $lightest;
 }
 
 /* this mixin makes all of the featured images the same size without stretching them DO NOT CHANGE*/
-@mixin featuredImageSize(){
+@mixin featured-image-size(){
   // position: relative;
   max-width: 100px;
   height: auto;
@@ -81,7 +81,7 @@ $scheme-nav-dark: $darkest, $lightest;
 }
 
 /* this mixin makes all of the small images in itemDetail the same size without stretching them DO NOT CHANGE*/
-@mixin thumbNail(){
+@mixin thumbnail(){
   max-width: 91px;
   height: auto;
   display: block;

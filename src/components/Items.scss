@@ -19,8 +19,8 @@
   margin-top: $margin-top;
 }
 
-.featuredImage  {
-  @include featuredImageSize();
+.featured-image  {
+  @include featured-image-size();
 }
 
 .title-container {
@@ -77,6 +77,6 @@
   // transform: translate(-10%, -100%);
 }
 
-.itemLink:hover .bid-price {
+.item-link:hover .bid-price {
   display: flex;
 }

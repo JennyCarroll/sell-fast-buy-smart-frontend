@@ -57,7 +57,7 @@ const MyBids = (props) => {
           console.log(bid)
           return (
             <div key={bid.id} className="item-container">
-            <Link className="itemLink" key={bid.item_id} to={`/items/${bid.item_id}`}>
+            <Link className="item-link" key={bid.item_id} to={`/items/${bid.item_id}`}>
               <img
                   className="itemImage"
                   src={bid.img_url}
