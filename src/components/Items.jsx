@@ -27,7 +27,7 @@ function Items(props) {
 
   return (
     <div className="top-element">
-      <h1 className="siteName">Sell Fast Buy Smart</h1>
+      <h1 className="site-name">Sell Fast Buy Smart</h1>
 
       <div className="title-container">
         <div className="title">
@@ -38,7 +38,7 @@ function Items(props) {
         </div>
       </div>
 
-      <div className="endingSoon">
+      <div className="ending-soon">
         {props.endingSoon.slice(0, 8).map((item) => {
           let image = props.images.find((image) => image.item_id === item.id);
           let itemBid = props.items.find((item2) => item2.id === item.id);

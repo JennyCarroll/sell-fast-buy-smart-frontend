@@ -168,7 +168,7 @@ $scheme-nav-dark: $darkest, $lightest;
   // grid-template-columns: 33% 66%;
   display: flex;
   // flex-direction: row;
-  margin-top: 4em;
+  // margin-top: 4em;
   margin-left: 4em;
   margin-right: 4em;
   width: 100%;
@@ -177,6 +177,8 @@ $scheme-nav-dark: $darkest, $lightest;
 
 //style the contents of the title div using flexbox
 @mixin title() {
+  min-width: fit-content;
+  min-height: fit-content;
   @include small-font();
   display: flex;
   align-items: left;

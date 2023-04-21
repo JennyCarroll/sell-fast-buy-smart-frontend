@@ -38,24 +38,26 @@
 }
 
 //style the ending soon photos
-.endingSoon {
+.ending-soon {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-gap: 1rem;
   margin-left: 2em;
   margin-right: 2em;
-  margin-bottom: 2em;
+  margin-bottom: 50px;
   // display: flex;
   // align-items: center;
   // flex-direction: row;
   // justify-content: space-around;
 }
 
-.siteName {
+.site-name {
+  font-size: 11vw;
   text-align: center;
-  font-size: 9em;
+  // font-size: 9em;
   @include large-font();
   padding-top: 20px;
+  margin-bottom: 50px;
 }
 
 .bid-price {
