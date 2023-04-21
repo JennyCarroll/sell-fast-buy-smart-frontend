@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 
 // State management
@@ -14,7 +13,7 @@ export default function useApplicationData() {
     conditions: [],
   });
   const [stateLoading, setStateLoading] = useState(true);
-  const [stateRefresh, setStateRefresh] = useState(false);
+  const [setStateRefresh] = useState(false);
 
   //Requests for data on first page load.
   useEffect(() => {

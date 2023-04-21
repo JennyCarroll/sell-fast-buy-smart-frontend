@@ -21,7 +21,7 @@ function ItemEdit() {
   const currentUser = parseInt(Cookies.get('userId'));
 
   const { state, setStateRefresh, setStateLoading } = useContext(stateContext);
-  const [editStatus, setEditStatus] = useState(false);
+  const [editStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
 
   const params = useParams();

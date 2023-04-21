@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 // Import components:
@@ -27,8 +27,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function App() {
   // State management and functions:
   const currentUser = Cookies.get('userId');
-  const { state, setState, stateLoading, setStateLoading, setStateRefresh } =
-    useContext(stateContext);
+  const { state, stateLoading, setStateRefresh } = useContext(stateContext);
   const [theme, setTheme] = useState(true);
 
   // console.log('stateLoading', stateLoading);

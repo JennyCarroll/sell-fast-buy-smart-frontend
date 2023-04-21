@@ -1,5 +1,5 @@
-import React, { useState, Fragment, useContext, useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { useState, Fragment, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -23,7 +23,7 @@ function ItemNew() {
 
   const { state, setStateRefresh, setStateLoading } = useContext(stateContext);
 
-  const [newItemId, setNewItemId] = useState(false);
+  const [setNewItemId] = useState(false);
   const navigate = useNavigate();
 
   // SUPPORTING FUNCTIONS:

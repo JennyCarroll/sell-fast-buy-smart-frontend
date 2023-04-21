@@ -1,7 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import Item from './Item';
-import { loginContext } from '../providers/UserContext';
 import Cookies from 'js-cookie';
 import Rating from './general/Rating';
 import('./MyProfile.scss');
