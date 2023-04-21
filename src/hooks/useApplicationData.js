@@ -21,14 +21,12 @@ export default function useApplicationData() {
   //Requests for data on first page load.
   useEffect(() => {
     Promise.all([
-      axios.get("https://octopus-app-hzms7.ondigitalocean.app/items"), // Add more requests as we scale up.
-      axios.get("https://octopus-app-hzms7.ondigitalocean.app/users"),
-      axios.get("https://octopus-app-hzms7.ondigitalocean.app/images/first"),
-      axios.get("https://octopus-app-hzms7.ondigitalocean.app/categories"),
-      axios.get(
-        "https://octopus-app-hzms7.ondigitalocean.app/items/ending-soon"
-      ),
-      axios.get("https://octopus-app-hzms7.ondigitalocean.app/conditions"),
+      axios.get("/items"), // Add more requests as we scale up.
+      axios.get("/users"),
+      axios.get("/images/first"),
+      axios.get("/categories"),
+      axios.get("/items/ending-soon"),
+      axios.get("/conditions"),
     ]).then((res) => {
       setState((prev) => ({
         ...prev,

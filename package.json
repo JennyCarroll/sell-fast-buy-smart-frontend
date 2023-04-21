@@ -51,6 +51,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://octopus-app-hzms7.ondigitalocean.app"
+  "proxy": "https://localhost:8001"
 }
 
