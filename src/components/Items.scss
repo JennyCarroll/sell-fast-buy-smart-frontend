@@ -2,12 +2,7 @@
 
 //this will space out our item photos
 .items-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 1rem;
-  margin-left: 2em;
-  margin-right: 2em;
-  margin-bottom: 2em;
+ @include items-container();
 }
 
 //this will center the items within their divs

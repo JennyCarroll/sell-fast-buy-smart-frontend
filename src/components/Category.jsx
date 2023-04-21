@@ -43,13 +43,15 @@ function Category({ categories, items }) {
               <hr />
             </span>
       </div>
-      <div className="category-items-container">
+      <div className="items-container">
         {itemsInCategory.map((item) => {
           let itemBid = items.find((item2) => item2.id === item.id);
           return (
-            <Link className="itemLink" to={`/items/${item.id}`} key={item.id}>
+            <div className="item-container" key={item.id}>
+            <Link className="itemLink" to={`/items/${item.id}`}>
               <Item photo={item.img_url} title={item.title} bid={itemBid} ></Item>
             </Link>
+            </div>
           );
         })}
       </div>{" "}
