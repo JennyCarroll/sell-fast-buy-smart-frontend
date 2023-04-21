@@ -12,7 +12,7 @@
 }
 
 .imageContainer {
-  @include imageSize();
+  @include image-size();
 }
 
 .bid-box {

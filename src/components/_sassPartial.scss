@@ -48,14 +48,19 @@ $scheme-nav-dark: $darkest, $lightest;
 }
 
 /* this mixin makes all of the images the same size without stretching them DO NOT CHANGE*/
-@mixin imageSize(){
-  width:  20vw;
-  height: 40vh;
+@mixin image-size(){
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
   border-radius: 4px;
-  background-Repeat: no-repeat;
-  background-Position: center;
-  background-Size: cover;
-  position: relative;
+  // width:  20vw;
+  // height: 40vh;
+  // border-radius: 4px;
+  // background-Repeat: no-repeat;
+  // background-Position: center;
+  // background-Size: cover;
+  // position: relative;
 }
 
 /* this mixin makes all of the featured images the same size without stretching them DO NOT CHANGE*/

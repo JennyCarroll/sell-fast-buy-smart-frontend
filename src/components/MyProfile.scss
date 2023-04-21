@@ -10,6 +10,7 @@
   margin-bottom: -4em;
 }
 .profile-photo {
+ @include image-size();
   align-items: center;
   display: flex;
   flex-direction: column;

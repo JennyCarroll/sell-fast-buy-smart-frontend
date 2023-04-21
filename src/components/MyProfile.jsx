@@ -24,7 +24,7 @@ const MyProfile = ({ users, items, images }) => {
       <div className='profile'>
         <div className='profile-photo'>
           {' '}
-          <img className='image' src={'https://i.imgur.com/b0h13kE.jpg'} alt='profile picture' />
+          <img className='image' src={'https://i.imgur.com/b0h13kE.jpg'} alt={thisUser.name} />
           <h2>{thisUser ? thisUser.name : 'Loading...'}</h2>
         </div>
         <div className='personal-info'>

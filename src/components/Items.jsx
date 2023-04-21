@@ -46,17 +46,11 @@ function Items(props) {
             <div key={item.id} className="itemContainer">
               <Link className="itemLink" to={`/items/${item.id}`}>
                 {/* rather than linking to an item or creating a new component, we render an image directly here with a special class to style the photos smaller */}
-                {/* <img
+                <img
                   className="featuredImage"
                   src={image.img_url}
                   alt={item.title}
-                /> */}
-                <div
-                  style={{
-                    backgroundImage: `url(${image.img_url})`,
-                  }}
-                  className="featuredImage"
-                ></div>
+                />
                 <div className="bid-price">
                   {bidToDollars(itemBid.highest_bid)}
                 </div>
