@@ -1,6 +1,7 @@
 import React, { useState, Fragment, useEffect, useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { stateContext } from '../providers/StateContext';
 
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -14,6 +15,7 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
   const [message, setMessage] = useState("");
   let currentUser = Cookies.get("userId");
   let currentBidInDollars = currentBid / 100;
+  const { state, setStateRefresh, setStateLoading } = useContext(stateContext);
 
   useEffect(() => {
     setUserId(currentUser);
@@ -54,6 +56,7 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
     axios
       .post("/bids/new", bidData)
       .then((res) => {
+        setStateLoading(true)
         onSubmit(true);
       })
       .catch((error) => {
