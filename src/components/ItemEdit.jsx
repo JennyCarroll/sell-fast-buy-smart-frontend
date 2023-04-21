@@ -23,7 +23,8 @@ function ItemEdit() {
   const currentUser = parseInt(Cookies.get('userId'));
 
   const { state, setStateRefresh } = useContext(stateContext);
-  const [success, setSuccess] = useState(false);
+  const [editStatus, setEditStatus] = useState(false);
+  const [deleteStatus, setDeleteStatus] = useState(false);
 
   const params = useParams();
   const paramsItemId = parseInt(params.itemId);
@@ -49,14 +50,15 @@ function ItemEdit() {
 
   // SUPPORTING FUNCTIONS:
   // Collects form data from state and submits an axios.post
-  const handleSubmit = (event) => {
+  const editItem = (event) => {
     event.preventDefault();
     // Data validation - No empty fields allowed.
     if (!currentUser || !title || !description || !endDate || !imgUrl || !category || !condition) {
       return;
     }
 
-    const itemData = {
+    const editData = {
+      id: paramsItemId,
       user_id: currentUser,
       title,
       description,
@@ -67,14 +69,13 @@ function ItemEdit() {
       minBid: parseInt(minBid * 100),
     };
 
-    const editData = { ...itemData, id: params.itemId };
     if (currentUser === item.user_id) {
       axios
-        .post(`/items/${params.itemId}/edit`, editData)
+        .post(`/items/${paramsItemId}/edit`, editData)
         .then((res) => {
           console.log(res);
           setStateRefresh(true);
-          setSuccess(true);
+          setEditStatus(true);
         })
         .catch((error) => {
           console.error('Error submitting form:', error);
@@ -82,10 +83,25 @@ function ItemEdit() {
     }
   };
 
+  const deleteItem = (event) => {
+    event.preventDefault();
+    axios
+      .post(`/items/${paramsItemId}/delete`, { itemId: paramsItemId })
+      .then(() => {
+        setStateRefresh(true);
+        setDeleteStatus(true);
+      })
+      .catch((error) => {
+        console.error('Error deleting item:', error);
+      });
+  };
+
+  console.log(deleteStatus);
   return (
     <Fragment>
-      {success && <Navigate to={'/items/' + paramsItemId} />}
-      <form onSubmit={handleSubmit} autoComplete='off'>
+      {editStatus && <Navigate to={'/items/' + paramsItemId} />}
+      {deleteStatus && <Navigate to={'/profile/' + currentUser} />}
+      <form autoComplete='off'>
         <div className={'itemForm'}></div>
         <div className={'m-4'}>
           <span className={'strong'}>Edit your item:</span>
@@ -211,7 +227,12 @@ function ItemEdit() {
           </div>
         </div>
         <div className='d-flex justify-content-end m-4'>
-          <button className={'btn btn-dark submit'}>Edit Item</button>
+          <button className={'btn btn-dark submit'} onClick={editItem}>
+            Edit Item
+          </button>
+          <button className={'btn btn-danger'} onClick={deleteItem}>
+            Delete Item
+          </button>
         </div>
       </form>
     </Fragment>

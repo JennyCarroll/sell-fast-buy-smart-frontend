@@ -16,7 +16,7 @@ const MyProfile = ({ users, items, images }) => {
   let itemsForUser = items.filter((item) => item.user_id === userId);
   useEffect(() => {
     setThisUser(users.find((user) => user.id === userId));
-  }, [params]);
+  }, [params, items]);
 
   return (
     <body>
