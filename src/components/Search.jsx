@@ -48,7 +48,7 @@ function Search(props) {
           placeholder="Search items ..."
           onChange={handleChange}
           value={searchInput}
-          // onBlur={handleBlur}
+          onBlur={handleBlur}
         />
         <button className={"btn btn-dark"} type={"submit"}>
           <FontAwesomeIcon icon={icon({ name: "magnifying-glass" })} />
