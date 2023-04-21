@@ -38,7 +38,7 @@ $colourDark: hsl(177, 40%, 45%);
 //create a variable with multiple values (a list)
 $scheme-light: $lightest, $dark;
 $scheme-dark: $dark, $light;
-$scheme-nav-light: $dark, $lightest;
+$scheme-nav-light: $dark, $light;
 $scheme-nav-dark: $darkest, $lightest;
 
 //color scheme mixin
