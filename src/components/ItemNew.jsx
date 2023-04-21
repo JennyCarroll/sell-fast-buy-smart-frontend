@@ -1,5 +1,6 @@
 import React, { useState, Fragment, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import axios from 'axios';
 
@@ -7,7 +8,7 @@ import SelectListOptions from './general/SelectListOptions';
 import { stateContext } from '../providers/StateContext';
 import Cookies from 'js-cookie';
 
-import './ItemForm/ItemForm.scss';
+import './general/ItemForm.scss';
 
 function ItemNew() {
   // MANAGE STATE
@@ -31,7 +32,26 @@ function ItemNew() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Data validation - No empty fields allowed.
-    if (!currentUser || !title || !description || !endDate || !imgUrl || !category || !condition) {
+    if (
+      !currentUser ||
+      !title ||
+      !description ||
+      !endDate ||
+      !imgUrl ||
+      !category ||
+      !condition ||
+      !minBid
+    ) {
+      toast.error('Errors on the page. Please review your submission', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
       return;
     }
 

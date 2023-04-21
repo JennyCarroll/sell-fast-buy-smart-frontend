@@ -22,6 +22,7 @@ import Cookies from 'js-cookie';
 // Import styling:
 import './App.scss';
 import 'react-toastify/dist/ReactToastify.css';
+import { Flip, ToastContainer } from 'react-toastify';
 
 // MAIN FUNCTION
 export default function App() {
@@ -81,7 +82,7 @@ export default function App() {
               <Route path='items/:itemId/edit' element={<ItemEdit />}></Route>
             </Routes>
           )}
-          <BidToast />
+          <ToastContainer transition={Flip} />
         </main>
       </div>
     </BrowserRouter>
