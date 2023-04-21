@@ -45,6 +45,9 @@ $scheme-nav-dark: $darkest, $lightest;
 @mixin color-scheme($bg, $text) {
   background-color: $bg;
   color: $text;
+  // a:hover{
+  //   color: green;
+  // }
 }
 
 /* this mixin makes all of the images the same size without stretching them DO NOT CHANGE*/
@@ -220,5 +223,5 @@ $scheme-nav-dark: $darkest, $lightest;
   grid-gap: 1rem;
   margin-left: 2em;
   margin-right: 2em;
-  margin-bottom: 2em;
+  padding-bottom: 2em;
 }
