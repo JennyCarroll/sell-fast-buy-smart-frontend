@@ -22,7 +22,7 @@ function Item(props) {
         className="itemImage"
       ></div>
       {props.bid ? (
-        <div class="bid-price">{bidToDollars(props.bid.highest_bid)}</div>
+        <div className="bid-price">{bidToDollars(props.bid.highest_bid)}</div>
       ) : null}
     </>
   );

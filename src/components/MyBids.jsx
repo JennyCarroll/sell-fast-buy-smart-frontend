@@ -3,13 +3,15 @@ import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { webSocketContext } from '../providers/WebSocketContext';
 import Cookies from 'js-cookie'
+import { loginContext } from '../providers/UserContext';
 import './MyBids.scss'
 
 const MyBids = (props) => {
   const params = useParams();
   const [myBids, setMyBids] = useState([]);
   const [highestBids, setHighestBids] = useState([]);
-  const currentUser = Cookies.get('userId')
+  const { currentUser } = useContext(loginContext);
+  const [ currentUserCookie, setCurrentUserCookie ] = useState(Cookies.get('userId'))
   const { bidData } = useContext(webSocketContext);
   
   
@@ -19,6 +21,10 @@ const MyBids = (props) => {
       currency: "USD",
     });
   };
+
+  useEffect(() => {
+    setCurrentUserCookie(Cookies.get('userId'))
+  }, [currentUser])
 
   useEffect(() => {
     axios
@@ -33,11 +39,15 @@ const MyBids = (props) => {
       });
   }, [params]);
 
-console.log(myBids)
-console.log(highestBids)
-
   return (
-    <div className="itemsContainer top-element">
+    <>
+    <div className="category-title top-element">
+    <h1>
+      {Number(currentUserCookie) === Number(params.userId) ? 'Your Bids' : "Users Bids"}
+      <hr />
+    </h1>
+  </div>
+    <div className="itemsContainer">
       {myBids.map((bid) => {
         const highestBid = highestBids.find(highBid => highBid.item_id === bid.item_id && highBid.highest_bid === bid.highest_bid);
         return (
@@ -47,12 +57,13 @@ console.log(highestBids)
                   backgroundImage: `url(${bid.img_url})`}}
               className="bids-image"
             ></div>
-            <div class='my-bid-price' >{bidToDollars(bid.highest_bid)}</div>
-            {highestBid && <div class='highest-bid-price'>{currentUser === params.userId ? '👑 You have the highest bid' : '👑 This user has the highest bid'}</div>}
+            <div className='my-bid-price' >{bidToDollars(bid.highest_bid)}</div>
+            {highestBid && <div className='highest-bid-price'>{currentUser === params.userId ? '👑 You have the highest bid' : '👑 This user has the highest bid'}</div>}
           </Link>
         );
       })}
     </div>
+    </>
   );
 };
 
