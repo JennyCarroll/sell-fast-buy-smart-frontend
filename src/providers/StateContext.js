@@ -4,9 +4,9 @@ import useApplicationData from "../hooks/useApplicationData";
 export const stateContext = createContext();
 
 export default function StateProvider(props) {
-  const { state, setState, setStateRefresh } = useApplicationData();
+  const { state, setState, stateLoading, setStateLoading, setStateRefresh } = useApplicationData();
 
-  const stateInfo = { state, setState, setStateRefresh };
+  const stateInfo = { state, setState, stateLoading, setStateLoading, setStateRefresh };
 
   return (
     <stateContext.Provider value={stateInfo}>
