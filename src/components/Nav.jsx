@@ -44,24 +44,6 @@ function Nav(props) {
           <Search items={props.items} />
         </div>
         <div className="nav right-nav">
-          {/* button to deal with dark mode and light mode */}
-
-          <i
-            class={props.theme ? "bi bi-lightbulb" : "bi bi-lightbulb-off"}
-            onClick={() => {
-              let theme = !props.theme;
-              props.setTheme(theme);
-            }}
-          ></i>
-          {/* <button
-            className="btn btn-light"
-            onClick={() => {
-              let theme = !props.theme;
-              props.setTheme(theme);
-            }}
-          >
-            {props.theme ? "Dark Mode" : "Light Mode"}
-          </button> */}
           {currentUserCookie ? (
             <>
               <div className="btn btn-light">
@@ -98,7 +80,7 @@ function Nav(props) {
                 <input
                   onKeyDown={handleKeyDown}
                   className="login form-control option"
-                  placeholder="User Id"
+                  placeholder="email"
                   onChange={handleChange}
                 />
                 <button
@@ -111,6 +93,14 @@ function Nav(props) {
               </div>
             </div>
           )}
+          {/* light bulb deal with dark mode and light mode */}
+          <i
+            class={props.theme ? "bi bi-lightbulb" : "bi bi-lightbulb-off"}
+            onClick={() => {
+              let theme = !props.theme;
+              props.setTheme(theme);
+            }}
+          ></i>
         </div>
       </div>
       <div className="nav bottom-nav">

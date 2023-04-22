@@ -72,7 +72,7 @@ $scheme-nav-dark: $darkest, $lightest;
 /* this mixin makes all of the small images in itemDetail the same size without stretching them DO NOT CHANGE*/
 @mixin thumbNail(){
   float: left;
-  width:  5vw;
+  width:  6vw;
   height: 10vh;
   object-fit: cover;
   border-radius: 4px;
