@@ -1,7 +1,7 @@
 import "./Nav.scss";
 import Search from "./Search";
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { loginContext } from "../providers/UserContext";
 
 function Nav(props) {
@@ -9,6 +9,12 @@ function Nav(props) {
 
   const [userId, setUserId] = useState(null);
   const { currentUser, login, logout } = useContext(loginContext);
+
+  const inputRef = useRef(null);
+
+  const bringInputToFocus = () => {
+      inputRef.current && inputRef.current.focus();
+    }
 
   const handleChange = (event) => {
     setUserId(event.target.value);
@@ -66,11 +72,12 @@ function Nav(props) {
             </>
           ) : (
             <div className="dropdown">
-              <button className="btn btn-light login login">
+              <button onMouseEnter={bringInputToFocus} className="btn btn-light login login">
                 Login / Sign Up
               </button>
               <div className="dropdown-content">
                 <input
+                  ref={inputRef}
                   onKeyDown={handleKeyDown}
                   className="login form-control option"
                   placeholder="email"
