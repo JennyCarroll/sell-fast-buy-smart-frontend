@@ -8,14 +8,14 @@ import Cookies from "js-cookie";
 
 import "./CreateBid.scss";
 
-const CreateBid = ({ item, onSubmit, currentBid }) => {
+const CreateBid = ({ item, onSubmit, currentBid, setCurrentBid }) => {
   const [userId, setUserId] = useState(null);
   const [itemId, setItemId] = useState(null);
   const [bidValue, setBidValue] = useState("");
   const [message, setMessage] = useState("");
   let currentUser = Cookies.get("userId");
   let currentBidInDollars = currentBid / 100;
-  const { state, setStateRefresh, setStateLoading } = useContext(stateContext);
+  const { setStateLoading } = useContext(stateContext);
 
   useEffect(() => {
     setUserId(currentUser);
@@ -56,8 +56,10 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
     axios
       .post("/bids/new", bidData)
       .then((res) => {
+        console.log('.thenCreateBid', res)
+        setCurrentBid(res.data.bid_value)
         setStateLoading(true)
-        onSubmit(true);
+        // onSubmit(true);
       })
       .catch((error) => {
         console.error("Error submitting bid:", error);

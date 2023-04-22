@@ -18,9 +18,11 @@ function ItemDetail(props) {
   const [currentUserCookie, setCurrentUserCookie] = useState(Cookies.get("userId"));
   //create state for the activeImage of the carousel
   const [activeImage, setActiveImage] = useState("");
-  // const [bidData, setBidData] = useState(itemObj.bid_value)
-  const { bidData } = useContext(webSocketContext);
+  const [bidData, setBidData] = useState(itemObj.bid_value)
+  // const { bidData } = useContext(webSocketContext);
   const { currentUser } = useContext(loginContext);
+
+  console.log('bidData', bidData)
 
   useEffect(() => {
     axios
@@ -37,6 +39,7 @@ function ItemDetail(props) {
         console.log(error.response.data);
       });
   }, [params, bidData]);
+
 
   useEffect(() => {
     setCurrentUserCookie(Cookies.get("userId"));
@@ -132,10 +135,10 @@ function ItemDetail(props) {
                       {currentUserCookie && (
                         <CreateBid
                           item={itemObj}
-                          onSubmit={props.onSubmit}
+                          // onSubmit={props.onSubmit}
                           currentBid={itemObj.bid_value}
                           // currentBid={bidData}
-                          // setCurrentBid={setBidData}
+                          setCurrentBid={setBidData}
                         />
                       )}
                     </span>
