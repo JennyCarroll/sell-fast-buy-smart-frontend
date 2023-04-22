@@ -20,6 +20,7 @@ function ItemDetail(props) {
   );
   //create state for the activeImage of the carousel
   const [activeImage, setActiveImage] = useState("");
+  // const [bidData, setBidData] = useState(itemObj.bid_value)
   const { bidData } = useContext(webSocketContext);
   const { currentUser } = useContext(loginContext);
 
@@ -130,6 +131,8 @@ function ItemDetail(props) {
                         item={itemObj}
                         onSubmit={props.onSubmit}
                         currentBid={itemObj.bid_value}
+                        // currentBid={bidData}
+                        // setCurrentBid={setBidData}
                       />
                     )}
                   </span>

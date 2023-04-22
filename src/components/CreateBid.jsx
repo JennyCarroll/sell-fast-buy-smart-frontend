@@ -25,6 +25,8 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setBidValue("");
+    // console.log('setbiddata', event.target.data)
+    // setCurrentBid(event.target.value);
     // Data validation - All field must be populated.
     // if (bidValue < currentBid || !itemId || !userId) {
     //   return;

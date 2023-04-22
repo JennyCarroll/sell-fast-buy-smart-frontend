@@ -52,7 +52,8 @@ $scheme-nav-dark: $darkest, $lightest;
 
 /* this mixin makes all of the images the same size without stretching them DO NOT CHANGE*/
 @mixin image-size(){
-  max-width: 100%;
+  // max-width: 100%;
+  max-width: 290px;
   height: auto;
   display: block;
   margin: 0 auto;
