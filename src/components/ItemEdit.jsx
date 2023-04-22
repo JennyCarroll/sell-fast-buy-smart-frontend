@@ -1,23 +1,10 @@
-<<<<<<< HEAD
 import React, { useState, Fragment, useContext, useEffect } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { useNavigate, Navigate, useParams } from "react-router-dom";
 import axios from "axios";
 import SelectListOptions from "./general/SelectListOptions";
 import { stateContext } from "../providers/StateContext";
 import Cookies from "js-cookie";
 import "./ItemForm/ItemForm.scss";
-=======
-import React, { useState, Fragment, useContext, useEffect } from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
-
-import axios from 'axios';
-
-import SelectListOptions from './general/SelectListOptions';
-import { stateContext } from '../providers/StateContext';
-import Cookies from 'js-cookie';
-
-import './ItemForm/ItemForm.scss';
->>>>>>> f56eb72c1ba24f38fe12058c3e9456d0aa60c7f1
 
 function ItemEdit() {
   // MANAGE STATE
@@ -94,7 +81,7 @@ function ItemEdit() {
       axios
         .post(`/items/${paramsItemId}/edit`, editData)
         .then((res) => {
-          console.log('inside edit - axios successful - setting states');
+          console.log("inside edit - axios successful - setting states");
           setStateLoading(true);
           setStateRefresh(true);
           navigate(`/items/${paramsItemId}`);
@@ -107,11 +94,11 @@ function ItemEdit() {
 
   const deleteItem = (event) => {
     event.preventDefault();
-    console.log('inside delete - start axios');
+    console.log("inside delete - start axios");
     axios
       .post(`/items/${paramsItemId}/delete`, { itemId: paramsItemId })
       .then(() => {
-        console.log('inside delete - axios successful - setting states');
+        console.log("inside delete - axios successful - setting states");
         setStateLoading(true);
         setStateRefresh(true);
         setDeleteStatus(true);
@@ -124,7 +111,6 @@ function ItemEdit() {
 
   return (
     <Fragment>
-<<<<<<< HEAD
       {editStatus && <Navigate to={"/items/" + paramsItemId} />}
       {deleteStatus && <Navigate to={"/profile/" + currentUser} />}
       <form autoComplete="off">
@@ -140,18 +126,6 @@ function ItemEdit() {
               ></img>
               <div className={"form-group m-1"}>
                 <label htmlFor="item-url">Item URL:</label>
-=======
-      {editStatus && <Navigate to={'/items/' + paramsItemId} />}
-      <form autoComplete='off'>
-        <div className={'itemForm'}></div>
-        <div className={'m-4'}>
-          <span className={'strong'}>Edit your item:</span>
-          <div className={'d-flex'}>
-            <div className={'d-flex flex-column'}>
-              <img className={'imageContainer img-fluid'} src={imgUrlBlur} alt='image_url'></img>
-              <div className={'form-group m-1'}>
-                <label htmlFor='item-url'>Item URL:</label>
->>>>>>> f56eb72c1ba24f38fe12058c3e9456d0aa60c7f1
                 <input
                   className={"form-control"}
                   type="text"
