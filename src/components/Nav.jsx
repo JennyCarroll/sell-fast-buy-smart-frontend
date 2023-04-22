@@ -37,7 +37,7 @@ function Nav(props) {
           <Search items={props.items} />
         </div>
         <div className="nav right-nav">
-          {currentUserCookie ? (
+          {currentUser ? (
             <>
               <div className="btn btn-light">
                 <Link to={"/items/new"}>Sell</Link>
