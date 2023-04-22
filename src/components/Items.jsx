@@ -43,8 +43,8 @@ function Items(props) {
           let image = props.images.find((image) => image.item_id === item.id);
           let itemBid = props.items.find((item2) => item2.id === item.id);
           return (
-              <Link className="item-container item-link" to={`/items/${item.id}`}>
-            <div key={item.id} >
+              <Link key={item.id} className="item-container item-link" to={`/items/${item.id}`}>
+            <div >
                 {/* rather than linking to an item or creating a new component, we render an image directly here with a special class to style the photos smaller */}
                 <img
                   className="featured-image"

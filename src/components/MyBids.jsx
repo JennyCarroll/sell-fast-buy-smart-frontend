@@ -56,8 +56,8 @@ const MyBids = (props) => {
           const highestBid = highestBids.find(highBid => highBid.item_id === bid.item_id && highBid.highest_bid === bid.highest_bid);
           console.log(bid)
           return (
-            <div key={bid.id} className="item-container">
-            <Link className="item-link" key={bid.item_id} to={`/items/${bid.item_id}`}>
+            <div key={bid.item_id}  className="item-container">
+            <Link className="item-link" to={`/items/${bid.item_id}`}>
               <img
                   className="itemImage"
                   src={bid.img_url}

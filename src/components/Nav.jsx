@@ -52,7 +52,7 @@ function Nav(props) {
                 Profile
                 <div className="dropdown-content">
                   <Link
-                    class="btn btn-light optio"
+                    className="btn btn-light optio"
                     to={`/profile/${currentUser}`}
                   >
                     Profile
