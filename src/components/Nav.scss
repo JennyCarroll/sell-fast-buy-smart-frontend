@@ -1,13 +1,11 @@
 @import "sassPartial";
 
 //this is just here so i can style my favicon font I will delete it later
-.fav {
-  line-height: 10px;
-  // color: white
-}
+// .fav {
+//   line-height: 10px;
+// }
 
 .nav-bar {
-  // background-color: black;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -17,30 +15,26 @@
   z-index: 1;
     a {
       text-decoration: none;
-      // color: grey;
+      color: inherit;
+      :hover {
+        color: $lightest;
+      }
+
     }
 
     .top-nav, .bottom-nav {
-      // color: gray;
      width: 100%;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-        // :hover {
-          // color:white;
-        // }
-        // .login{
-          // :hover{
-            // color: black;
-          // }
-        // }
     }
     .categories {
       display: flex;
       flex-direction: row;
       justify-content: space-evenly;
-      width: 100%
+      width: 100%;
+      height: 65px;
     }
     .right-nav {
       display: flex;
@@ -48,15 +42,8 @@
         div {
          margin-right: 15px;
         }
-        // .login {
-          // input {
-            // color: black;
-          // }
-        // }
     }
     .search {
-      // color: black;
-      // background-color: white;
       align-items: center;
       z-index: 2;
       :hover {
@@ -71,14 +58,12 @@
 }
 .dropdown {
   position: fixed;
-  // color: grey !important;
 }
 
 .dropdown-content {
   padding-left: 10px;
   min-width: 100px;
   max-width: 100px;
-  // background-color: black;
   position: fixed;
   flex-direction: column;
   display: none;
@@ -89,6 +74,24 @@
 
 .dropdown:hover .dropdown-content {display: flex;}
 
-// .login-input {
-  // color: black;
-// }
+.category {
+  text-decoration: none;
+  color: inherit;
+}
+
+.input-group {
+  width: 20%;
+}
+
+.search-bar-with-results {
+  width: 45em;
+}
+
+.bi {
+  margin-right: 17px;
+  margin-top: 8px;
+}
+
+.option {
+  margin-top: 3px;
+}
