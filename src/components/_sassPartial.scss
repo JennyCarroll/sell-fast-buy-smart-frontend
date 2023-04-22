@@ -149,7 +149,7 @@ $scheme-nav-dark: $darkest, $lightest;
 .light {
   //when passing in a list as arguments use three dots
   @include color-scheme($scheme-light...);
-  height: 100%;
+  height: fit-content;
   // .items-container{
   //   @include color-scheme($scheme-light...);
   // }
@@ -157,7 +157,7 @@ $scheme-nav-dark: $darkest, $lightest;
 
 .dark {
   @include color-scheme($scheme-dark...);
-  height:100%;
+  height:fit-content;
   // .items-container{
   //   @include color-scheme($scheme-light...);
   // }
