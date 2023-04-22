@@ -17,6 +17,7 @@ function ItemEdit() {
   const [minBid, setMinBid] = useState(0);
   const [imgUrl, setImgUrl] = useState("");
   const [imgUrlBlur, setImgUrlBlur] = useState("https://imgur.com/BDT7VOn.jpg");
+  const [bidCount, setBidCount] = useState(0);
   const currentUser = parseInt(Cookies.get("userId"));
 
   const { state, setStateRefresh, setStateLoading } = useContext(stateContext);
@@ -37,6 +38,7 @@ function ItemEdit() {
       setCategory(resItem.category_id);
       setEndDate(new Date(resItem.end_date).toISOString().slice(0, 16));
       setMinBid(resItem.bid_value / 100);
+      setBidCount(res.data.length);
 
       let image = state.images.find(
         (element) => element.item_id === resItem.id
@@ -245,9 +247,12 @@ function ItemEdit() {
           </div>
         </div>
         <div className="d-flex justify-content-end m-4">
-          <button className={"btn btn-dark submit"} onClick={editItem}>
-            Edit Item
-          </button>
+          {/* conditionally render the edit button if there are no bids yet */}
+          {bidCount < 1 && (
+            <button className={"btn btn-dark submit"} onClick={editItem}>
+              Edit Item
+            </button>
+          )}
           <button className={"btn btn-danger"} onClick={deleteItem}>
             Delete Item
           </button>
