@@ -42,13 +42,13 @@ const MyProfile = ({ users, items, images }) => {
       </div>
       <div className="items">
         {currentUser ? (
-          <div className="titleContainer">
+           <div className="titleContainer">
             <div className="title">
               <h1>Your Items For Sale</h1>
             </div>
-            <div className="hr">
+            <span className="hr">
               <hr />
-            </div>
+            </span>
           </div>
         ) : (
           <div className="titleContainer">
