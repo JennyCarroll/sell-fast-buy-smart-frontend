@@ -58,6 +58,7 @@ $scheme-nav-dark: $darkest, $lightest;
   display: block;
   margin: 0 auto;
   border-radius: 4px;
+  // object-fit: contain;
   // width:  20vw;
   // height: 40vh;
   // border-radius: 4px;
@@ -147,11 +148,11 @@ $scheme-nav-dark: $darkest, $lightest;
 
 @mixin edit-on-hover() {
   position: absolute;
-  font-size: calc(0.5vw + 0.9vh);
-  bottom: 0;
+  // font-size: calc(0.5vw + 0.9vh);
+  top: 0;
   right: 0;
-  width: 2rem; /* set the width of the price element */
-  height: 5vh; /* set the height of the price element */
+  width: 1rem; /* set the width of the price element */
+  height: 2vh; /* set the height of the price element */
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   border-radius: 4px;
@@ -161,7 +162,7 @@ $scheme-nav-dark: $darkest, $lightest;
   text-align: center;
   min-height: fit-content;
   min-width: fit-content;
-  padding: 5px 10px;
+  padding: 10px;
 }
 
 .light {
