@@ -1,3 +1,6 @@
+//Deprecated? Conflicts with other toasts
+// when you click.
+
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { useContext } from 'react';

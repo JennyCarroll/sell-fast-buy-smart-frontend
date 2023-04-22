@@ -1,10 +1,11 @@
 import React, { useState, Fragment, useContext, useEffect } from 'react';
-import { useNavigate, Navigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import SelectListOptions from './general/SelectListOptions';
 import { stateContext } from '../providers/StateContext';
 import Cookies from 'js-cookie';
-import './ItemForm/ItemForm.scss';
+import './general/ItemForm.scss';
+import { toast } from 'react-toastify';
 
 function ItemEdit() {
   // MANAGE STATE
@@ -21,14 +22,13 @@ function ItemEdit() {
   const currentUser = parseInt(Cookies.get('userId'));
 
   const { state, setStateRefresh, setStateLoading } = useContext(stateContext);
-  const [editStatus] = useState(false);
-  const [deleteStatus, setDeleteStatus] = useState(false);
 
   const params = useParams();
   const paramsItemId = parseInt(params.itemId);
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log('axios');
     axios.get(`/items/${paramsItemId}`).then((res) => {
       const resItem = res.data[0];
       setItem(resItem);
@@ -53,7 +53,26 @@ function ItemEdit() {
   const editItem = (event) => {
     event.preventDefault();
     // Data validation - No empty fields allowed.
-    if (!currentUser || !title || !description || !endDate || !imgUrl || !category || !condition) {
+    if (
+      !currentUser ||
+      !title ||
+      !description ||
+      !endDate ||
+      !imgUrl ||
+      !category ||
+      !condition ||
+      !minBid
+    ) {
+      toast.error('Errors on the page. Please review your submission', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
       return;
     }
 
@@ -75,7 +94,7 @@ function ItemEdit() {
         .then((res) => {
           // console.log("inside edit - axios successful - setting states");
           setStateLoading(true);
-          setStateRefresh(true);
+          // setStateRefresh(true);
           navigate(`/items/${paramsItemId}`);
         })
         .catch((error) => {
@@ -92,8 +111,7 @@ function ItemEdit() {
       .then(() => {
         // console.log("inside delete - axios successful - setting states");
         setStateLoading(true);
-        setStateRefresh(true);
-        setDeleteStatus(true);
+        // setStateRefresh(true);
         navigate(`/profile/${currentUser}`);
       })
       .catch((error) => {
@@ -101,10 +119,9 @@ function ItemEdit() {
       });
   };
 
+  console.log('bidCount', bidCount);
   return (
     <Fragment>
-      {editStatus && <Navigate to={'/items/' + paramsItemId} />}
-      {deleteStatus && <Navigate to={'/profile/' + currentUser} />}
       <form autoComplete='off'>
         <div className={'itemForm'}></div>
         <div className={'m-4'}>
@@ -231,10 +248,9 @@ function ItemEdit() {
           </div>
         </div>
         <div className='d-flex justify-content-end m-4'>
-          {/* conditionally render the edit button if there are no bids yet */}
-          {bidCount < 1 && (
+          {bidCount === 1 && (
             <button className={'btn btn-dark submit'} onClick={editItem}>
-              Edit Item
+              Save Edit
             </button>
           )}
           <button className={'btn btn-danger'} onClick={deleteItem}>

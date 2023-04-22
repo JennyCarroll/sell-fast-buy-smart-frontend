@@ -1,22 +1,14 @@
 import "./Nav.scss";
 import Search from "./Search";
-import { Link, useParams } from "react-router-dom";
-import { useContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
 import { loginContext } from "../providers/UserContext";
-import Cookies from "js-cookie";
 
 function Nav(props) {
   let categories = props.categories;
 
   const [userId, setUserId] = useState(null);
-  const [currentUserCookie, setCurrentUserCookie] = useState(
-    Cookies.get("userId")
-  );
   const { currentUser, login, logout } = useContext(loginContext);
-
-  useEffect(() => {
-    setCurrentUserCookie(Cookies.get("userId"));
-  }, [currentUser, useParams()]);
 
   const handleChange = (event) => {
     setUserId(event.target.value);
@@ -28,6 +20,7 @@ function Nav(props) {
     }
   };
 
+  console.log("currentUser", currentUser);
   return (
     <div className="nav nav-bar">
       <div className="nav top-nav">
@@ -54,7 +47,7 @@ function Nav(props) {
                 <div className="dropdown-content">
                   <Link
                     class="btn btn-light option"
-                    to={`/profile/${currentUserCookie}`}
+                    to={`/profile/${currentUser}`}
                   >
                     Profile
                   </Link>
@@ -68,7 +61,7 @@ function Nav(props) {
                 </div>
               </div>
               <div className="btn btn-light">
-                <Link to={`bids/${currentUserCookie}`}>Bids</Link>
+                <Link to={`bids/${currentUser}`}>Bids</Link>
               </div>
             </>
           ) : (
