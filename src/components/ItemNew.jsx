@@ -8,7 +8,7 @@ import SelectListOptions from './general/SelectListOptions';
 import { stateContext } from '../providers/StateContext';
 import Cookies from 'js-cookie';
 
-import './general/ItemForm.scss';
+import './general/Item-form.scss';
 
 function ItemNew() {
   // MANAGE STATE
@@ -83,7 +83,7 @@ function ItemNew() {
   return (
     <Fragment>
       <form onSubmit={handleSubmit} autoComplete='off'>
-        <div className={'itemForm'}></div>
+        <div className={'item-form'}></div>
         <div className={'m-4'}>
           <span className={'strong'}>List a new item:</span>
           <div className={'d-flex'}>
@@ -211,7 +211,7 @@ function ItemNew() {
             </div>
           </div>
         </div>
-        <div className='d-flex justify-content-end m-4'>
+        <div className='d-flex justify-content-end m-4 bottom-element'>
           <button className={'btn btn-dark submit'}>Create Item</button>
         </div>
       </form>

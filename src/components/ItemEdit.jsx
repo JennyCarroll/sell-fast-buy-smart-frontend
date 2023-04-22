@@ -4,7 +4,7 @@ import axios from 'axios';
 import SelectListOptions from './general/SelectListOptions';
 import { stateContext } from '../providers/StateContext';
 import Cookies from 'js-cookie';
-import './general/ItemForm.scss';
+import './general/Item-form.scss';
 import { toast } from 'react-toastify';
 
 function ItemEdit() {
@@ -123,7 +123,7 @@ function ItemEdit() {
   return (
     <Fragment>
       <form autoComplete='off'>
-        <div className={'itemForm'}></div>
+        <div className={'item-form'}></div>
         <div className={'m-4'}>
           <span className={'strong'}>Edit your item:</span>
           <div className={'d-flex'}>
@@ -247,7 +247,7 @@ function ItemEdit() {
             </div>
           </div>
         </div>
-        <div className='d-flex justify-content-end m-4'>
+        <div className='d-flex justify-content-end m-4 bottom-element'>
           {bidCount === 1 && (
             <button className={'btn btn-dark submit'} onClick={editItem}>
               Save Edit
