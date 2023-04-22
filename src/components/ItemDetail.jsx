@@ -43,15 +43,15 @@ function ItemDetail(props) {
   }, [currentUser]);
 
   // Helper function to convert bid value to a dollar amount
-  const bidToDollars = function(value) {
-    return (itemObj.bid_value / 100).toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD',
+  const bidToDollars = function (value) {
+    return (itemObj.bid_value / 100).toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
     });
   };
 
   // set thumbNails
-  const thumbNails = function(itemObj) {
+  const thumbNails = function (itemObj) {
     if (!itemObj.img_url) {
       return;
     }
@@ -72,72 +72,77 @@ function ItemDetail(props) {
     <>
       {/* check to see if the itemObj exists before rendering the jsx */}
       {itemObj && (
-        <div className='top-element '>
+        <div className="top-element ">
           <div className="title-container">
-              <h1 className="title">{itemObj.title}</h1>
+            <h1 className="title">{itemObj.title}</h1>
             <span className="hr">
               <hr />
             </span>
           </div>
-          <div className='itemDetail'>
-          <div className='detailContainer'>
-            <div className='carousel-image-container'>
-              <div className='custom-container'>
-                <div className='images'>
-                  {/* because this data is nested in itemObj and it is an additional async query, it may take longer to load so we check to make sure it exists and has length before rendering */}
-                  <div className='item-container'>
-                    {itemObj.img_url && itemObj.img_url.length > 0 && (
-                      <Carousel
-                        images={itemObj.img_url}
-                        title={itemObj.title}
-                        active={activeImage}
-                      ></Carousel>
-                    )}
+          <div className="item-detail">
+            <div className="detail-container">
+              <div className="carousel-image-container">
+                <div className="custom-container">
+                  <div className="images">
+                    {/* because this data is nested in itemObj and it is an additional async query, it may take longer to load so we check to make sure it exists and has length before rendering */}
+                    <div className="item-container">
+                      {itemObj.img_url && itemObj.img_url.length > 0 && (
+                        <Carousel
+                          images={itemObj.img_url}
+                          title={itemObj.title}
+                          active={activeImage}
+                        ></Carousel>
+                      )}
+                    </div>
+                    <div className="thumbnails">{thumbNails(itemObj)}</div>
                   </div>
-                  <div className='thumbnails'>{thumbNails(itemObj)}</div>
                 </div>
-
               </div>
-            </div>
-            <div className='info-container'>
-              <div className='info'>
-                <span className="description">{itemObj.description}</span>
-                <span className="counter">
-                  {/*It is necessary to only render this once `itemObj.end_date` exists, otherwise the setInterval won't start properly
-                   */}
-                  {itemObj.end_date && <Counter end_date={itemObj.end_date} />}
-                </span>
-              </div>
-
-              <div className='info'>
-                <div className='bidInfo'>
-                  <span className='bid-plus-condition'>
-                    <span>
-                      {Number(itemObj.user_id) === Number(currentUserCookie)
-                        ? "👑 You are the highest bidder"
-                        : ""}
-                    </span>
-                    <span>Current Bid: {bidToDollars(itemObj.bid_value)}</span>
-                    <span>Condition: {itemObj.condition}</span>
-                    <span>
-                      <Link to={`/profile/${sellerId}`}>View This Seller</Link>
-                    </span>
-                  </span>
-                  <span className="newBid">
-                    {currentUserCookie && (
-                      <CreateBid
-                        item={itemObj}
-                        onSubmit={props.onSubmit}
-                        currentBid={itemObj.bid_value}
-                        // currentBid={bidData}
-                        // setCurrentBid={setBidData}
-                      />
+              <div className="info-container">
+                <div className="info">
+                  <span className="description">{itemObj.description}</span>
+                  <span className="counter">
+                    {/*It is necessary to only render this once `itemObj.end_date` exists, otherwise the setInterval won't start properly
+                     */}
+                    {itemObj.end_date && (
+                      <Counter end_date={itemObj.end_date} />
                     )}
                   </span>
                 </div>
+
+                <div className="info">
+                  <div className="bidInfo">
+                    <span className="bid-plus-condition">
+                      <span>
+                        {Number(itemObj.user_id) === Number(currentUserCookie)
+                          ? "👑 You are the highest bidder"
+                          : ""}
+                      </span>
+                      <span>
+                        Current Bid: {bidToDollars(itemObj.bid_value)}
+                      </span>
+                      <span>Condition: {itemObj.condition}</span>
+                      <span>
+                        <Link to={`/profile/${sellerId}`}>
+                          View This Seller
+                        </Link>
+                      </span>
+                    </span>
+                    <span>
+                      {currentUserCookie && (
+                        <CreateBid
+                          item={itemObj}
+                          onSubmit={props.onSubmit}
+                          currentBid={itemObj.bid_value}
+                          // currentBid={bidData}
+                          // setCurrentBid={setBidData}
+                        />
+                      )}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
           </div>
         </div>
       )}

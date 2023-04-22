@@ -7,15 +7,6 @@
   background-Position: center;
   background-Size: cover;
   position: relative;
-    // :hover {
-    //   width: 21vw;
-    //   height: 42vh;
-    //   opacity: 0.9;
-    //   zoom: 5%;
-    //     .bid-price {
-    //       opacity: 1;
-    //     }
-    // }
 }
 
 .my-bid-price {
@@ -44,20 +35,6 @@
   text-align: center;
   padding: 5px 10px;
   border-Radius: 5px;
-  // @include bid-price-on-hover();
-  // opacity: 0.8;
-  // position: absolute;
-  // margin-left: 20px;
-  // width: 12vw;
-  // height: 6vh;
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
-  // background-Color: black;
-  // color: white;
-  // padding: 10px;
-  // border-Radius: 5px;
-  // transform: translate(-10%, -660%);
 }
 
 .items {
