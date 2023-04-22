@@ -49,7 +49,8 @@
 .siteName {
   text-align: center;
   font-size: 9em;
-  @include large-font()
+  @include large-font();
+  padding-top: 20px;
 }
 
 .bid-price {
