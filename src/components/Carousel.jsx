@@ -12,7 +12,8 @@ function Carousel(props) {
             title={props.title}
           ></Item>
         </div>
-        {props.images.map((image, i) => {
+        {/* need to find a way to loop through the images starting on props.active */}
+        {props.images.slice(1).map((image, i) => {
           return (
             <div key={i} className="carousel-item">
               <Item photo={image.img_url} title={props.title}></Item>

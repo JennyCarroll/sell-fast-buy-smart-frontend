@@ -52,7 +52,7 @@ function Nav(props) {
                     Profile
                   </Link>
                   <Link
-                    class="btn btn-light option"
+                    className="btn btn-light option"
                     to={`/`}
                     onClick={() => logout()}
                   >
@@ -88,7 +88,7 @@ function Nav(props) {
           )}
           {/* light bulb deal with dark mode and light mode */}
           <i
-            class={props.theme ? "bi bi-lightbulb" : "bi bi-lightbulb-off"}
+            className={props.theme ? "bi bi-lightbulb" : "bi bi-lightbulb-off"}
             onClick={() => {
               let theme = !props.theme;
               props.setTheme(theme);
