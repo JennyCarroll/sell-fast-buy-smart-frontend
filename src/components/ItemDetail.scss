@@ -29,7 +29,7 @@
 }
 
 .image {
-  @include imageSize();
+  @include image-size();
   margin: 5px;
 }
 

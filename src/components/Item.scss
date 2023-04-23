@@ -1,7 +1,7 @@
 @import "sassPartial";
 
 .itemImage  {
-  @include imageSize();
+  @include image-size();
 }
 
 // .bid-price {
