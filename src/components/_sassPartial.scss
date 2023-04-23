@@ -82,7 +82,7 @@ $scheme-nav-dark: $darkest, $lightest;
 
 /* this mixin makes all of the small images in itemDetail the same size without stretching them DO NOT CHANGE*/
 @mixin thumbNail(){
-  max-width: 100px;
+  max-width: 91px;
   height: auto;
   display: block;
   margin: 0 auto;
@@ -160,7 +160,7 @@ $scheme-nav-dark: $darkest, $lightest;
 }
 
 
-@mixin titleContainer() {
+@mixin title-container() {
   //create layout for the component using css grid
   // display: grid;
   //if we specify columns, but not rows, it assumes there can be more than one row.
@@ -209,6 +209,7 @@ $scheme-nav-dark: $darkest, $lightest;
   border-color: black;
   border-style: solid;
   border-radius: 4px;
+  width: 100%
 }
 
 @mixin items-container {

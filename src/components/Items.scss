@@ -23,8 +23,8 @@
   @include featuredImageSize();
 }
 
-.titleContainer {
-@include titleContainer();
+.title-container {
+@include title-container();
 }
 
 //style the contents of the title div using flexbox

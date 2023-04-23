@@ -39,7 +39,7 @@ const MyProfile = ({ users, items, images }) => {
       </div>
       <div className='items'>
         {currentUser ? (
-          <div className='titleContainer'>
+          <div className='title-container'>
             <div className='title'>
               <h1>Your Items For Sale</h1>
             </div>
@@ -48,7 +48,7 @@ const MyProfile = ({ users, items, images }) => {
             </span>
           </div>
         ) : (
-          <div className='titleContainer'>
+          <div className='title-container'>
             <div className='title'>
               <h1>Items For Sale By User</h1>
             </div>
