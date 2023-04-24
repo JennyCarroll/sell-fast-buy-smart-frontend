@@ -1,5 +1,6 @@
 import React, { useState, Fragment, useEffect, useContext } from "react";
 import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -10,6 +11,7 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
   const [userId, setUserId] = useState(null);
   const [itemId, setItemId] = useState(null);
   const [bidValue, setBidValue] = useState("");
+  const [message, setMessage] = useState("");
   let currentUser = Cookies.get("userId");
   let currentBidInDollars = currentBid / 100;
 
@@ -24,14 +26,21 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
   // Collects form data from state and submits an axios.post
   const handleSubmit = (event) => {
     event.preventDefault();
-    setBidValue("");
     // Data validation - All field must be populated.
-    // if (bidValue < currentBid || !itemId || !userId) {
-    //   return;
-    // }
-    if (bidValue < currentBidInDollars || !itemId || !currentUser) {
+    if (bidValue < currentBidInDollars) {
+      toast.warn("Bid too low!", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       return;
     }
+
     setBidValue("");
     const bidData = {
       user_id: userId,
@@ -68,8 +77,9 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
                 type="number"
                 name="new-bid"
                 value={bidValue}
-                placeholder="Bid Amount"
+                placeholder={message ? message : "Bid Amount"}
                 onChange={(event) => {
+                  //allows the numbers to show up in the input field
                   setBidValue(event.target.value);
                 }}
               />
