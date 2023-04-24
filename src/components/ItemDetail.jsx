@@ -15,9 +15,7 @@ function ItemDetail(props) {
   const params = useParams();
   const [itemObj, setItemObj] = useState({});
   const [sellerId, setSellerId] = useState({});
-  const [currentUserCookie, setCurrentUserCookie] = useState(
-    Cookies.get("userId")
-  );
+  const [currentUserCookie, setCurrentUserCookie] = useState(Cookies.get("userId"));
   //create state for the activeImage of the carousel
   const [activeImage, setActiveImage] = useState("");
   // const [bidData, setBidData] = useState(itemObj.bid_value)
