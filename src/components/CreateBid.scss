@@ -1,5 +1,3 @@
-@import "sassPartial";
-
 .new-bid {
   display: flex;
   flex-direction: column;
@@ -10,10 +8,6 @@
   display: flex;
   margin-top: 50px;
   margin-left: 7px;
-}
-
-.imageContainer {
-  @include image-size();
 }
 
 .bid-box {
