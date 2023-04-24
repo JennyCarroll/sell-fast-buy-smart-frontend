@@ -44,6 +44,9 @@
         div {
          margin-right: 15px;
          cursor: default;
+         p{
+          margin-bottom: 0;
+         }
         }
     }
     .search {
@@ -92,7 +95,7 @@
   background-color: $dark;
   color: $light;
   margin-right: 17px;
-  margin-top: 8px;
+  // margin-top: 8px;
   :hover{
     cursor: pointer;
     color: $lightest;
@@ -132,3 +135,4 @@
 .right-nav .btn {
   background-color: $light;
 }
+

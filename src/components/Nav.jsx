@@ -46,10 +46,11 @@ function Nav(props) {
           {currentUser ? (
             <>
               <div className="">
-                <Link to={"/items/new"}>Sell</Link>
+                <Link to={"/items/new"}>
+                  <p>Sell</p></Link>
               </div>
               <div className="dropdown">
-                Profile
+                <p>Profile</p>
                 <div className="dropdown-content">
                   <Link
                     className="btn btn-light optio"
@@ -67,7 +68,7 @@ function Nav(props) {
                 </div>
               </div>
               <div className="">
-                <Link to={`bids/${currentUser}`}>Bids</Link>
+                <Link to={`bids/${currentUser}`}><p>Bids</p></Link>
               </div>
             </>
           ) : (
@@ -94,6 +95,7 @@ function Nav(props) {
             </div>
           )}
           {/* light bulb deal with dark mode and light mode */}
+          <div >
           <i
             className={props.theme ? "bi bi-lightbulb btn" : "bi bi-lightbulb-off btn"}
             onClick={() => {
@@ -101,6 +103,7 @@ function Nav(props) {
               props.setTheme(theme);
             }}
           ></i>
+          </div>
         </div>
       </div>
       <div className="nav bottom-nav">
