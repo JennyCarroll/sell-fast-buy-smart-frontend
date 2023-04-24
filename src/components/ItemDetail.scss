@@ -8,13 +8,13 @@
   @include title();
 }
 
-.detailContainer {
+.detail-container {
   width: 80%;
   display: flex;
   flex-direction: row;
 }
 
-.itemDetail {
+.item-detail {
   display: flex;
   justify-content: center;
   //or we could do margin auto

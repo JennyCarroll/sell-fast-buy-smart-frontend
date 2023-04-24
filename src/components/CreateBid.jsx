@@ -26,12 +26,9 @@ const CreateBid = ({ item, onSubmit, currentBid }) => {
   // Collects form data from state and submits an axios.post
   const handleSubmit = (event) => {
     event.preventDefault();
-<<<<<<< HEAD
-=======
     setBidValue("");
     // console.log('setbiddata', event.target.data)
     // setCurrentBid(event.target.value);
->>>>>>> 300a80ded1488daac2351c1ceb20cb38f23c49cb
     // Data validation - All field must be populated.
     if (bidValue < currentBidInDollars) {
       toast.warn("Bid too low!", {
