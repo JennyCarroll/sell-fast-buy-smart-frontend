@@ -13,8 +13,8 @@ function Nav(props) {
   const inputRef = useRef(null);
 
   const bringInputToFocus = () => {
-      inputRef.current && inputRef.current.focus();
-    }
+    inputRef.current && inputRef.current.focus();
+  };
 
   const handleChange = (event) => {
     setUserId(event.target.value);
@@ -35,10 +35,6 @@ function Nav(props) {
             <h1>SFBS</h1>
           </Link>
         </div>
-        {/* leave this here till the favicon is finalized after we are sure about font
-        <div className="fav">
-          sell<br></br>buy
-        </div> */}
         <div className="nav search">
           <Search items={props.items} />
         </div>
@@ -47,7 +43,8 @@ function Nav(props) {
             <>
               <div className="">
                 <Link to={"/items/new"}>
-                  <p>Sell</p></Link>
+                  <p>Sell</p>
+                </Link>
               </div>
               <div className="dropdown">
                 <p>Profile</p>
@@ -68,12 +65,17 @@ function Nav(props) {
                 </div>
               </div>
               <div className="">
-                <Link to={`bids/${currentUser}`}><p>Bids</p></Link>
+                <Link to={`bids/${currentUser}`}>
+                  <p>Bids</p>
+                </Link>
               </div>
             </>
           ) : (
             <div className="dropdown">
-              <button onMouseEnter={bringInputToFocus} className="btn btn-light login login">
+              <button
+                onMouseEnter={bringInputToFocus}
+                className="btn btn-light login login"
+              >
                 Login / Sign Up
               </button>
               <div className="dropdown-content">
@@ -95,14 +97,16 @@ function Nav(props) {
             </div>
           )}
           {/* light bulb deal with dark mode and light mode */}
-          <div >
-          <i
-            className={props.theme ? "bi bi-lightbulb btn" : "bi bi-lightbulb-off btn"}
-            onClick={() => {
-              let theme = !props.theme;
-              props.setTheme(theme);
-            }}
-          ></i>
+          <div>
+            <i
+              className={
+                props.theme ? "bi bi-lightbulb btn" : "bi bi-lightbulb-off btn"
+              }
+              onClick={() => {
+                let theme = !props.theme;
+                props.setTheme(theme);
+              }}
+            ></i>
           </div>
         </div>
       </div>
