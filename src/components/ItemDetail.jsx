@@ -15,19 +15,23 @@ function ItemDetail(props) {
   const params = useParams();
   const [itemObj, setItemObj] = useState({});
   const [sellerId, setSellerId] = useState({});
-  const [currentUserCookie, setCurrentUserCookie] = useState(Cookies.get("userId"));
+  const [currentUserCookie, setCurrentUserCookie] = useState(
+    Cookies.get("userId")
+  );
   //create state for the activeImage of the carousel
   const [activeImage, setActiveImage] = useState("");
-  const [bidData, setBidData] = useState(itemObj.bid_value)
+  const [bidData, setBidData] = useState(itemObj.bid_value);
   // const { bidData } = useContext(webSocketContext);
   const { currentUser } = useContext(loginContext);
 
-  console.log('bidData', bidData)
+  console.log("bidData", bidData);
 
   useEffect(() => {
     axios
       //fetch item data from the server
-      .get(`/items/${params.itemId}`)
+      .get(
+        `https://octopus-app-hzms7.ondigitalocean.app/items/${params.itemId}`
+      )
       .then((res) => {
         // Set the item object state with the response data
         setItemObj(res.data[0]);
@@ -39,7 +43,6 @@ function ItemDetail(props) {
         console.log(error.response.data);
       });
   }, [params, bidData]);
-
 
   useEffect(() => {
     setCurrentUserCookie(Cookies.get("userId"));

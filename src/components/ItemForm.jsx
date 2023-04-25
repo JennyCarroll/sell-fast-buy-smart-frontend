@@ -1,27 +1,27 @@
-import React, { useState, Fragment, useContext, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import SelectListOptions from './general/SelectListOptions';
-import { stateContext } from '../providers/StateContext';
-import Cookies from 'js-cookie';
-import './ItemForm.scss';
-import { toast } from 'react-toastify';
+import React, { useState, Fragment, useContext, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import SelectListOptions from "./general/SelectListOptions";
+import { stateContext } from "../providers/StateContext";
+import Cookies from "js-cookie";
+import "./ItemForm.scss";
+import { toast } from "react-toastify";
 
 function ItemEdit() {
   // MANAGE STATE
   const [item, setItem] = useState({});
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [condition, setCondition] = useState(1);
   const [category, setCategory] = useState(1);
-  const [endDate, setEndDate] = useState('');
+  const [endDate, setEndDate] = useState("");
   const [minBid, setMinBid] = useState(0);
-  const [imgUrl, setImgUrl] = useState('');
-  const [imgUrlBlur, setImgUrlBlur] = useState('https://imgur.com/BDT7VOn.jpg');
+  const [imgUrl, setImgUrl] = useState("");
+  const [imgUrlBlur, setImgUrlBlur] = useState("https://imgur.com/BDT7VOn.jpg");
   const [bidCount, setBidCount] = useState(0);
   // const [setNewItemId] = useState(false);
 
-  const currentUser = parseInt(Cookies.get('userId'));
+  const currentUser = parseInt(Cookies.get("userId"));
 
   const { state, setStateRefresh, setStateLoading } = useContext(stateContext);
 
@@ -39,37 +39,39 @@ function ItemEdit() {
       return;
     }
     // console.log('axios');
-    axios.get(`/items/${paramsItemId}`).then((res) => {
-      const resItem = res.data[0];
-      setItem(resItem);
-      setTitle(resItem.title);
-      setDescription(resItem.description);
-      setCondition(resItem.condition);
-      setCategory(resItem.category_id);
-      setEndDate(new Date(resItem.end_date).toISOString().slice(0, 16));
-      setMinBid(resItem.bid_value / 100);
-      setBidCount(res.data.length);
+    axios
+      .get(`https://octopus-app-hzms7.ondigitalocean.app/items/${paramsItemId}`)
+      .then((res) => {
+        const resItem = res.data[0];
+        setItem(resItem);
+        setTitle(resItem.title);
+        setDescription(resItem.description);
+        setCondition(resItem.condition);
+        setCategory(resItem.category_id);
+        setEndDate(new Date(resItem.end_date).toISOString().slice(0, 16));
+        setMinBid(resItem.bid_value / 100);
+        setBidCount(res.data.length);
 
-      const image = resItem.img_url[0].img_url;
-      if (image) {
-        setImgUrl(image);
-        setImgUrlBlur(image);
-      }
-    });
+        const image = resItem.img_url[0].img_url;
+        if (image) {
+          setImgUrl(image);
+          setImgUrlBlur(image);
+        }
+      });
   }, [state]);
 
   // SUPPORTING FUNCTIONS:
 
   const toastError = (message) => {
     toast.error(message, {
-      position: 'bottom-center',
+      position: "bottom-center",
       autoClose: 2500,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: 'colored',
+      theme: "colored",
     });
     return;
   };
@@ -87,7 +89,7 @@ function ItemEdit() {
       !condition ||
       !minBid
     ) {
-      toastError('Errors on the page. Please review your submission');
+      toastError("Errors on the page. Please review your submission");
       return;
     }
 
@@ -105,7 +107,10 @@ function ItemEdit() {
 
     if (currentUser === item.user_id) {
       axios
-        .post(`/items/${paramsItemId}/edit`, editData)
+        .post(
+          `https://octopus-app-hzms7.ondigitalocean.app/items/${paramsItemId}/edit`,
+          editData
+        )
         .then((res) => {
           // console.log("inside edit - axios successful - setting states");
           setStateLoading(true);
@@ -113,7 +118,7 @@ function ItemEdit() {
           navigate(`/items/${paramsItemId}`);
         })
         .catch((error) => {
-          console.error('Error submitting form:', error);
+          console.error("Error submitting form:", error);
         });
     }
   };
@@ -122,7 +127,10 @@ function ItemEdit() {
     event.preventDefault();
     // console.log("inside delete - start axios");
     axios
-      .post(`/items/${paramsItemId}/delete`, { itemId: paramsItemId })
+      .post(
+        `https://octopus-app-hzms7.ondigitalocean.app/items/${paramsItemId}/delete`,
+        { itemId: paramsItemId }
+      )
       .then(() => {
         // console.log("inside delete - axios successful - setting states");
         setStateLoading(true);
@@ -130,7 +138,7 @@ function ItemEdit() {
         navigate(`/profile/${currentUser}`);
       })
       .catch((error) => {
-        console.error('Error deleting item:', error);
+        console.error("Error deleting item:", error);
       });
   };
 
@@ -147,7 +155,7 @@ function ItemEdit() {
       !condition ||
       !minBid
     ) {
-      toastError('Errors on the page. Please review your submission');
+      toastError("Errors on the page. Please review your submission");
       return;
     }
 
@@ -163,32 +171,36 @@ function ItemEdit() {
     };
     // console.log('Item New - Pre Axios');
     axios
-      .post('/items/new', itemData)
+      .post("https://octopus-app-hzms7.ondigitalocean.app/items/new", itemData)
       .then((res) => {
-        console.log('Item New - Axios Success, newItemId:', res.data.id);
+        console.log("Item New - Axios Success, newItemId:", res.data.id);
         setStateLoading(true);
         navigate(`/items/${res.data.id}`);
       })
       .catch((error) => {
-        console.error('Error submitting form:', error);
+        console.error("Error submitting form:", error);
       });
   };
 
   return (
     <Fragment>
-      <form autoComplete='off'>
-        <div className={'item-form'}></div>
-        <div className={'m-4'}>
-          <span className={'strong'}>Edit your item:</span>
-          <div className={'d-flex'}>
-            <div className={'d-flex flex-column'}>
-              <img className={'imageContainer img-fluid'} src={imgUrlBlur} alt='image_url'></img>
-              <div className={'form-group m-1'}>
-                <label htmlFor='item-url'>Item URL:</label>
+      <form autoComplete="off">
+        <div className={"item-form"}></div>
+        <div className={"m-4"}>
+          <span className={"strong"}>Edit your item:</span>
+          <div className={"d-flex"}>
+            <div className={"d-flex flex-column"}>
+              <img
+                className={"imageContainer img-fluid"}
+                src={imgUrlBlur}
+                alt="image_url"
+              ></img>
+              <div className={"form-group m-1"}>
+                <label htmlFor="item-url">Item URL:</label>
                 <input
-                  className={'form-control'}
-                  type='text'
-                  name='item-url'
+                  className={"form-control"}
+                  type="text"
+                  name="item-url"
                   value={imgUrl}
                   onChange={(event) => {
                     setImgUrl(event.target.value);
@@ -196,20 +208,22 @@ function ItemEdit() {
                   onBlur={(event) => {
                     setImgUrlBlur(event.target.value);
                   }}
-                  placeholder='Item Image Url'
+                  placeholder="Item Image Url"
                 />
                 <div
                   onClick={() => {
-                    setImgUrlBlur('https://i.imgur.com/HGJaWYO.jpeg');
-                    setImgUrl('https://i.imgur.com/HGJaWYO.jpeg');
+                    setImgUrlBlur("https://i.imgur.com/HGJaWYO.jpeg");
+                    setImgUrl("https://i.imgur.com/HGJaWYO.jpeg");
                   }}
                 >
-                  <i>A nice picture of a car: https://i.imgur.com/HGJaWYO.jpeg</i>
+                  <i>
+                    A nice picture of a car: https://i.imgur.com/HGJaWYO.jpeg
+                  </i>
                 </div>
                 <div
                   onClick={() => {
-                    setImgUrlBlur('https://i.imgur.com/kwUdo7j.jpeg');
-                    setImgUrl('https://i.imgur.com/kwUdo7j.jpeg');
+                    setImgUrlBlur("https://i.imgur.com/kwUdo7j.jpeg");
+                    setImgUrl("https://i.imgur.com/kwUdo7j.jpeg");
                   }}
                 >
                   <i>Or maybe some boots?: https://i.imgur.com/kwUdo7j.jpeg</i>
@@ -217,39 +231,39 @@ function ItemEdit() {
               </div>
             </div>
 
-            <div className={'flex-column col-8'}>
-              <div className={'form-group m-1'}>
-                <label htmlFor='item-title'>Title:</label>
+            <div className={"flex-column col-8"}>
+              <div className={"form-group m-1"}>
+                <label htmlFor="item-title">Title:</label>
                 <input
-                  className={'form-control'}
-                  type='text'
-                  name='item-title'
+                  className={"form-control"}
+                  type="text"
+                  name="item-title"
                   value={title}
                   onChange={(event) => {
                     setTitle(event.target.value);
                   }}
-                  placeholder='Item Title'
+                  placeholder="Item Title"
                 />
               </div>
-              <div className={'form-group m-1'}>
-                <label htmlFor='item-description'>Description:</label>
+              <div className={"form-group m-1"}>
+                <label htmlFor="item-description">Description:</label>
                 <textarea
-                  className={'form-control'}
-                  name='item-description'
+                  className={"form-control"}
+                  name="item-description"
                   value={description}
-                  placeholder='Item Description'
+                  placeholder="Item Description"
                   onChange={(event) => {
                     setDescription(event.target.value);
                   }}
                 ></textarea>
               </div>
-              <div className={'row'}>
-                <div className={'form-group col m-1'}>
-                  <label htmlFor='item-category'>Category:</label>
+              <div className={"row"}>
+                <div className={"form-group col m-1"}>
+                  <label htmlFor="item-category">Category:</label>
                   <select
-                    className={'form-control'}
-                    name='item-category'
-                    placeholder='Choose a Category'
+                    className={"form-control"}
+                    name="item-category"
+                    placeholder="Choose a Category"
                     value={category}
                     onChange={(event) => setCategory(event.target.value)}
                   >
@@ -257,13 +271,13 @@ function ItemEdit() {
                   </select>
                 </div>
 
-                <div className={'form-group col m-1'}>
-                  <label htmlFor='item-condition'>Condition:</label>
+                <div className={"form-group col m-1"}>
+                  <label htmlFor="item-condition">Condition:</label>
                   <select
-                    className={'form-control'}
-                    name='item-condition'
+                    className={"form-control"}
+                    name="item-condition"
                     value={condition}
-                    placeholder='Item Condition'
+                    placeholder="Item Condition"
                     onChange={(event) => {
                       setCondition(event.target.value);
                     }}
@@ -272,45 +286,54 @@ function ItemEdit() {
                   </select>
                 </div>
               </div>
-              <div className={'form-group m-1'}>
-                <label htmlFor='item-bid'>Minimum Bid:</label>
+              <div className={"form-group m-1"}>
+                <label htmlFor="item-bid">Minimum Bid:</label>
                 <input
-                  className={'form-control'}
-                  type='number'
-                  name='item-bid'
+                  className={"form-control"}
+                  type="number"
+                  name="item-bid"
                   value={minBid}
-                  placeholder='Minimum Bid'
+                  placeholder="Minimum Bid"
                   onChange={(event) => {
                     setMinBid(event.target.value);
                   }}
                 />
               </div>
-              <div className={'form-group m-1'}>
-                <label htmlFor='item-auction'>Auction End:</label>
+              <div className={"form-group m-1"}>
+                <label htmlFor="item-auction">Auction End:</label>
                 <input
-                  className={'form-control'}
-                  type='datetime-local'
-                  name='item-auction'
+                  className={"form-control"}
+                  type="datetime-local"
+                  name="item-auction"
                   value={endDate}
-                  placeholder='Auction End'
+                  placeholder="Auction End"
                   onChange={(event) => {
                     setEndDate(event.target.value);
                   }}
                 />
               </div>
-              <div className='d-flex justify-content-end'>
+              <div className="d-flex justify-content-end">
                 {editButtonRender && bidCount === 1 && (
-                  <button className={'btn  btn-dark submit m-1'} onClick={editItem}>
+                  <button
+                    className={"btn  btn-dark submit m-1"}
+                    onClick={editItem}
+                  >
                     Save Edit
                   </button>
                 )}
                 {editButtonRender && (
-                  <button className={'btn  btn-danger m-1'} onClick={deleteItem}>
+                  <button
+                    className={"btn  btn-danger m-1"}
+                    onClick={deleteItem}
+                  >
                     Delete Item
                   </button>
                 )}
                 {!editButtonRender && (
-                  <button className={'btn btn-dark submit m-1'} onClick={createItem}>
+                  <button
+                    className={"btn btn-dark submit m-1"}
+                    onClick={createItem}
+                  >
                     Create Item
                   </button>
                 )}
@@ -318,7 +341,7 @@ function ItemEdit() {
             </div>
           </div>
         </div>
-        <div className='d-flex justify-content-end m-4 bottom-element'></div>
+        <div className="d-flex justify-content-end m-4 bottom-element"></div>
       </form>
     </Fragment>
   );

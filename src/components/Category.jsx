@@ -15,11 +15,14 @@ function Category({ categories, items }) {
 
   useEffect(() => {
     axios
-      .get(`/categories/:categoryId`, {
-        params: {
-          id: params.categoryId,
-        },
-      })
+      .get(
+        `https://octopus-app-hzms7.ondigitalocean.app/categories/:categoryId`,
+        {
+          params: {
+            id: params.categoryId,
+          },
+        }
+      )
       .then((res) => {
         setItemsInCategory(res.data);
         setCurrentCategory(
@@ -38,19 +41,24 @@ function Category({ categories, items }) {
     <>
       <div className="title-container top-element">
         <h1 className="title">
-          {currentCategory ? currentCategory.title : "loading..."}</h1>
-          <span className="hr">
-              <hr />
-            </span>
+          {currentCategory ? currentCategory.title : "loading..."}
+        </h1>
+        <span className="hr">
+          <hr />
+        </span>
       </div>
       <div className="items-container">
         {itemsInCategory.map((item) => {
           let itemBid = items.find((item2) => item2.id === item.id);
           return (
             <div className="item-container" key={item.id}>
-            <Link className="item-link" to={`/items/${item.id}`}>
-              <Item photo={item.img_url} title={item.title} bid={itemBid} ></Item>
-            </Link>
+              <Link className="item-link" to={`/items/${item.id}`}>
+                <Item
+                  photo={item.img_url}
+                  title={item.title}
+                  bid={itemBid}
+                ></Item>
+              </Link>
             </div>
           );
         })}

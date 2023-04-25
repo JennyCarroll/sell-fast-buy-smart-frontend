@@ -6,9 +6,11 @@ const AllBids = (props) => {
   const [allBids, setAllBids] = useState([]);
 
   useEffect(() => {
-    axios.get("/bids", {}).then((res) => {
-      setAllBids(res.data);
-    });
+    axios
+      .get("https://octopus-app-hzms7.ondigitalocean.app/bids", {})
+      .then((res) => {
+        setAllBids(res.data);
+      });
   }, []);
 
   return (
