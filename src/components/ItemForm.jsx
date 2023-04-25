@@ -1,35 +1,80 @@
-import React, { useState, Fragment, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-
+import React, { useState, Fragment, useContext, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-
 import SelectListOptions from './general/SelectListOptions';
 import { stateContext } from '../providers/StateContext';
 import Cookies from 'js-cookie';
+import './ItemForm.scss';
+import { toast } from 'react-toastify';
 
-import './general/Item-form.scss';
-
-function ItemNew() {
+function ItemEdit() {
   // MANAGE STATE
+  const [item, setItem] = useState({});
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [condition, setCondition] = useState(1);
   const [category, setCategory] = useState(1);
   const [endDate, setEndDate] = useState('');
-  const [minBid, setMinBid] = useState('');
+  const [minBid, setMinBid] = useState(0);
   const [imgUrl, setImgUrl] = useState('');
   const [imgUrlBlur, setImgUrlBlur] = useState('https://imgur.com/BDT7VOn.jpg');
+  const [bidCount, setBidCount] = useState(0);
+  // const [setNewItemId] = useState(false);
+
   const currentUser = parseInt(Cookies.get('userId'));
 
   const { state, setStateRefresh, setStateLoading } = useContext(stateContext);
 
-  const [setNewItemId] = useState(false);
+  const params = useParams();
+  const paramsItemId = parseInt(params.itemId);
+  let editButtonRender = false;
+  if (paramsItemId) {
+    editButtonRender = true;
+  }
   const navigate = useNavigate();
 
+  // Get info for edit
+  useEffect(() => {
+    if (!paramsItemId) {
+      return;
+    }
+    // console.log('axios');
+    axios.get(`/items/${paramsItemId}`).then((res) => {
+      const resItem = res.data[0];
+      setItem(resItem);
+      setTitle(resItem.title);
+      setDescription(resItem.description);
+      setCondition(resItem.condition);
+      setCategory(resItem.category_id);
+      setEndDate(new Date(resItem.end_date).toISOString().slice(0, 16));
+      setMinBid(resItem.bid_value / 100);
+      setBidCount(res.data.length);
+
+      const image = resItem.img_url[0].img_url;
+      if (image) {
+        setImgUrl(image);
+        setImgUrlBlur(image);
+      }
+    });
+  }, [state]);
+
   // SUPPORTING FUNCTIONS:
-  // Collects form data from state and submits an axios.post
-  const handleSubmit = (event) => {
+
+  const toastError = (message) => {
+    toast.error(message, {
+      position: 'bottom-center',
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+    return;
+  };
+
+  const editItem = (event) => {
     event.preventDefault();
     // Data validation - No empty fields allowed.
     if (
@@ -42,16 +87,67 @@ function ItemNew() {
       !condition ||
       !minBid
     ) {
-      toast.error('Errors on the page. Please review your submission', {
-        position: 'bottom-center',
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
+      toastError('Errors on the page. Please review your submission');
+      return;
+    }
+
+    const editData = {
+      id: paramsItemId,
+      user_id: currentUser,
+      title,
+      description,
+      endDate,
+      imgUrl,
+      category: parseInt(category),
+      condition: parseInt(condition),
+      minBid: parseInt(minBid * 100),
+    };
+
+    if (currentUser === item.user_id) {
+      axios
+        .post(`/items/${paramsItemId}/edit`, editData)
+        .then((res) => {
+          // console.log("inside edit - axios successful - setting states");
+          setStateLoading(true);
+          // setStateRefresh(true);
+          navigate(`/items/${paramsItemId}`);
+        })
+        .catch((error) => {
+          console.error('Error submitting form:', error);
+        });
+    }
+  };
+
+  const deleteItem = (event) => {
+    event.preventDefault();
+    // console.log("inside delete - start axios");
+    axios
+      .post(`/items/${paramsItemId}/delete`, { itemId: paramsItemId })
+      .then(() => {
+        // console.log("inside delete - axios successful - setting states");
+        setStateLoading(true);
+        // setStateRefresh(true);
+        navigate(`/profile/${currentUser}`);
+      })
+      .catch((error) => {
+        console.error('Error deleting item:', error);
       });
+  };
+
+  const createItem = (event) => {
+    event.preventDefault();
+    // Data validation - No empty fields allowed.
+    if (
+      !currentUser ||
+      !title ||
+      !description ||
+      !endDate ||
+      !imgUrl ||
+      !category ||
+      !condition ||
+      !minBid
+    ) {
+      toastError('Errors on the page. Please review your submission');
       return;
     }
 
@@ -69,10 +165,8 @@ function ItemNew() {
     axios
       .post('/items/new', itemData)
       .then((res) => {
-        // console.log('Item New - Axios Success, newItemId:', res.data.id);
-        setNewItemId(res.data.id);
+        console.log('Item New - Axios Success, newItemId:', res.data.id);
         setStateLoading(true);
-        setStateRefresh(true);
         navigate(`/items/${res.data.id}`);
       })
       .catch((error) => {
@@ -82,17 +176,13 @@ function ItemNew() {
 
   return (
     <Fragment>
-      <form onSubmit={handleSubmit} autoComplete='off'>
+      <form autoComplete='off'>
         <div className={'item-form'}></div>
         <div className={'m-4'}>
-          <span className={'strong'}>List a new item:</span>
+          <span className={'strong'}>Edit your item:</span>
           <div className={'d-flex'}>
             <div className={'d-flex flex-column'}>
-              <img
-                className={'imageContainer img-fluid'}
-                src={imgUrlBlur ? imgUrlBlur : 'https://imgur.com/BDT7VOn.jpg'}
-                alt='image_url'
-              ></img>
+              <img className={'imageContainer img-fluid'} src={imgUrlBlur} alt='image_url'></img>
               <div className={'form-group m-1'}>
                 <label htmlFor='item-url'>Item URL:</label>
                 <input
@@ -212,11 +302,25 @@ function ItemNew() {
           </div>
         </div>
         <div className='d-flex justify-content-end m-4 bottom-element'>
-          <button className={'btn btn-dark submit'}>Create Item</button>
+          {editButtonRender && bidCount === 1 && (
+            <button className={'btn btn-dark submit'} onClick={editItem}>
+              Save Edit
+            </button>
+          )}
+          {editButtonRender && (
+            <button className={'btn btn-danger'} onClick={deleteItem}>
+              Delete Item
+            </button>
+          )}
+          {!editButtonRender && (
+            <button className={'btn btn-dark submit'} onClick={createItem}>
+              Create Item
+            </button>
+          )}
         </div>
       </form>
     </Fragment>
   );
 }
 
-export default ItemNew;
+export default ItemEdit;

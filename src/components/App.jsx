@@ -5,8 +5,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Items from './Items';
 import Nav from './Nav';
 import ItemDetail from './ItemDetail';
-import ItemNew from './ItemNew';
-import ItemEdit from './ItemEdit';
+import ItemForm from './ItemForm';
 import Category from './Category';
 import MyBids from './MyBids';
 import AllBids from './AllBids';
@@ -77,9 +76,9 @@ export default function App() {
               <Route path='/logout' element={<MyBids />}></Route>
               <Route
                 path='items/new'
-                element={currentUser ? <ItemNew /> : <Navigate to={'/'} />}
+                element={currentUser ? <ItemForm /> : <Navigate to={'/'} />}
               ></Route>
-              <Route path='items/:itemId/edit' element={<ItemEdit />}></Route>
+              <Route path='items/:itemId/edit' element={<ItemForm />}></Route>
             </Routes>
           )}
           <ToastContainer transition={Flip} />
