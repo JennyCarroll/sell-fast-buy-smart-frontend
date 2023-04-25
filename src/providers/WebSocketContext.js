@@ -11,7 +11,7 @@ export default function WebSocketProvider(props) {
   const [bidItem, setBidItem] = useState(0);
 
   useEffect(() => {
-    const socket = io();
+    const socket = io('https://octopus-app-hzms7.ondigitalocean.app');
     setSocket(socket);
 
     socket.on('bid', (data) => {
