@@ -1,13 +1,15 @@
-import "./Nav.scss";
-import Search from "./Search";
-import { Link } from "react-router-dom";
-import { useContext, useState, useRef } from "react";
-import { loginContext } from "../providers/UserContext";
+import './Nav.scss';
+import Search from './Search';
+import { Link } from 'react-router-dom';
+import { useContext, useState, useRef } from 'react';
+import { loginContext } from '../providers/UserContext';
+import { stateContext } from '../providers/StateContext';
 
 function Nav(props) {
   let categories = props.categories;
   const [userId, setUserId] = useState(null);
   const { currentUser, login, logout } = useContext(loginContext);
+  const { setStateRefresh } = useContext(stateContext);
   const inputRef = useRef(null);
 
   const bringInputToFocus = () => {
@@ -19,75 +21,66 @@ function Nav(props) {
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       login(userId);
     }
   };
 
   return (
-    <div className="nav nav-bar">
-      <div className="nav top-nav">
-        <div className="nav logo btn">
-          <Link to={"/"}>
+    <div className='nav nav-bar'>
+      <div className='nav top-nav'>
+        <div className='nav logo btn'>
+          <Link
+            to={'/'}
+            onClick={() => {
+              setStateRefresh(true);
+            }}
+          >
             <h1>SFBS</h1>
           </Link>
         </div>
-        <div className="nav search">
+        <div className='nav search'>
           <Search items={props.items} />
         </div>
-        <div className="nav right-nav">
+        <div className='nav right-nav'>
           {currentUser ? (
             <>
-              <div className="">
-                <Link to={"/items/new"}>
+              <div className=''>
+                <Link to={'/items/new'}>
                   <p>Sell</p>
                 </Link>
               </div>
-              <div className="dropdown">
+              <div className='dropdown'>
                 <p>Profile</p>
-                <div className="dropdown-content">
-                  <Link
-                    className="btn btn-light optio"
-                    to={`/profile/${currentUser}`}
-                  >
+                <div className='dropdown-content'>
+                  <Link className='btn btn-light optio' to={`/profile/${currentUser}`}>
                     Profile
                   </Link>
-                  <Link
-                    className="btn btn-light option"
-                    to={`/`}
-                    onClick={() => logout()}
-                  >
+                  <Link className='btn btn-light option' to={`/`} onClick={() => logout()}>
                     logout
                   </Link>
                 </div>
               </div>
-              <div className="">
+              <div className=''>
                 <Link to={`bids/${currentUser}`}>
                   <p>Bids</p>
                 </Link>
               </div>
             </>
           ) : (
-            <div className="dropdown">
-              <button
-                onMouseEnter={bringInputToFocus}
-                className="btn btn-light login login"
-              >
+            <div className='dropdown'>
+              <button onMouseEnter={bringInputToFocus} className='btn btn-light login login'>
                 Login / Sign Up
               </button>
-              <div className="dropdown-content">
+              <div className='dropdown-content'>
                 <input
                   ref={inputRef}
                   onKeyDown={handleKeyDown}
-                  className="login form-control option"
-                  placeholder="email"
+                  className='login form-control option'
+                  placeholder='email'
                   onChange={handleChange}
                 />
-                <button
-                  className="btn btn-light option"
-                  id="login"
-                  onClick={() => login(userId)}
-                >
+                <button className='btn btn-light option' id='login' onClick={() => login(userId)}>
                   Login
                 </button>
               </div>
@@ -96,9 +89,7 @@ function Nav(props) {
           {/* light bulb deal with dark mode and light mode */}
           <div>
             <i
-              className={
-                props.theme ? "bi bi-lightbulb btn" : "bi bi-lightbulb-off btn"
-              }
+              className={props.theme ? 'bi bi-lightbulb btn' : 'bi bi-lightbulb-off btn'}
               onClick={() => {
                 let theme = !props.theme;
                 props.setTheme(theme);
@@ -107,13 +98,16 @@ function Nav(props) {
           </div>
         </div>
       </div>
-      <div className="nav bottom-nav">
-        <div className="nav categories">
+      <div className='nav bottom-nav'>
+        <div className='nav categories'>
           {categories.map((category) => (
             <Link
               key={category.id}
               to={`/categories/${category.id}`}
-              className="category"
+              className='category'
+              onClick={() => {
+                setStateRefresh(true);
+              }}
             >
               <h2>{category.title}</h2>
             </Link>
