@@ -1,4 +1,5 @@
 import { React } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 import './Item.scss';
@@ -11,17 +12,21 @@ function Item(props) {
     });
   };
 
+  const onEdit = () => {
+    console.log('onEdit, props.itemId', props.itemId);
+  };
+
   return (
     <>
       <img className='item-image' src={props.photo} alt={props.title} />
-      <div className='item-info'>
-        {props.bid && <div className='bid-price'>{bidToDollars(props.bid.highest_bid)}</div>}
-        {props.edit && (
-          <span>
-            <FontAwesomeIcon icon={icon({ name: 'pen-to-square' })} className='bid-price' />
-          </span>
-        )}
-      </div>
+      {props.bid && <span className='bid-price'>{bidToDollars(props.bid.highest_bid)}</span>}
+      {props.edit && (
+        <span>
+          <Link to={`/items/${props.itemId}/edit`}>
+          <FontAwesomeIcon icon={icon({ name: 'pen-to-square' })} className='edit-icon' size='xs'/>
+          </Link>
+        </span>
+      )}
     </>
   );
 }

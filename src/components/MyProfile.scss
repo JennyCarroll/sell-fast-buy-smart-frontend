@@ -1,4 +1,4 @@
-@import "sassPartial";
+@import 'sassPartial';
 
 .profile {
   margin-top: $margin-top;
@@ -10,8 +10,8 @@
   margin-bottom: -4em;
 }
 .profile-photo {
- @include image-size();
- max-width: 20em;
+  @include image-size();
+  max-width: 20em;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -44,14 +44,14 @@
 
 .title-container {
   @include title-container();
-  }
-  
-  //style the contents of the title div using flexbox
-  .title {
+}
+
+//style the contents of the title div using flexbox
+.title {
   @include title();
-  }
-  
-  //style the contents of the horizontal rule div using flexbox
-  .hr {
+}
+
+//style the contents of the horizontal rule div using flexbox
+.hr {
   @include hr();
-  }
+}
