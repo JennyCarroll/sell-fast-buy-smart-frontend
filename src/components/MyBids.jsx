@@ -14,6 +14,7 @@ const MyBids = (props) => {
   const [currentUserCookie, setCurrentUserCookie] = useState(Cookies.get("userId"));
   const { bidData } = useContext(webSocketContext);
 
+  //convert the bid from cents to dollars
   const bidToDollars = function (value) {
     return (value / 100).toLocaleString("en-US", {
       style: "currency",
@@ -25,6 +26,7 @@ const MyBids = (props) => {
     setCurrentUserCookie(Cookies.get("userId"));
   }, [currentUser]);
 
+  //fetch information regarding bids for currentUser and the highest bids for those items
   useEffect(() => {
     axios
       .get("https://octopus-app-hzms7.ondigitalocean.app/bids/:userId", {

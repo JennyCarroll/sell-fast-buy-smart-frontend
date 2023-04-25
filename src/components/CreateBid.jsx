@@ -40,11 +40,10 @@ const CreateBid = ({ item, onSubmit, currentBid, setCurrentBid }) => {
       return;
     }
 
-    setBidValue("");
     const bidData = {
       user_id: userId,
       item_id: parseInt(itemId),
-      bid_value: parseInt(bidValue * 100),
+      bid_value: parseInt(bidValue.replace('$', '') * 100),
     };
 
     axios
@@ -62,14 +61,13 @@ const CreateBid = ({ item, onSubmit, currentBid, setCurrentBid }) => {
   return (
     <Fragment>
       <form onSubmit={handleSubmit} autoComplete="off">
-        {/* <div className={"m-4"}> */}
         <div className={"d-flex bid-box"}>
           <div className={"d-flex flex-column"}></div>
           <div className={"new-bid"}>
             <p className={"strong"}>Create a new bid:</p>
             <div className={"form-group"}>
               <label htmlFor="new-bid">What Is Your Bid?</label>
-              <input
+              <div className="dollar-sign"><p>$</p><input
                 className={"form-control"}
                 type="number"
                 name="new-bid"
@@ -80,13 +78,13 @@ const CreateBid = ({ item, onSubmit, currentBid, setCurrentBid }) => {
                   setBidValue(event.target.value);
                 }}
               />
+              </div>
             </div>
           </div>
           <div className="bid-button">
             <button className={"btn btn-dark submit"}>Create Bid</button>
           </div>
         </div>
-        {/* </div> */}
       </form>
     </Fragment>
   );

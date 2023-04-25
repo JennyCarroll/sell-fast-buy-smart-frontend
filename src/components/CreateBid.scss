@@ -13,3 +13,13 @@
 .bid-box {
   padding-right: 3em;
 }
+
+.dollar-sign {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  p{
+   margin-top: 1em;
+  }
+}
