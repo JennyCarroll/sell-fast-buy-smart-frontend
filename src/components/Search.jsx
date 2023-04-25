@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 
 function Search(props) {
   const items = props.items;
-
   const [searchInput, setSearchInput] = useState("");
 
+  //clears the search bar when leaving focus
   const handleBlur = (event) => {
     setTimeout(() => {
       setSearchInput("");
@@ -29,17 +29,6 @@ function Search(props) {
 
   return (
     <div className="nav search-bar-with-results">
-      {/* <div class="input-group ps-5">
-    <div id="navbar-search-autocomplete" class="form-outline">
-      <input type="search" id="form1" class="form-control" />
-      <label class="form-label" for="form1">Search</label>
-    </div>
-    <button type="button" class="btn btn-primary">
-      <i class="fas fa-search"></i>
-    </button>
-  </div>
-</div> */}
-
       <div className="input-group">
         <input
           id="search-bar"

@@ -9,16 +9,13 @@ const MyProfile = ({ users, items, images }) => {
   const params = useParams();
   const [thisUser, setThisUser] = useState({});
   const currentUser = Cookies.get('userId');
-
   const userId = Number(params.userId);
 
   let itemsForUser = items.filter((item) => item.user_id === userId);
   useEffect(() => {
-    // console.log("MyProfile - UseEffect");
     setThisUser(users.find((user) => user.id === userId));
   }, [params, items]);
 
-  // console.log("MyProfile - Render");
   return (
     <div>
       <div className='profile'>
@@ -58,7 +55,6 @@ const MyProfile = ({ users, items, images }) => {
           </div>
         )}
       </div>
-      {/* <div className="items-info"> */}
       <div className='items-container'>
         {itemsForUser.map((item) => {
           let itemBid = items.find((item2) => item2.id === item.id);

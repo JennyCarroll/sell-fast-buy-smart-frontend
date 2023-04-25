@@ -24,7 +24,6 @@ function ItemDetail(props) {
   // const { bidData } = useContext(webSocketContext);
   const { currentUser } = useContext(loginContext);
 
-  console.log("bidData", bidData);
 
   useEffect(() => {
     axios

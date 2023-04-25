@@ -11,9 +11,7 @@ const MyBids = (props) => {
   const [myBids, setMyBids] = useState([]);
   const [highestBids, setHighestBids] = useState([]);
   const { currentUser } = useContext(loginContext);
-  const [currentUserCookie, setCurrentUserCookie] = useState(
-    Cookies.get("userId")
-  );
+  const [currentUserCookie, setCurrentUserCookie] = useState(Cookies.get("userId"));
   const { bidData } = useContext(webSocketContext);
 
   const bidToDollars = function (value) {
@@ -61,17 +59,11 @@ const MyBids = (props) => {
               highBid.item_id === bid.item_id &&
               highBid.highest_bid === bid.highest_bid
           );
-          console.log(bid);
+
           return (
             <div key={bid.item_id} className="item-container">
               <Link className="item-link" to={`/items/${bid.item_id}`}>
                 <img className="item-image" src={bid.img_url} alt={bid.title} />
-                {/* <div
-                style={{
-                  backgroundImage: `url(${bid.img_url})`
-                }}
-                className="bids-image"
-              ></div> */}
                 <div className="my-bid-price">
                   {bidToDollars(bid.highest_bid)}
                 </div>

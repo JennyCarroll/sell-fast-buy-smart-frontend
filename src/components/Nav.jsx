@@ -6,10 +6,8 @@ import { loginContext } from "../providers/UserContext";
 
 function Nav(props) {
   let categories = props.categories;
-
   const [userId, setUserId] = useState(null);
   const { currentUser, login, logout } = useContext(loginContext);
-
   const inputRef = useRef(null);
 
   const bringInputToFocus = () => {
@@ -26,7 +24,6 @@ function Nav(props) {
     }
   };
 
-  console.log("currentUser", currentUser);
   return (
     <div className="nav nav-bar">
       <div className="nav top-nav">

@@ -1,11 +1,8 @@
 import React, { useState, Fragment, useEffect, useContext } from "react";
-import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { stateContext } from "../providers/StateContext";
-
 import axios from "axios";
 import Cookies from "js-cookie";
-
 import "./CreateBid.scss";
 
 const CreateBid = ({ item, onSubmit, currentBid, setCurrentBid }) => {
@@ -17,20 +14,17 @@ const CreateBid = ({ item, onSubmit, currentBid, setCurrentBid }) => {
   let currentBidInDollars = currentBid / 100;
   const { setStateLoading } = useContext(stateContext);
 
+  //if item of user changes it will reset the currentUser itemId and the bid value to go along with the itemId
   useEffect(() => {
     setUserId(currentUser);
     setItemId(item.item_id);
     setBidValue("");
   }, [item, currentUser]);
 
-  // values: [bidInfo.user_id, bidInfo.item_id, bidInfo.bid_value],
-
   // Collects form data from state and submits an axios.post
   const handleSubmit = (event) => {
     event.preventDefault();
     setBidValue("");
-    // console.log('setbiddata', event.target.data)
-    // setCurrentBid(event.target.value);
     // Data validation - All field must be populated.
     if (bidValue < currentBidInDollars) {
       toast.warn("Bid too low!", {
@@ -56,7 +50,6 @@ const CreateBid = ({ item, onSubmit, currentBid, setCurrentBid }) => {
     axios
       .post("https://octopus-app-hzms7.ondigitalocean.app/bids/new", bidData)
       .then((res) => {
-        console.log(".thenCreateBid", res);
         setCurrentBid(res.data.bid_value);
         setStateLoading(true);
         // onSubmit(true);
@@ -68,16 +61,12 @@ const CreateBid = ({ item, onSubmit, currentBid, setCurrentBid }) => {
 
   return (
     <Fragment>
-      {/* {newItemId && <Navigate to={`/items/${itemId}`}} */}
-
       <form onSubmit={handleSubmit} autoComplete="off">
         {/* <div className={"m-4"}> */}
         <div className={"d-flex bid-box"}>
           <div className={"d-flex flex-column"}></div>
-
           <div className={"new-bid"}>
             <p className={"strong"}>Create a new bid:</p>
-
             <div className={"form-group"}>
               <label htmlFor="new-bid">What Is Your Bid?</label>
               <input

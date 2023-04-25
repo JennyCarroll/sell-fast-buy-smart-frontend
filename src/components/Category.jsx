@@ -4,15 +4,14 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Item from "./Item";
-
 import "./Category.scss";
 
 function Category({ categories, items }) {
   const params = useParams();
-
   const [itemsInCategory, setItemsInCategory] = useState([]);
   const [currentCategory, setCurrentCategory] = useState({});
 
+  //fetch information regarding category and items within categories
   useEffect(() => {
     axios
       .get(
@@ -33,9 +32,6 @@ function Category({ categories, items }) {
       });
   }, [params]);
 
-  console.log(params);
-  console.log(currentCategory);
-  console.log(itemsInCategory);
 
   return (
     <>
