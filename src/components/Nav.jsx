@@ -104,9 +104,9 @@ function Nav(props) {
             <Link
               key={category.id}
               to={`/categories/${category.id}`}
-              onClick={() => {
-                setStateRefresh(true);
-              }}
+              // onClick={() => {
+              //   setStateRefresh(true);
+              // }}
               className='category'
             >
               <h2>{category.title}</h2>
