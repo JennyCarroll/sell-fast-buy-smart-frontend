@@ -63,7 +63,7 @@ function ItemEdit() {
   const toastError = (message) => {
     toast.error(message, {
       position: 'bottom-center',
-      autoClose: 3000,
+      autoClose: 2500,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
@@ -298,26 +298,27 @@ function ItemEdit() {
                   }}
                 />
               </div>
+              <div className='d-flex justify-content-end'>
+                {editButtonRender && bidCount === 1 && (
+                  <button className={'btn  btn-dark submit m-1'} onClick={editItem}>
+                    Save Edit
+                  </button>
+                )}
+                {editButtonRender && (
+                  <button className={'btn  btn-danger m-1'} onClick={deleteItem}>
+                    Delete Item
+                  </button>
+                )}
+                {!editButtonRender && (
+                  <button className={'btn btn-dark submit m-1'} onClick={createItem}>
+                    Create Item
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>
-        <div className='d-flex justify-content-end m-4 bottom-element'>
-          {editButtonRender && bidCount === 1 && (
-            <button className={'btn btn-dark submit'} onClick={editItem}>
-              Save Edit
-            </button>
-          )}
-          {editButtonRender && (
-            <button className={'btn btn-danger'} onClick={deleteItem}>
-              Delete Item
-            </button>
-          )}
-          {!editButtonRender && (
-            <button className={'btn btn-dark submit'} onClick={createItem}>
-              Create Item
-            </button>
-          )}
-        </div>
+        <div className='d-flex justify-content-end m-4 bottom-element'></div>
       </form>
     </Fragment>
   );
