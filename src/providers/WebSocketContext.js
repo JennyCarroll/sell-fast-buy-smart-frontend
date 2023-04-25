@@ -23,7 +23,7 @@ export default function WebSocketProvider(props) {
       setBidItem(data.item.id);
       toast.info(`${userName} bid $${price} for ${itemName}!`, {
         position: "bottom-center",
-        autoClose: 3000,
+        autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

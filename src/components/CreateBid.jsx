@@ -1,26 +1,26 @@
-import React, { useState, Fragment, useEffect, useContext } from "react";
-import { Navigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import React, { useState, Fragment, useEffect, useContext } from 'react';
+import { Navigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { stateContext } from '../providers/StateContext';
 
-import axios from "axios";
-import Cookies from "js-cookie";
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
-import "./CreateBid.scss";
+import './CreateBid.scss';
 
 const CreateBid = ({ item, onSubmit, currentBid, setCurrentBid }) => {
   const [userId, setUserId] = useState(null);
   const [itemId, setItemId] = useState(null);
-  const [bidValue, setBidValue] = useState("");
-  const [message, setMessage] = useState("");
-  let currentUser = Cookies.get("userId");
+  const [bidValue, setBidValue] = useState('');
+  const [message, setMessage] = useState('');
+  let currentUser = Cookies.get('userId');
   let currentBidInDollars = currentBid / 100;
   const { setStateLoading } = useContext(stateContext);
 
   useEffect(() => {
     setUserId(currentUser);
     setItemId(item.item_id);
-    setBidValue("");
+    setBidValue('');
   }, [item, currentUser]);
 
   // values: [bidInfo.user_id, bidInfo.item_id, bidInfo.bid_value],
@@ -28,25 +28,25 @@ const CreateBid = ({ item, onSubmit, currentBid, setCurrentBid }) => {
   // Collects form data from state and submits an axios.post
   const handleSubmit = (event) => {
     event.preventDefault();
-    setBidValue("");
+    setBidValue('');
     // console.log('setbiddata', event.target.data)
     // setCurrentBid(event.target.value);
     // Data validation - All field must be populated.
     if (bidValue < currentBidInDollars) {
-      toast.warn("Bid too low!", {
-        position: "bottom-center",
-        autoClose: 5000,
+      toast.warn('Bid too low!', {
+        position: 'bottom-center',
+        autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "colored",
+        theme: 'colored',
       });
       return;
     }
 
-    setBidValue("");
+    setBidValue('');
     const bidData = {
       user_id: userId,
       item_id: parseInt(itemId),
@@ -54,15 +54,15 @@ const CreateBid = ({ item, onSubmit, currentBid, setCurrentBid }) => {
     };
 
     axios
-      .post("/bids/new", bidData)
+      .post('/bids/new', bidData)
       .then((res) => {
-        console.log('.thenCreateBid', res)
-        setCurrentBid(res.data.bid_value)
-        setStateLoading(true)
+        console.log('.thenCreateBid', res);
+        setCurrentBid(res.data.bid_value);
+        setStateLoading(true);
         // onSubmit(true);
       })
       .catch((error) => {
-        console.error("Error submitting bid:", error);
+        console.error('Error submitting bid:', error);
       });
   };
 
@@ -70,22 +70,22 @@ const CreateBid = ({ item, onSubmit, currentBid, setCurrentBid }) => {
     <Fragment>
       {/* {newItemId && <Navigate to={`/items/${itemId}`}} */}
 
-      <form onSubmit={handleSubmit} autoComplete="off">
+      <form onSubmit={handleSubmit} autoComplete='off'>
         {/* <div className={"m-4"}> */}
-        <div className={"d-flex bid-box"}>
-          <div className={"d-flex flex-column"}></div>
+        <div className={'d-flex bid-box'}>
+          <div className={'d-flex flex-column'}></div>
 
-          <div className={"new-bid"}>
-            <p className={"strong"}>Create a new bid:</p>
+          <div className={'new-bid'}>
+            <p className={'strong'}>Create a new bid:</p>
 
-            <div className={"form-group"}>
-              <label htmlFor="new-bid">What Is Your Bid?</label>
+            <div className={'form-group'}>
+              <label htmlFor='new-bid'>What Is Your Bid?</label>
               <input
-                className={"form-control"}
-                type="number"
-                name="new-bid"
+                className={'form-control'}
+                type='number'
+                name='new-bid'
                 value={bidValue}
-                placeholder={message ? message : "Bid Amount"}
+                placeholder={message ? message : 'Bid Amount'}
                 onChange={(event) => {
                   //allows the numbers to show up in the input field
                   setBidValue(event.target.value);
@@ -93,8 +93,8 @@ const CreateBid = ({ item, onSubmit, currentBid, setCurrentBid }) => {
               />
             </div>
           </div>
-          <div className="bid-button">
-            <button className={"btn btn-dark submit"}>Create Bid</button>
+          <div className='bid-button'>
+            <button className={'btn btn-dark submit'}>Create Bid</button>
           </div>
         </div>
         {/* </div> */}
