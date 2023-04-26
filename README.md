@@ -16,13 +16,15 @@ This web app has been deployed on [Digital Ocean](https://starfish-app-bhxro.ond
 
 Fork and clone this respository.
 
-Npm i to install dependencies.
+`npm install` to install dependencies.
 
-Npm start.
+`npm start` to start the webpack server and launch the app in the browser.
 
-Fork and clone the backend repository linked above and follow further README instructions.
+Fork and clone the [backend repository](https://github.com/JennyCarroll/sell-fast-buy-smart-backend) and follow further README instructions.
 
-## Tech Stack
+## Tech Stack/ Dependencies
+
+This application was developed using Node 16.19.1
 
 ### Front-End:
 
