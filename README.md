@@ -12,17 +12,27 @@ This web app has been deployed on [Digital Ocean](https://starfish-app-bhxro.ond
 
 ## Final Product
 
+### Browse items, search, and make bids
+
+<img src=https://github.com/JennyCarroll/sell-fast-buy-smart-frontend/blob/main/documents/01_browse_and_bid.gif/>
+
+### Create items and post them for auction
+
+<img src=https://github.com/JennyCarroll/sell-fast-buy-smart-frontend/blob/main/documents/02_create_Item.gif/>
+
 ## Getting Started
 
 Fork and clone this respository.
 
-Npm i to install dependencies.
+`npm install` to install dependencies.
 
-Npm start.
+`npm start` to start the webpack server and launch the app in the browser.
 
-Fork and clone the backend repository linked above and follow further README instructions.
+Fork and clone the [backend repository](https://github.com/JennyCarroll/sell-fast-buy-smart-backend) and follow further README instructions.
 
-## Tech Stack
+## Tech Stack/ Dependencies
+
+This application was developed using Node 16.19.1
 
 ### Front-End:
 
