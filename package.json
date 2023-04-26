@@ -23,6 +23,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
+    "react-test-renderer": "^18.2.0",
     "react-toastify": "^9.1.2",
     "sass": "^1.62.0",
     "socket.io-client": "^4.6.1",
@@ -52,5 +53,11 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8001/"
+  "proxy": "http://localhost:8001/",
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/.git/"
+    ]
+  }
 }
