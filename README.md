@@ -22,19 +22,14 @@ This web app has been deployed on [Digital Ocean](https://starfish-app-bhxro.ond
 
 ## Getting Started
 
-Fork and clone this respository.
+1. Clone or fork this respository.
+2. `npm install` to install dependencies.
+3. `npm start` to start the webpack server and launch the app in the browser.
+4. If the user wants to run a local backend server - Fork and clone the [backend repository](https://github.com/JennyCarroll/sell-fast-buy-smart-backend) and follow further README instructions.
 
-`npm install` to install dependencies.
-
-`npm start` to start the webpack server and launch the app in the browser.
-
-Fork and clone the [backend repository](https://github.com/JennyCarroll/sell-fast-buy-smart-backend) and follow further README instructions.
-
-## Tech Stack/ Dependencies
+### Front-End Dependencies:
 
 This application was developed using Node 16.19.1
-
-### Front-End:
 
 - Axios
 - Bootstrap
@@ -46,16 +41,6 @@ This application was developed using Node 16.19.1
 - React-toastify
 - Sass
 - Socket.io-client
-
-### Back-End:
-
-- Chalk
-- Cors
-- Dotenv
-- Express
-- Morgan
-- Pg
-- Socket.io
 
 ## Contact the Contributors
 
