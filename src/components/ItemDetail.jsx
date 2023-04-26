@@ -129,7 +129,9 @@ function ItemDetail(props) {
                       <span>Condition: {itemObj.condition}</span>
                       <span>
                         <Link to={`/profile/${sellerId}`}>
+                          <p className="view-seller">
                           View This Seller
+                          </p>
                         </Link>
                       </span>
                     </span>
