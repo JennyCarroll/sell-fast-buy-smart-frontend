@@ -28,8 +28,8 @@ function ItemDetail(props) {
   useEffect(() => {
     axios
       //fetch item data from the server
-      .get(`/items/${params.itemId}`
-        // `https://octopus-app-hzms7.ondigitalocean.app/items/${params.itemId}`
+      .get(
+        `https://octopus-app-hzms7.ondigitalocean.app/items/${params.itemId}`
       )
       .then((res) => {
         // Set the item object state with the response data
