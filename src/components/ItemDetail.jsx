@@ -28,8 +28,8 @@ function ItemDetail(props) {
   useEffect(() => {
     axios
       //fetch item data from the server
-      .get(
-        `https://octopus-app-hzms7.ondigitalocean.app/items/${params.itemId}`
+      .get(`/items/${params.itemId}`
+        // `https://octopus-app-hzms7.ondigitalocean.app/items/${params.itemId}`
       )
       .then((res) => {
         // Set the item object state with the response data
@@ -129,7 +129,9 @@ function ItemDetail(props) {
                       <span>Condition: {itemObj.condition}</span>
                       <span>
                         <Link to={`/profile/${sellerId}`}>
+                          <p className="view-seller">
                           View This Seller
+                          </p>
                         </Link>
                       </span>
                     </span>

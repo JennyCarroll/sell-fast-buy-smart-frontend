@@ -1,5 +1,6 @@
 import React from "react";
 import Item from "./Item";
+import './Carousel.scss'
 
 function Carousel(props) {
   return (
