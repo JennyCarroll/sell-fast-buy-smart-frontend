@@ -11,6 +11,7 @@ import MyBids from './MyBids';
 import AllBids from './AllBids';
 import MyProfile from './MyProfile';
 import BidToast from './general/BidToast';
+import Page404 from './Page404';
 
 // Import hooks and helpers:
 // import useApplicationData from '../hooks/useApplicationData';
@@ -79,6 +80,7 @@ export default function App() {
                 element={currentUser ? <ItemForm /> : <Navigate to={'/'} />}
               ></Route>
               <Route path='items/:itemId/edit' element={<ItemForm />}></Route>
+              <Route path='*' element={<Page404 />}></Route>
             </Routes>
           )}
           <ToastContainer transition={Flip} />
