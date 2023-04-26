@@ -42,17 +42,19 @@
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-gap: 1rem;
+  // margin-top: 2em;
   margin-left: 2em;
   margin-right: 2em;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .site-name {
-  font-size: 11vw;
   text-align: center;
-  @include large-font();
-  padding-top: 20px;
-  margin-bottom: 50px;
+  @include site-heading();
+  padding-top: 50px;
+  padding-bottom: 50px;
+  // margin-bottom: 50px;
+  background-image: url("../../public/images/45-degree-fabric-light.png");
 }
 
 .bid-price {
