@@ -3,7 +3,6 @@ import axios from "axios";
 
 // State management
 export default function useApplicationData() {
-  console.log("Start Application Data");
   const [state, setState] = useState({
     items: [],
     users: [],
@@ -15,11 +14,8 @@ export default function useApplicationData() {
   const [stateLoading, setStateLoading] = useState(true);
   const [setStateRefresh] = useState(false);
 
-  //Requests for data on first page load.
   useEffect(() => {
-    // console.log('pre Axios - UseApplicationData, stateLoading:', stateLoading);
     if (stateLoading) {
-      // console.log('Application data - starting axios');
       Promise.all([
         axios.get("https://octopus-app-hzms7.ondigitalocean.app/items"),
         axios.get("https://octopus-app-hzms7.ondigitalocean.app/users"),
@@ -30,7 +26,6 @@ export default function useApplicationData() {
         ),
         axios.get("https://octopus-app-hzms7.ondigitalocean.app/conditions"),
       ]).then((res) => {
-        // console.log('Application data - axios success');
         setState((prev) => ({
           ...prev,
           items: res[0].data,

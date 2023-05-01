@@ -31,10 +31,8 @@ export default function App() {
   const { state, stateLoading, setStateRefresh } = useContext(stateContext);
   const [theme, setTheme] = useState(true);
 
-  // console.log('stateLoading', stateLoading);
   return (
     <BrowserRouter>
-      {/* create a button that sets this theme set theme  = !theme*/}
       <div className={`${theme ? 'light' : 'dark'}`}>
         <Nav items={state.items} categories={state.categories} theme={theme} setTheme={setTheme} />
         <main className='main'>

@@ -86,7 +86,6 @@ function Nav(props) {
               </div>
             </div>
           )}
-          {/* light bulb deal with dark mode and light mode */}
           <div>
             <i
               className={props.theme ? 'bi bi-lightbulb btn' : 'bi bi-lightbulb-off btn'}
@@ -101,14 +100,7 @@ function Nav(props) {
       <div className='nav bottom-nav'>
         <div className='nav categories'>
           {categories.map((category) => (
-            <Link
-              key={category.id}
-              to={`/categories/${category.id}`}
-              // onClick={() => {
-              //   setStateRefresh(true);
-              // }}
-              className='category'
-            >
+            <Link key={category.id} to={`/categories/${category.id}`} className='category'>
               <h2>{category.title}</h2>
             </Link>
           ))}

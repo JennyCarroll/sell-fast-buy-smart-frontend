@@ -46,12 +46,10 @@
   @include title-container();
 }
 
-//style the contents of the title div using flexbox
 .title {
   @include title();
 }
 
-//style the contents of the horizontal rule div using flexbox
 .hr {
   @include hr();
 }

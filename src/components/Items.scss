@@ -1,11 +1,9 @@
-@import "sassPartial";
+@import 'sassPartial';
 
-//this will space out our item photos
 .items-container {
- @include items-container();
+  @include items-container();
 }
 
-//this will center the items within their divs
 .item-container {
   position: relative;
   display: flex;
@@ -19,30 +17,26 @@
   margin-top: $margin-top;
 }
 
-.featured-image  {
+.featured-image {
   @include featured-image-size();
 }
 
 .title-container {
-@include title-container();
+  @include title-container();
 }
 
-//style the contents of the title div using flexbox
 .title {
-@include title();
+  @include title();
 }
 
-//style the contents of the horizontal rule div using flexbox
 .hr {
-@include hr();
+  @include hr();
 }
 
-//style the ending soon photos
 .ending-soon {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-gap: 1rem;
-  // margin-top: 2em;
   margin-left: 2em;
   margin-right: 2em;
   margin-bottom: 30px;
@@ -53,8 +47,7 @@
   @include site-heading();
   padding-top: 50px;
   padding-bottom: 50px;
-  // margin-bottom: 50px;
-  background-image: url("../../public/images/45-degree-fabric-light.png");
+  background-image: url('../../public/images/45-degree-fabric-light.png');
 }
 
 .bid-price {

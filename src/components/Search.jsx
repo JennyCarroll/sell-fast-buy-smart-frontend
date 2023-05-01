@@ -1,17 +1,16 @@
-import "./Search.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { icon } from "@fortawesome/fontawesome-svg-core/import.macro";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import './Search.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Search(props) {
   const items = props.items;
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('');
 
-  //clears the search bar when leaving focus
-  const handleBlur = (event) => {
+  const handleBlur = () => {
     setTimeout(() => {
-      setSearchInput("");
+      setSearchInput('');
     }, 100);
   };
 
@@ -28,26 +27,26 @@ function Search(props) {
   }
 
   return (
-    <div className="nav search-bar-with-results">
-      <div className="input-group">
+    <div className='nav search-bar-with-results'>
+      <div className='input-group'>
         <input
-          id="search-bar"
-          className="form-control search-bar"
-          type="text"
-          placeholder="Search items ..."
+          id='search-bar'
+          className='form-control search-bar'
+          type='text'
+          placeholder='Search items ...'
           onChange={handleChange}
           value={searchInput}
           onBlur={handleBlur}
         />
-        <button className={"btn btn-dark"} type={"submit"}>
-          <FontAwesomeIcon icon={icon({ name: "magnifying-glass" })} />
+        <button className={'btn btn-dark'} type={'submit'}>
+          <FontAwesomeIcon icon={icon({ name: 'magnifying-glass' })} />
         </button>
       </div>
-      <ul className="results">
+      <ul className='results'>
         {filteredItems.map((item) => (
           <Link className='search-result-link' key={item.id} to={`/items/${item.id}`}>
-            <div className="search-result">
-            <p className="result-list">{item.title}</p>
+            <div className='search-result'>
+              <p className='result-list'>{item.title}</p>
             </div>
           </Link>
         ))}

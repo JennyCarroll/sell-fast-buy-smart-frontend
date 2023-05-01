@@ -1,4 +1,4 @@
-@import "sassPartial";
+@import 'sassPartial';
 
 .nav {
   display: flex;
@@ -41,7 +41,7 @@
     margin-bottom: 1rem;
 
     :hover {
-      color: $lightest
+      color: $lightest;
     }
   }
 }
@@ -57,7 +57,7 @@
 
 .search .search-bar-with-results .input-group :hover {
   background-color: $lightest;
-  color: $dark
+  color: $dark;
 }
 
 .search .search-bar-with-results .results {
@@ -68,7 +68,6 @@
 
 .nav .search .search-result-link {
   padding-left: 2em;
-  // pointer-events: none;
   width: 100%;
   :hover {
     text-decoration: none;

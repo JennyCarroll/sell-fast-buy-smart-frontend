@@ -1,4 +1,4 @@
-@import "sassPartial";
+@import 'sassPartial';
 
 .top-element {
   margin-top: $margin-top;
@@ -17,7 +17,6 @@
 .item-detail {
   display: flex;
   justify-content: center;
-  //or we could do margin auto
 }
 
 .custom-container {
@@ -26,13 +25,11 @@
   justify-content: space-between;
 }
 
-//style the contents of the images div using flexbox
 .images {
   margin-top: 30px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  // border: 0.5px black solid;
 }
 
 .image {
@@ -84,19 +81,19 @@ hr {
 }
 
 .footer {
-  position:absolute
+  position: absolute;
 }
 
 div {
   .thumbnail:hover {
-  cursor: pointer;
+    cursor: pointer;
   }
-} 
+}
 a {
   text-decoration: none !important;
   color: inherit !important;
 }
 
-.view-seller{
+.view-seller {
   text-underline-position: under;
 }

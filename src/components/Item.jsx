@@ -12,10 +12,6 @@ function Item(props) {
     });
   };
 
-  const onEdit = () => {
-    console.log('onEdit, props.itemId', props.itemId);
-  };
-
   return (
     <>
       <img className='item-image' src={props.photo} alt={props.title} />
@@ -23,7 +19,11 @@ function Item(props) {
       {props.edit && (
         <span>
           <Link to={`/items/${props.itemId}/edit`}>
-          <FontAwesomeIcon icon={icon({ name: 'pen-to-square' })} className='edit-icon' size='xs'/>
+            <FontAwesomeIcon
+              icon={icon({ name: 'pen-to-square' })}
+              className='edit-icon'
+              size='xs'
+            />
           </Link>
         </span>
       )}

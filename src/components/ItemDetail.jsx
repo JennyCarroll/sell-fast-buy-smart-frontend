@@ -1,57 +1,43 @@
-import { useState, useEffect, useContext } from "react";
-import "./ItemDetail.scss";
-import axios from "axios";
-import { Link, useParams } from "react-router-dom";
-import ThumbNail from "./ThumbNail";
-import Carousel from "./Carousel";
-import CreateBid from "./CreateBid";
-import Counter from "./general/Counter";
-import { webSocketContext } from "../providers/WebSocketContext";
-import { loginContext } from "../providers/UserContext";
-import Cookies from "js-cookie";
+import { useState, useEffect, useContext } from 'react';
+import './ItemDetail.scss';
+import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
+import ThumbNail from './ThumbNail';
+import Carousel from './Carousel';
+import CreateBid from './CreateBid';
+import Counter from './general/Counter';
+import { loginContext } from '../providers/UserContext';
+import Cookies from 'js-cookie';
 
 function ItemDetail(props) {
-  // Get the itemId from the URL parameters
   const params = useParams();
   const [itemObj, setItemObj] = useState({});
   const [sellerId, setSellerId] = useState({});
-  const [currentUserCookie, setCurrentUserCookie] = useState(
-    Cookies.get("userId")
-  );
-  //create state for the activeImage of the carousel
-  const [activeImage, setActiveImage] = useState("");
+  const [currentUserCookie, setCurrentUserCookie] = useState(Cookies.get('userId'));
+  const [activeImage, setActiveImage] = useState('');
   const [bidData, setBidData] = useState(itemObj.bid_value);
-  // const { bidData } = useContext(webSocketContext);
   const { currentUser } = useContext(loginContext);
-
 
   useEffect(() => {
     axios
-      //fetch item data from the server
-      .get(
-        `https://octopus-app-hzms7.ondigitalocean.app/items/${params.itemId}`
-      )
+      .get(`https://octopus-app-hzms7.ondigitalocean.app/items/${params.itemId}`)
       .then((res) => {
-        // Set the item object state with the response data
         setItemObj(res.data[0]);
         setSellerId(res.data[res.data.length - 1].user_id);
       })
-      .catch((error) => {
-        console.log(error.response.status);
-        console.log(error.response.headers);
-        console.log(error.response.data);
+      .catch(() => {
+        console.log('Error fetching items data');
       });
   }, [params, bidData]);
 
   useEffect(() => {
-    setCurrentUserCookie(Cookies.get("userId"));
+    setCurrentUserCookie(Cookies.get('userId'));
   }, [currentUser]);
 
-  // Helper function to convert bid value to a dollar amount
-  const bidToDollars = function (value) {
-    return (itemObj.bid_value / 100).toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
+  const bidToDollars = function () {
+    return (itemObj.bid_value / 100).toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
     });
   };
 
@@ -72,25 +58,22 @@ function ItemDetail(props) {
     });
   };
 
-  // console.log("Item Detail - Render");
   return (
     <>
-      {/* check to see if the itemObj exists before rendering the jsx */}
       {itemObj && (
-        <div className="top-element ">
-          <div className="title-container">
-            <h1 className="title">{itemObj.title}</h1>
-            <span className="hr">
+        <div className='top-element '>
+          <div className='title-container'>
+            <h1 className='title'>{itemObj.title}</h1>
+            <span className='hr'>
               <hr />
             </span>
           </div>
-          <div className="item-detail">
-            <div className="detail-container">
-              <div className="carousel-image-container">
-                <div className="custom-container">
-                  <div className="images">
-                    {/* because this data is nested in itemObj and it is an additional async query, it may take longer to load so we check to make sure it exists and has length before rendering */}
-                    <div className="item-container">
+          <div className='item-detail'>
+            <div className='detail-container'>
+              <div className='carousel-image-container'>
+                <div className='custom-container'>
+                  <div className='images'>
+                    <div className='item-container'>
                       {itemObj.img_url && itemObj.img_url.length > 0 && (
                         <Carousel
                           images={itemObj.img_url}
@@ -99,39 +82,31 @@ function ItemDetail(props) {
                         ></Carousel>
                       )}
                     </div>
-                    <div className="thumbnails">{thumbNails(itemObj)}</div>
+                    <div className='thumbnails'>{thumbNails(itemObj)}</div>
                   </div>
                 </div>
               </div>
-              <div className="info-container">
-                <div className="info">
-                  <span className="description">{itemObj.description}</span>
-                  <span className="counter">
-                    {/*It is necessary to only render this once `itemObj.end_date` exists, otherwise the setInterval won't start properly
-                     */}
-                    {itemObj.end_date && (
-                      <Counter end_date={itemObj.end_date} />
-                    )}
+              <div className='info-container'>
+                <div className='info'>
+                  <span className='description'>{itemObj.description}</span>
+                  <span className='counter'>
+                    {itemObj.end_date && <Counter end_date={itemObj.end_date} />}
                   </span>
                 </div>
 
-                <div className="info">
-                  <div className="bidInfo">
-                    <span className="bid-plus-condition">
+                <div className='info'>
+                  <div className='bidInfo'>
+                    <span className='bid-plus-condition'>
                       <span>
                         {Number(itemObj.user_id) === Number(currentUserCookie)
-                          ? "👑 You are the highest bidder"
-                          : ""}
+                          ? '👑 You are the highest bidder'
+                          : ''}
                       </span>
-                      <span>
-                        Current Bid: {bidToDollars(itemObj.bid_value)}
-                      </span>
+                      <span>Current Bid: {bidToDollars(itemObj.bid_value)}</span>
                       <span>Condition: {itemObj.condition}</span>
                       <span>
                         <Link to={`/profile/${sellerId}`}>
-                          <p className="view-seller">
-                          View This Seller
-                          </p>
+                          <p className='view-seller'>View This Seller</p>
                         </Link>
                       </span>
                     </span>
@@ -139,9 +114,7 @@ function ItemDetail(props) {
                       {currentUserCookie && (
                         <CreateBid
                           item={itemObj}
-                          // onSubmit={props.onSubmit}
                           currentBid={itemObj.bid_value}
-                          // currentBid={bidData}
                           setCurrentBid={setBidData}
                         />
                       )}

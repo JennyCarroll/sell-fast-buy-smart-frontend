@@ -1,16 +1,16 @@
-@import "sassPartial";
+@import 'sassPartial';
 
 .bids-image {
   width: 20vw;
   height: 40vh;
-  background-Repeat: no-repeat;
-  background-Position: center;
-  background-Size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   position: relative;
 }
 
 .my-bid-price {
-  @include bid-price-on-hover()
+  @include bid-price-on-hover();
 }
 
 .item-link:hover .my-bid-price {
@@ -24,17 +24,17 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 12vw; /* set the width of the price element */
-  height: 6vh; /* set the height of the price element */
+  width: 12vw;
+  height: 6vh;
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   border-radius: 4px;
-  display: flex; /* hide the element by default */
+  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 5px 10px;
-  border-Radius: 5px;
+  border-radius: 5px;
 }
 
 .items {
