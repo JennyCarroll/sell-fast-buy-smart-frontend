@@ -13,7 +13,7 @@ function Category({ categories, items }) {
 
   useEffect(() => {
     axios
-      .get(`https://octopus-app-hzms7.ondigitalocean.app/categories/:categoryId`, {
+      .get(`/categories/:categoryId`, {
         params: {
           id: params.categoryId,
         },

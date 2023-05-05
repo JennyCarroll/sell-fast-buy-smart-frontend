@@ -20,7 +20,7 @@ function ItemDetail(props) {
 
   useEffect(() => {
     axios
-      .get(`https://octopus-app-hzms7.ondigitalocean.app/items/${params.itemId}`)
+      .get(`/items/${params.itemId}`)
       .then((res) => {
         setItemObj(res.data[0]);
         setSellerId(res.data[res.data.length - 1].user_id);

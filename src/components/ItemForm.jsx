@@ -36,7 +36,7 @@ function ItemEdit() {
     if (!paramsItemId) {
       return;
     }
-    axios.get(`https://octopus-app-hzms7.ondigitalocean.app/items/${paramsItemId}`).then((res) => {
+    axios.get(`/items/${paramsItemId}`).then((res) => {
       const resItem = res.data[0];
       setItem(resItem);
       setTitle(resItem.title);
@@ -102,7 +102,7 @@ function ItemEdit() {
 
     if (currentUser === item.user_id) {
       axios
-        .post(`https://octopus-app-hzms7.ondigitalocean.app/items/${paramsItemId}/edit`, editData)
+        .post(`/items/${paramsItemId}/edit`, editData)
         .then((res) => {
           setStateLoading(true);
           navigate(`/items/${paramsItemId}`);
@@ -116,7 +116,7 @@ function ItemEdit() {
   const deleteItem = (event) => {
     event.preventDefault();
     axios
-      .post(`https://octopus-app-hzms7.ondigitalocean.app/items/${paramsItemId}/delete`, {
+      .post(`/items/${paramsItemId}/delete`, {
         itemId: paramsItemId,
       })
       .then(() => {
@@ -156,7 +156,7 @@ function ItemEdit() {
       minBid: parseInt(minBid * 100),
     };
     axios
-      .post('https://octopus-app-hzms7.ondigitalocean.app/items/new', itemData)
+      .post('/items/new', itemData)
       .then((res) => {
         setStateLoading(true);
         navigate(`/items/${res.data.id}`);

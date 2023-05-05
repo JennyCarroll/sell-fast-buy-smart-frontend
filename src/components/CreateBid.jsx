@@ -47,7 +47,7 @@ const CreateBid = ({ item, onSubmit, currentBid, setCurrentBid }) => {
     };
 
     axios
-      .post('https://octopus-app-hzms7.ondigitalocean.app/bids/new', bidData)
+      .post('/bids/new', bidData)
       .then((res) => {
         setCurrentBid(res.data.bid_value);
         setStateLoading(true);

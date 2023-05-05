@@ -27,7 +27,7 @@ const MyBids = (props) => {
 
   useEffect(() => {
     axios
-      .get('https://octopus-app-hzms7.ondigitalocean.app/bids/:userId', {
+      .get('/bids/:userId', {
         params: {
           id: params.userId,
         },

@@ -17,14 +17,14 @@ export default function useApplicationData() {
   useEffect(() => {
     if (stateLoading) {
       Promise.all([
-        axios.get("https://octopus-app-hzms7.ondigitalocean.app/items"),
-        axios.get("https://octopus-app-hzms7.ondigitalocean.app/users"),
-        axios.get("https://octopus-app-hzms7.ondigitalocean.app/images/first"),
-        axios.get("https://octopus-app-hzms7.ondigitalocean.app/categories"),
+        axios.get("/items"),
+        axios.get("/users"),
+        axios.get("/images/first"),
+        axios.get("/categories"),
         axios.get(
-          "https://octopus-app-hzms7.ondigitalocean.app/items/ending-soon"
+          "/items/ending-soon"
         ),
-        axios.get("https://octopus-app-hzms7.ondigitalocean.app/conditions"),
+        axios.get("/conditions"),
       ]).then((res) => {
         setState((prev) => ({
           ...prev,

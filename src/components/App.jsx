@@ -10,7 +10,6 @@ import Category from './Category';
 import MyBids from './MyBids';
 import AllBids from './AllBids';
 import MyProfile from './MyProfile';
-import BidToast from './general/BidToast';
 import Page404 from './Page404';
 
 // Import hooks and helpers:

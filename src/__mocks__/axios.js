@@ -18,9 +18,9 @@ const fixtures = {
 };
 
 const axiosMock = {
-  defaults: { baseURL: "https://octopus-app-hzms7.ondigitalocean.app" },
+  defaults: { baseURL: "" },
   get: jest.fn((url) => {
-    if (url === "https://octopus-app-hzms7.ondigitalocean.app/items") {
+    if (url === "/items") {
       return Promise.resolve({
         status: 200,
         statusText: "OK",
