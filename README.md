@@ -5,7 +5,7 @@
 ## Overview
 
 A buy/sell application that allows users to bid on and post items for sale, with real time web socket notifications. This application was created in a one week period during our studies at Lighthouse Labs.
-If we had more time, we would have loved to have implemented styled components, media queries to make the app more responsive and error handling.
+If we had more time, we would have loved to have implemented styled components, media queries to make the app more responsive, error handling and tests.
 
 To view the dedicated Git repository for the backend, please [click here](https://github.com/JennyCarroll/sell-fast-buy-smart-backend).
 
